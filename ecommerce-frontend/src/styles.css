@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Rancho&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,7 +11,7 @@ body{
 :root {
     --background: #fffce9;
     --font-preta: #000;
-    --font-verde: #7bba83;
+    --font-verde: #7BBA83;
     --primaryone: #b1bec6;
     --primarytwo: #5f8fa4;
     --primarythree: #ff5252;
