@@ -1,73 +1,15 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <title>EcommerceFrontend</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="./styles.css">
 </head>
-
 <body>
-  <nav class="navbar navast">
-    <div class="container">
-      <input type="text" class="main-search" placeholder="Search..." />
-      <button type="submit" class="buttonsearch">
-        <div class="searchicon"></div>
-      </button>
-    </div>
-    <ul>
-      <li><a href="#" class="active nav-a">Home</a></li>
-      <li><a href="#" class="nav-a">Shop</a></li>
-      <li><a href="#" class="nav-a">Carrinho</a></li>
-      <li><a href="#" class="nav-a">Categorias</a></li>
-    </ul>
-    <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-      <span class="sr-only">Open user menu</span>
-      <img class="w-11 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="user photo">
-    </button>
-    <!-- Dropdown menu -->
-    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
-      <div class="px-4 py-3">
-        <span class="block text-sm text-gray-900 dark:text-white tm">Bonnie Green</span>
-        <span class="block text-sm  text-gray-500 truncate dark:text-gray-400 tm-2">name@flowbite.com</span>
-      </div>
-      <ul class="py-2" aria-labelledby="user-menu-button user">
-        <li>
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white user">Settings</a>
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white deslog">Sign out</a>
-        </li>
-      </ul>
-    </div>
-  </nav>  
-
   <app-root></app-root>
-
-  <footer class="bg-white rounded-lg shadow m-4 dark:bg-gray-800">
-    <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/"
-          class="hover:underline">Flowbite™</a>. All Rights Reserved.
-      </span>
-      <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
-        <li>
-          <a href="#" class="hover:underline me-4 md:me-6">About</a>
-        </li>
-        <li>
-          <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
-        </li>
-        <li>
-          <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
-        </li>
-        <li>
-          <a href="#" class="hover:underline">Contact</a>
-        </li>
-      </ul>
-    </div>
-  </footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 </body>
-
 </html>

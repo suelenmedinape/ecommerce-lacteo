@@ -1,0 +1,233 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Rancho&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --background: #fffce9;
+    --font-preta: #000;
+    --font-verde: #7bba83;
+    --primaryone: #b1bec6;
+    --primarytwo: #5f8fa4;
+    --primarythree: #ff5252;
+    --primaryfour: #43b3e7;
+}
+
+body{
+    background-color: var(--background);
+}
+
+.navast {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Rancho", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.navbar {
+    background-color: var(--background);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+}
+
+.main-search {
+    position: relative;
+    border: 1px solid black;
+    background: var(--background);
+    width: 300px;
+    height: 25px;
+    border-radius: 50px;
+    padding: 4px 11px 4px 31px;
+    font-size: 13px;
+    color: #555;
+}
+
+.main-search:focus {
+    outline: none;
+}
+
+.searchicon {
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    background: transparent;
+    border: 2px solid black;
+    left: 16px;
+    top: 3px;
+    border-radius: 100%;
+}
+
+.searchicon:after {
+    content: '';
+    position: absolute;
+    background: black;
+    height: 6px;
+    width: 3px;
+    bottom: -5px;
+    right: -3px;
+    transform: rotate(-45deg);
+}
+
+.buttonsearch {
+    position: absolute;
+    height: 25px;
+    width: 50px;
+    background: transparent;
+    border: 1px solid black;
+    left: 360px;
+    top: 19px;
+    border-radius: 50px;
+}
+
+.icon-holder {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 7px;
+}
+
+.icon {
+    position: relative;
+    height: 35px;
+    width: 35px;
+    background: var(--primaryfour);
+    border-radius: 100%;
+    box-shadow: 0px 1px 2px 0px #555;
+    cursor: pointer;
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.icon:hover {
+    background: lighten(var(--primaryfour), 10%);
+    animation-play-state: paused;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    margin-right: 20px;
+}
+
+ul li .nav-a {
+    font-size: 19px;
+    font-weight: normal;
+    color: var(--font-preta);
+    border: 1px solid var(--font-preta);
+    border-width: 0px 0px 1px 0px;
+    border-radius: 50px;
+    text-decoration: none;
+    padding: 0 8px;
+}
+
+ul li .nav-a:hover {
+    border: 1px solid var(--font-preta);
+    border-width: 1px 0px 1px 0px;
+    border-radius: 50px;
+}
+
+ul li .nav-a.active {
+    border: 1px solid var(--font-preta);
+    border-radius: 50px;
+}
+
+.deslog{
+    color: var(--primarythree);
+    border: 1px solid var(--primarythree);
+}
+
+.user{
+    border-width: 1px 1px 1px 1px;
+}
+
+.tm{
+    font-size: 22px;
+}
+
+.tm-2{
+    font-size: 20px;
+}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>EcommerceFrontend</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<body>
+  <nav class="navbar navast">
+    <div class="container">
+      <input type="text" class="main-search" placeholder="Search..." />
+      <button type="submit" class="buttonsearch">
+        <div class="searchicon"></div>
+      </button>
+    </div>
+    <ul>
+      <li><a href="#" class="active nav-a">Home</a></li>
+      <li><a href="#" class="nav-a">Shop</a></li>
+      <li><a href="#" class="nav-a">Carrinho</a></li>
+      <li><a href="#" class="nav-a">Categorias</a></li>
+      <li><a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-a">Login</a></li>
+    </ul>
+    <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+      <span class="sr-only">Open user menu</span>
+      <img class="w-11 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="user photo">
+    </button>
+    <!-- Dropdown menu -->
+    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+      <div class="px-4 py-3">
+        <span class="block text-sm text-gray-900 dark:text-white tm">Bonnie Green</span>
+        <span class="block text-sm  text-gray-500 truncate dark:text-gray-400 tm-2">name@flowbite.com</span>
+      </div>
+      <ul class="py-2" aria-labelledby="user-menu-button user">
+        <li>
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white user">Settings</a>
+        </li>
+        <li>
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white deslog">Sign out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>  
+
+  <app-root></app-root>
+
+  <footer class="bg-white rounded-lg shadow m-4 dark:bg-gray-800">
+    <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/"
+          class="hover:underline">Flowbite™</a>. All Rights Reserved.
+      </span>
+      <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+        <li>
+          <a href="#" class="hover:underline me-4 md:me-6">About</a>
+        </li>
+        <li>
+          <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+        </li>
+        <li>
+          <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+        </li>
+        <li>
+          <a href="#" class="hover:underline">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+</body>
+
+</html>
