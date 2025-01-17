@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary tam">
+    <div class="container-fluid">
+        <div class="circulo">
+            <a class="navbar-brand _circulo" href="#">
+                <img src="/icone-windows.jpg" alt="Bootstrap">
+            </a>
+        </div>
+
+        <!-- Modal 
+        <div id="infoModal" class="modal">
+            <div class="modal-content">
+                <span class="close" (click)="closeModal()">&times;</span>
+                <h3>John Doe</h3>
+                <p>Email: johndoe.com</p>
+                <div class="modal-buttons">
+                    <button class="settings-btn">Settings</button>
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+        </div>-->
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 fontes-bordas">
+                <li class="nav-item bordas">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item bordas">
+                    <a class="nav-link" href="#">Shop</a>
+                </li>
+                <li class="nav-item dropdown bordas">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" (click)="toggleDropdown($event)">
+                        Categoria
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2 search search-input" type="search" placeholder="Search"
+                    aria-label="Search">
+                <button class="btn btn-outline-success search" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
