@@ -10,6 +10,42 @@
     height: 60px;
 }
 
+.text-gray-300 {
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 50px;
+}
+
+.text-white {
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 50px;
+  color: black;
+}
+
+.bg-gray-700 {
+  width: 350px;
+}
+
+.bg-gray-800 {
+  height: 65px;
+}
+
+.p-4 {
+  padding: 0.5rem;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.bg-gray-800 {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 .search {
     border-radius: 50px;
 }
@@ -105,5 +141,9 @@
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
+  }
+
+  .bordas{
+    color: black;
   }
   

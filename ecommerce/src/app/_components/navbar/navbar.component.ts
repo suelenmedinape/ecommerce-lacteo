@@ -15,8 +15,10 @@ export class NavbarComponent {
 
     if (isVisible) {
       this.renderer.removeClass(dropdown, 'show');
+      this.renderer.addClass(dropdown, 'hidden');
     } else {
       this.renderer.addClass(dropdown, 'show');
+      this.renderer.removeClass(dropdown, 'hidden');
     }
   }
 }
