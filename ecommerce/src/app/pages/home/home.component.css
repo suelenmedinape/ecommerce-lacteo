@@ -1,26 +1,19 @@
-.max-w-xs {
-    max-width: 17rem;
-}
+@import url('../../../styles.css');
 
 .fundo{
-    background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
+    background-color: white;
     margin-left: 30px;
     margin-right: 30px;
+    margin-bottom: 30px;
     border-radius: 10px;
+    border: 1px solid black;
 }
 
-.dark\:bg-gray-800 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
+.titulo h2{
+    font-family: "Rancho", serif;
+    font-size: 40px;
 }
 
-.dark\:border-gray-700 {
-    --tw-border-opacity: 1;
-    border-color: transparent;
-}
-
-.shadow {
-    --tw-shadow: 0;
-    --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
+.shadow-below {
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  }
