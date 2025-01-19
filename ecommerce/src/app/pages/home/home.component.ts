@@ -17,6 +17,12 @@ export class HomeComponent {
     { id: 4, nome: "Manteiga", preco: 45.00, avaliacao: 3.0, imagem: '/4.png' },
   ];
 
+  categorias = [
+    { id: 1, nome: "Queijo", desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s." },
+    { id: 2, nome: "Iogurte", desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."},
+    { id: 3, nome: "Leite", desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s." },
+  ];
+
   getStars(rating: number): number[] {
     return Array(5).fill(0).map((_, i) => rating - i);
   }
