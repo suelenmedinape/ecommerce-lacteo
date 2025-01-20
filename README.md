@@ -29,7 +29,7 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 - Você tem uma máquina `<Windows / Linux / Mac>`.
 - É preciso tambem ter o Node em sua maquina `winget install Schniz.fnm -> fnm install 22`.
 
-Adicione comandos de execução e exemplos que você acha que os usuários acharão úteis. Forneça uma referência de opções para pontos de bônus!
+## ☕ Executando o projeto
 - Para executar o projeto `ng serve`.
 - Para executar o projeto em um navegador especifico `$env:BROWSER="chrome"; ng serve --open`.
 
