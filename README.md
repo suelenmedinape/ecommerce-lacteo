@@ -9,7 +9,7 @@ O projeto ainda está em desenvolvimento e ainda faltam algumas paginas a serem 
 - [ ] Login
 - [ ] Cadastro
 - [x] Home
-- [ ] Loja
+- [x] Loja
 - [ ] Carrinho
 - [ ] Produto Individual
 - [ ] Lista de produtos
