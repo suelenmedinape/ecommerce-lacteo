@@ -9,9 +9,12 @@
 
     <!-- Navigation Links -->
     <div class="hidden md:flex items-center space-x-4">
-      <a href="/" class="text-black-900 hover:text-black px-3 py-2 rounded-md text-2xl font-medium ty-f-rancho">Home</a>
-      <a href="#" class="text-black-900 hover:text-black px-3 py-2 rounded-md text-2xl font-medium ty-f-rancho">Shop</a>
-      <a href="#" class="text-black-900 hover:text-black px-3 py-2 rounded-md text-2xl font-medium ty-f-rancho">Carrinho</a>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+        class="text-black-900 hover:text-black px-3 py-2 rounded-md text-2xl font-medium ty-f-rancho">Home</a>
+      <a routerLink="/shop" routerLinkActive="active"
+        class="text-black-900 hover:text-black px-3 py-2 rounded-md text-2xl font-medium ty-f-rancho">Shop</a><a
+        href="#"
+        class="text-black-900 hover:text-black px-3 py-2 rounded-md text-2xl font-medium ty-f-rancho">Carrinho</a>
       <div class="relative">
         <button
           class="flex items-center text-black-300 hover:text-black px-3 py-2 rounded-md text-2xl font-medium focus:outline-none ty-f-rancho"
