@@ -25,7 +25,7 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 - Você instalou a versão mais recente do Angular `npm install -g @angular/cli`
 - Você instalou a versão mais recente do Tailwind CSS `npm install -D tailwindcss`
 - Iniciar o Tailwind dentro do projeto Angular `npx tailwindcss init`
-- Você instalou a versão mais recente do Angular `npm install flowbite`
+- Você instalou a versão mais recente do Flowbite `npm install flowbite`
 - Você tem uma máquina `<Windows / Linux / Mac>`.
 - É preciso tambem ter o Node em sua maquina `winget install Schniz.fnm -> fnm install 22`.
 
