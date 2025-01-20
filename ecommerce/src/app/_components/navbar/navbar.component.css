@@ -1,5 +1,9 @@
 @import url('../../../styles.css');
 
+.bg-color{
+  background-color: #FFFCE9;
+}
+
 /* Estilo do círculo */
 .circulo {
     width: 40px;
@@ -24,4 +28,5 @@
   .border-1{
     border: 1px solid black;
     border-radius: 50px;
+    padding-left: 15px;
   }

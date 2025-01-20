@@ -18,9 +18,9 @@ export class HomeComponent {
   ];
 
   categorias = [
-    { id: 1, nome: "Queijo", desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s." },
-    { id: 2, nome: "Iogurte", desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."},
-    { id: 3, nome: "Leite", desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s." },
+    { id: 1, nome: "Queijo", desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry." },
+    { id: 2, nome: "Iogurte", desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+    { id: 3, nome: "Leite", desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry." },
   ];
 
   getStars(rating: number): number[] {

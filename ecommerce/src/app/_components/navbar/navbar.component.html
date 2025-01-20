@@ -1,40 +1,47 @@
-<nav class="bg-white-800 rounded-md shadow" style="margin: 20px; height: 60px;">
+<nav class="bg-white-800 rounded-md navbar-color" style="margin: 20px; height: 60px;">
   <div class="container mx-auto flex items-center justify-between" style="height: 100%;">
-      <!-- Logo e Texto -->
-      <div class="flex items-center circulo">
-          <a href="#" class="flex items-center _circulo">
-              <img src="/icone-windows.jpg" class="h-8 w-8 mr-2" alt="Logo">
-          </a>
-      </div>
+    <!-- Logo e Texto -->
+    <div class="flex items-center circulo">
+      <a href="#" class="flex items-center _circulo">
+        <img src="/icone-windows.jpg" class="h-8 w-8 mr-2" alt="Logo">
+      </a>
+    </div>
 
-      <!-- Navigation Links -->
-      <div class="hidden md:flex items-center space-x-4">
-          <a href="/" class="text-black-300 hover:text-black px-3 py-2 rounded-md text-sm font-medium">Home</a>
-          <a href="#" class="text-black-300 hover:text-black px-3 py-2 rounded-md text-sm font-medium">Shop</a>
-          <a href="#" class="text-black-300 hover:text-black px-3 py-2 rounded-md text-sm font-medium">Carrinho</a>
-          <div class="relative">
-              <button class="flex items-center text-black-300 hover:text-black px-3 py-2 rounded-md text-sm font-medium focus:outline-none" (click)="toggleDropdown($event)">
-                Categoria
-                <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              <div class="dropdown-menu hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-20">
-                <a href="#" class="block px-4 py-2 text-black-700 hover:bg-black-100">Action</a>
-                <a href="#" class="block px-4 py-2 text-black-700 hover:bg-black-100">Another action</a>
-              </div>
-          </div>
+    <!-- Navigation Links -->
+    <div class="hidden md:flex items-center space-x-4">
+      <a href="/" class="text-black-900 hover:text-black px-3 py-2 rounded-md text-2xl font-medium ty-f-rancho">Home</a>
+      <a href="#" class="text-black-900 hover:text-black px-3 py-2 rounded-md text-2xl font-medium ty-f-rancho">Shop</a>
+      <a href="#" class="text-black-900 hover:text-black px-3 py-2 rounded-md text-2xl font-medium ty-f-rancho">Carrinho</a>
+      <div class="relative">
+        <button
+          class="flex items-center text-black-300 hover:text-black px-3 py-2 rounded-md text-2xl font-medium focus:outline-none ty-f-rancho"
+          (click)="toggleDropdown($event)">
+          Categoria
+          <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="dropdown-menu hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-20">
+          <a href="#" class="block px-4 py-2 text-black-700 hover:bg-black-100">Action</a>
+          <a href="#" class="block px-4 py-2 text-black-700 hover:bg-black-100">Another action</a>
+        </div>
       </div>
+    </div>
 
-      <!-- Search Form -->
-      <form class="flex space-x-2">
-          <input type="text" class="bg-white-700 text-black-300 placeholder-black-400 rounded-md px-5 py-2 focus:ring-2 focus:ring-black-500 border-1 h-10" placeholder="Search">
-          <button type="submit" class="bg-white-500 text-white px-3 py-2 rounded-md hover:bg-green-600 border-1 focus:outline-none">
-            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" 
-                    stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-      </form>
+    <!-- Search Form -->
+    <form class="flex space-x-2">
+      <input type="text"
+        class="bg-white-700 text-black-300 placeholder-black-400 rounded-md px-20 py-2 focus:ring-2 focus:ring-black-500 border-1 h-8 bg-color">
+      <button type="submit"
+        class="bg-white-500 text-black px-3 py-2 rounded-md border-1 focus:outline-none h-8 flex items-center justify-center">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z"
+            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </form>
   </div>
 </nav>
+<img class="h-auto max-w-full" src="/7099.JPG" alt="image description">

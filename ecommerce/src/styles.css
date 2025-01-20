@@ -7,3 +7,10 @@ body {
     line-height: inherit;
     background-color: #FFFCE9;
 }
+
+.ty-f-rancho{
+    font-family: 'Rancho', serif;
+    font-weight: 400;
+    font-style: normal;
+    /*font-size: 40px;*/
+}
