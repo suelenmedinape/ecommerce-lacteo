@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { PaginationComponent } from '../../_components/pagination/pagination.component';
 import { CurrencyPipe, NgClass, NgFor } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ProdutoComponent } from '../produto/produto.component';
 
 @Component({
   selector: 'app-shop',
-  imports: [ PaginationComponent, NgFor, NgClass, CurrencyPipe],
+  imports: [ PaginationComponent, NgFor, NgClass, CurrencyPipe, RouterLink, RouterLinkActive],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.css'
 })
