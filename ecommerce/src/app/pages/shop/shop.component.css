@@ -1,0 +1,18 @@
+.grid {
+    display: grid;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.margem{
+    margin-right: 88%;
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+.borda-org{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
