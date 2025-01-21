@@ -17,6 +17,7 @@ O projeto ainda está em desenvolvimento e ainda faltam algumas paginas a serem 
 - [ ] Relatorios
 - [ ] Pedidos
 - [ ] Estoque
+- [ ] Tela de Erro (Para produtos não encontrados ou outra coisa)
 
 ## 💻 Pré-requisitos
 
