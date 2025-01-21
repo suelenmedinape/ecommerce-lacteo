@@ -1,3 +1,9 @@
-.w-full {
-    width: 50%;
+.w-80 {
+    width: 40rem;
+}
+/**ngIf="produto; else naoEncontrado"*/
+/*[src]="produto.imagem"
+    [alt]="produto.nome"*/
+.h-80 {
+    height: 40rem;
 }

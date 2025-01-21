@@ -1,27 +1,26 @@
 import { NgFor, NgClass, CurrencyPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ProdutosService } from '../../services/produtos.service';
+import { CategoriasService } from '../../services/categorias.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor, NgClass, CurrencyPipe],
+  imports: [NgFor, NgClass, CurrencyPipe, RouterLink, RouterLinkActive],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  produtos = [
-    { id: 1, nome: "Queijo", preco: 15.00, avaliacao: 4.5, imagem: '/1.png' },
-    { id: 2, nome: "Iogurte", preco: 25.00, avaliacao: 4.0, imagem: '/2.png' },
-    { id: 3, nome: "Leite", preco: 35.00, avaliacao: 3.5, imagem: '/3.png' },
-    { id: 4, nome: "Manteiga", preco: 45.00, avaliacao: 3.0, imagem: '/4.png' },
-    { id: 4, nome: "Manteiga", preco: 45.00, avaliacao: 3.0, imagem: '/4.png' },
-  ];
+export class HomeComponent implements OnInit {
+  produtos: { id: number; nome: string; preco: number; avaliacao: number; imagem: string; }[] = [];
+  categorias: { id: number; nome: string; desc: string; }[] = [];
 
-  categorias = [
-    { id: 1, nome: "Queijo", desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry." },
-    { id: 2, nome: "Iogurte", desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-    { id: 3, nome: "Leite", desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry." },
-  ];
+  constructor(private produtosService: ProdutosService, private categoriasService: CategoriasService) {}
+
+  ngOnInit(): void {
+    this.produtos = this.produtosService.getProdutos().slice(0, 5);
+    this.categorias = this.categoriasService.getCategorias().slice(0, 3);
+  }
 
   getStars(rating: number): number[] {
     return Array(5).fill(0).map((_, i) => rating - i);

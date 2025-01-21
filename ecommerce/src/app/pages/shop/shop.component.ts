@@ -4,7 +4,7 @@ import { CurrencyPipe, NgClass, NgFor } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ProdutoComponent } from '../produto/produto.component';
 import { ProdutosService } from '../../services/produtos.service';
-
+ 
 @Component({
   selector: 'app-shop',
   imports: [ PaginationComponent, NgFor, NgClass, CurrencyPipe, RouterLink, RouterLinkActive],
