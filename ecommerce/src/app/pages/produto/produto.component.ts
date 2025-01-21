@@ -14,6 +14,8 @@ import { RouterModule } from "@angular/router";
   providers: [ProdutosService],
 })
 export class ProdutoComponent implements OnInit {
+  produtos: { id: number; nome: string; preco: number; avaliacao: number; imagem: string; }[] = [];
+
   produto: any;
   quantity = 5;
   minQuantity = 1;
@@ -24,20 +26,25 @@ export class ProdutoComponent implements OnInit {
     private produtosService: ProdutosService
   ) {}
 
-  ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get("id"));
+ngOnInit(): void {
+  this.produtos = this.produtosService.getProdutos().slice(0, 5);
+  // Inscrevendo-se no Observable de parâmetros da rota
+  this.route.paramMap.subscribe((params) => {
+    const id = Number(params.get("id"));
     this.produto = this.produtosService.getProdutoById(id);
 
     if (!this.produto) {
       console.error("Produto não encontrado para o ID:", id);
     }
-  }
+  });
+}
 
   getStars(avaliacao: number): number[] {
     return Array.from({ length: 5 }, (_, index) =>
       index < Math.round(avaliacao) ? 1 : 0
     );
   }
+
 
   increment(): void {
     if (this.quantity < this.maxQuantity) {
