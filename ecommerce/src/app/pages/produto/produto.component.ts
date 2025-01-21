@@ -31,7 +31,7 @@ export class ProdutoComponent implements OnInit {
     return Array.from({ length: 5 }, (_, index) => index < Math.round(avaliacao) ? 1 : 0);
   }
 
-  quantity: number = 1; // Valor inicial
+  quantity: number = 5; // Valor inicial
   minQuantity: number = 1; // Valor mínimo
   maxQuantity: number = 50; // Valor máximo
 
