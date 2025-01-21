@@ -40,34 +40,54 @@
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
             </svg>
-
             Add to cart
           </a>
 
-          <!-- NÃO ESTÁ FUNCIONANDO 
           <form class="max-w-xs mx-auto">
             <div class="relative flex items-center max-w-[8rem]">
-                <button type="button"
-                (click)="decrement()" class="bg-white-100 dark:bg-white-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-10 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                    <svg class="w-3 h-3 text-gray-900 dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
-                    </svg>
-                </button>
-                <input type="text"
+              <button
+                type="button"
+                (click)="decrement()"
+                class="bg-white-100 dark:bg-white-700 dark:hover:bg-green-600 dark:border-gray-600 hover:bg-green-200 border border-gray-300 rounded-s-lg p-3 h-10 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+              >
+                <svg
+                  class="w-3 h-3 text-gray-900 dark:text-black"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 18 2"
+                >
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                </svg>
+              </button>
+              <input
+                type="number"
                 [(ngModel)]="quantity"
-                (input)="validateQuantity()"
+                name="quantity"
+                (ngModelChange)="validateQuantity()"
                 [min]="minQuantity"
-                [max]="maxQuantity" class="bg-white-50 border-x-0 border-white-300 h-10 text-center text-black-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="999" value="5" required />
-                <button type="button"
-                (click)="increment()" class="bg-white-100 dark:bg-white-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-10 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                    <svg class="w-3 h-3 text-gray-900 dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                    </svg>
-                </button>
+                [max]="maxQuantity"
+                class="bg-white-50 border-white-300 h-10 text-center text-black-900 text-sm focus:ring-blue-500 focus:border-gray-500 block w-full py-2.5 dark:bg-white-700 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 tam-w"
+                required
+              />
+              <button
+                type="button"
+                (click)="increment()"
+                class="bg-white-100 dark:bg-white-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-green-200 border border-gray-300 rounded-e-lg p-3 h-10 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+              >
+                <svg
+                  class="w-3 h-3 text-gray-900 dark:text-black"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 18 18"
+                >
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                </svg>
+              </button>
             </div>
           </form>
-          -->
-
+          
         </div>
 
         <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
@@ -87,3 +107,4 @@
 <ng-template #naoEncontrado>
   <p>Produto não encontrado.</p>
 </ng-template>
+

@@ -1,17 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { ProdutosService } from '../../services/produtos.service';
-import { CommonModule, CurrencyPipe } from '@angular/common';
-import { FormsModule, NgModel } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { ProdutosService } from "../../services/produtos.service";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
 
 @Component({
-  selector: 'app-produto',
-  imports: [CurrencyPipe, CommonModule, RouterModule, FormsModule],
-  templateUrl: './produto.component.html',
-  styleUrl: './produto.component.css'
+  selector: "app-produto",
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
+  templateUrl: "./produto.component.html",
+  styleUrls: ["./produto.component.css"],
+  providers: [ProdutosService],
 })
 export class ProdutoComponent implements OnInit {
   produto: any;
+  quantity = 5;
+  minQuantity = 1;
+  maxQuantity = 50;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,43 +25,41 @@ export class ProdutoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = Number(this.route.snapshot.paramMap.get("id"));
     this.produto = this.produtosService.getProdutoById(id);
-  
+
     if (!this.produto) {
-      console.error('Produto não encontrado para o ID:', id);
+      console.error("Produto não encontrado para o ID:", id);
     }
   }
 
   getStars(avaliacao: number): number[] {
-    return Array.from({ length: 5 }, (_, index) => index < Math.round(avaliacao) ? 1 : 0);
+    return Array.from({ length: 5 }, (_, index) =>
+      index < Math.round(avaliacao) ? 1 : 0
+    );
   }
 
-  quantity: number = 5; // Valor inicial
-  minQuantity: number = 1; // Valor mínimo
-  maxQuantity: number = 50; // Valor máximo
-
-  // Incrementa o valor respeitando o máximo
   increment(): void {
     if (this.quantity < this.maxQuantity) {
       this.quantity++;
     }
   }
 
-  // Decrementa o valor respeitando o mínimo
   decrement(): void {
     if (this.quantity > this.minQuantity) {
       this.quantity--;
     }
   }
 
-  // Valida o valor inserido manualmente
   validateQuantity(): void {
-    if (this.quantity < this.minQuantity) {
+    const parsedQuantity = Number.parseInt(this.quantity.toString(), 10);
+    if (isNaN(parsedQuantity)) {
       this.quantity = this.minQuantity;
-    } else if (this.quantity > this.maxQuantity) {
-      this.quantity = this.maxQuantity;
+    } else {
+      this.quantity = Math.max(
+        this.minQuantity,
+        Math.min(parsedQuantity, this.maxQuantity)
+      );
     }
   }
-  
 }
