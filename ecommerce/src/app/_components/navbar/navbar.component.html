@@ -6,18 +6,17 @@
         <div class="shrink-0">
           <form class="relative">
             <label for="search-input" class="sr-only">Search</label>
-            <input 
-                id="search-input" 
-                type="text" 
-                placeholder="Search..." 
-                class="block w-full lg:w-64 px-4 py-2 text-sm text-black-900 bg-black-50 border border-black-200 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            />
-            <button type="submit" class="absolute top-1/2 right-2 transform -translate-y-1/2 text-black-500 dark:text-black-400 hover:text-primary-700 dark:hover:text-primary-500 ml-1">
-                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 1 0-14 0 7 7 0 0 0 14 0z" />
-                </svg>
+            <input id="search-input" type="text" placeholder="Search..."
+              class="block w-full lg:w-64 px-4 py-2 text-sm text-black-900 bg-black-50 border border-black-200 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+            <button type="submit"
+              class="absolute top-1/2 right-2 transform -translate-y-1/2 text-black-500 dark:text-black-400 hover:text-primary-700 dark:hover:text-primary-500 ml-1">
+              <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M21 21l-6-6m2-5a7 7 0 1 0-14 0 7 7 0 0 0 14 0z" />
+              </svg>
             </button>
-        </form>
+          </form>
         </div>
 
         <ul class="hidden lg:flex items-center justify-start gap-6 md:gap-8 py-3 sm:justify-center">
@@ -48,24 +47,17 @@
             <!-- Dropdown Menu -->
             <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg dark:bg-gray-800 z-20"
               [ngClass]="{ 'hidden': !isDropdownOpen }">
-              <a href="#"
+              <a href="#" *ngFor="let categ of categorias"
                 class="block px-4 py-2 text-black-700 hover:bg-green-100 dark:text-black-200 dark:hover:bg-green-700">
-                Categoria 1
-              </a>
-              <a href="#"
-                class="block px-4 py-2 text-black-700 hover:bg-green-100 dark:text-black-200 dark:hover:bg-green-700">
-                Categoria 2
-              </a>
-              <a href="#"
-                class="block px-4 py-2 text-black-700 hover:bg-green-100 dark:text-black-200 dark:hover:bg-green-700">
-                Categoria 3
+                {{ categ.nome }}
               </a>
             </div>
           </li>
         </ul>
       </div>
 
-      <div class="flex items-center lg:space-x-2">
+      <!-- Conta e Carrinho -->
+      <div *ngIf="isLoggedIn; else loggedOutOptions" class="flex items-center lg:space-x-2">
 
         <button id="myCartDropdownButton1" data-dropdown-toggle="myCartDropdown1" type="button"
           class="inline-flex items-center rounded-lg justify-center p-2 hover:bg-white-100 dark:hover:bg-white-700 text-sm font-medium leading-none text-white-900 dark:text-black">
@@ -148,7 +140,7 @@
           </ul>
 
           <div class="p-2 text-sm font-medium text-white-900 dark:text-black">
-            <a href="#" title=""
+            <a (click)="logout()" href="#" title=""
               class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-white-100 dark:hover:bg-white-600">
               Sign Out </a>
           </div>
@@ -166,6 +158,18 @@
           </svg>
         </button>
       </div>
+      <ng-template #loggedOutOptions>
+        <div class="flex items-center space-x-2">
+          <a routerLink="/login" routerLinkActive="active" title=""
+            class="flex text-sm font-medium text-white-900 hover:text-primary-700 dark:text-black dark:hover:text-primary-500 mr-2">
+            Login
+          </a>
+          <a routerLink="/register" routerLinkActive="active" title=""
+            class="flex text-sm font-medium text-white-900 hover:text-primary-700 dark:text-black dark:hover:text-primary-500">
+            Registre-se
+          </a>
+        </div>
+      </ng-template>
     </div>
 
     <!-- MENU RESPONSIVO -->
@@ -194,4 +198,4 @@
     </div>
   </div>
 </nav>
-<img class="h-auto max-w-full mb-10 shadow" src="/7102.png" alt="image description">
+<img *ngIf="navbarService.isVisible" class="h-auto max-w-full mb-10 shadow" src="/7102.png" alt="image description">

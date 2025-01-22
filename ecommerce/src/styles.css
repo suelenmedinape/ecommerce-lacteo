@@ -12,5 +12,16 @@ body {
     font-family: 'Rancho', serif;
     font-weight: 400;
     font-style: normal;
-    /*font-size: 40px;*/
+}
+
+.font-type-1{
+    font-family: 'Rancho', serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.font-type-2{
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }

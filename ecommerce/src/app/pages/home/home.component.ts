@@ -13,13 +13,15 @@ import { CategoriasService } from '../../services/categorias.service';
 })
 export class HomeComponent implements OnInit {
   produtos: { id: number; nome: string; preco: number; avaliacao: number; imagem: string; }[] = [];
-  categorias: { id: number; nome: string; desc: string; }[] = [];
+  categorias: { id: number; nome: string; desc: string; }[] = []; 
 
   constructor(private produtosService: ProdutosService, private categoriasService: CategoriasService) {}
 
   ngOnInit(): void {
     this.produtos = this.produtosService.getProdutos().slice(0, 5);
-    this.categorias = this.categoriasService.getCategorias().slice(0, 3);
+    this.categoriasService.getCategorias().subscribe((data) => {
+      this.categorias = data.slice(0, 3);
+    });
   }
 
   getStars(rating: number): number[] {

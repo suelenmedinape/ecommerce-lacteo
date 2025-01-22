@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,14 @@ export class CategoriasService {
     { id: 4, nome: "Manteigas e Cremes", desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry." },
   ];
   
-  getCategorias() {
-    return this.categorias;
+  // Retorna as categorias como um Observable
+  getCategorias(): Observable<{ id: number; nome: string; desc: string; }[]> {
+    return of(this.categorias);
   }
 
-  getCategoriaById(id: number) {
-    return this.categorias.find((categoria) => categoria.id === id);
+  // Retorna uma categoria específica por ID como um Observable
+  getCategoriaById(id: number): Observable<{ id: number; nome: string; desc: string; } | undefined> {
+    const categoria = this.categorias.find((cat) => cat.id === id);
+    return of(categoria);
   }
 }
