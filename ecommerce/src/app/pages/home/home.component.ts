@@ -10,7 +10,7 @@ import { CategoriasService } from '../../services/categorias.service';
   imports: [NgFor, NgClass, CurrencyPipe, RouterLink, RouterLinkActive],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
-})
+}) 
 export class HomeComponent implements OnInit {
   produtos: { id: number; nome: string; preco: number; avaliacao: number; imagem: string; }[] = [];
   categorias: { id: number; nome: string; desc: string; }[] = []; 

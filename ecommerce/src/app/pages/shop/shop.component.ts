@@ -10,7 +10,7 @@ import { ProdutosService } from '../../services/produtos.service';
   imports: [ PaginationComponent, NgFor, NgClass, CurrencyPipe, RouterLink, RouterLinkActive],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.css'
-})
+}) 
 export class ShopComponent implements OnInit {
   produtos: { id: number; nome: string; preco: number; avaliacao: number; imagem: string; }[] = [];
 
