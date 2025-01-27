@@ -6,13 +6,13 @@
 
 O projeto ainda está em desenvolvimento e ainda faltam algumas paginas a serem feitas:
 
-- [ ] Login
-- [ ] Cadastro
+- [x] Login
+- [x] Cadastro
 - [x] Home
 - [x] Loja
-- [ ] Carrinho
-- [ ] Produto Individual
-- [ ] Lista de produtos
+- [x] Carrinho
+- [x] Produto Individual
+- [x] Lista de produtos
 - [ ] Cadastro de produtos
 - [ ] Relatorios
 - [ ] Pedidos
