@@ -17,4 +17,8 @@ export class ProdutoService {
   getProdutoById(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
+
+  getProdutoByName(name: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/search`, { params: { name } });
+  }
 }
