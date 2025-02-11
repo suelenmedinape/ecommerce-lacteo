@@ -39,3 +39,20 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 ## 📝 Licença
 
 Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
+
+## 🤝 Colaboradores
+
+Agradecemos às seguintes pessoas que contribuíram para este projeto:
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/JhonnyBCastro" title="defina o título do link">
+        <img src="https://avatars.githubusercontent.com/u/166658525?v=4" width="100px;" alt="Foto do Iuri Silva no GitHub"/><br>
+        <sub>
+          <b>Jhonata Castro</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
