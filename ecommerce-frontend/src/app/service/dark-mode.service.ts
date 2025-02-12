@@ -2,12 +2,13 @@ import { Injectable, OnInit } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
-})
+}) 
+
 export class DarkModeService implements OnInit {
-
-  constructor() { }
+  
   isDarkMode = false;
-
+  constructor() { }
+  
   ngOnInit(): void {
     // Verifica o estado inicial baseado no localStorage
     const darkMode = localStorage.getItem('darkMode');

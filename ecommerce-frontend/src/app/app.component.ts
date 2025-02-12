@@ -12,7 +12,5 @@ import { UserType } from './Models/user-types.enum';
 })
 export class AppComponent {
   title = 'ecommerce-frontend';
-  // TODO: Integrar com o sistema de autenticação
-  userType: UserType = UserType.CLIENTE // Defina o tipo de usuário aqui para testes
 }
 

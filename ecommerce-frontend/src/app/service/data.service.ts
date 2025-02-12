@@ -6,7 +6,7 @@ import { catchError } from "rxjs/operators";
 interface ApiResponse {
   success: boolean;
   data: any;
-}
+} 
 
 @Injectable({
   providedIn: "root",

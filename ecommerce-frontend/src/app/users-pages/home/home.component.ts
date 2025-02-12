@@ -1,14 +1,17 @@
-import { Component, type OnInit } from "@angular/core"
 import { AsyncPipe, NgClass, CurrencyPipe } from "@angular/common";
 import { RouterLink, RouterLinkActive } from "@angular/router"
+import { Component, type OnInit } from "@angular/core"
+
 import { map, type Observable, take } from "rxjs"
+
 import { ProdutoService } from "../../service/produtos.service"
 import { CategoriasService } from "../../service/categoria.service"
+import { get } from "http";
 
 @Component({
   selector: "app-home",
   standalone: true,
-  imports: [NgClass, CurrencyPipe, RouterLink, RouterLinkActive, AsyncPipe],
+  imports: [CurrencyPipe, RouterLink, RouterLinkActive],
   templateUrl: "./home.component.html",
   styleUrl: "./home.component.css",
 })
@@ -24,6 +27,12 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getProduto();
+    this.categorias$ = this.categoriasService.getCategorias();
+    this.getCategLimit();
+  }
+
+  getProduto(): void {
     this.produtosService.getProdutos().subscribe({
       next: (dados) => {
         this.produtos = dados.slice(0, 4); // Pegando apenas os 4 primeiros produtos
@@ -32,7 +41,9 @@ export class HomeComponent implements OnInit {
         console.error("Erro ao buscar produtos:", err);
       },
     });
-    this.categorias$ = this.categoriasService.getCategorias()
+  }
+
+  getCategLimit(): void {
     this.categoriasService
       .getCategorias()
       .pipe(take(1))
@@ -56,4 +67,3 @@ export class HomeComponent implements OnInit {
     )
   }
 }
-

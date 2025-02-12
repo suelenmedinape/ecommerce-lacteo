@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core"
 
-
 @Component({
   selector: "app-pagination",
   standalone: true,
@@ -10,7 +9,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core"
 })
 export class PaginationComponent {
   @Input() totalPages = 10
-  @Input() currentPage = 1
+  @Input() currentPage = 1 
   @Output() pageChange = new EventEmitter<number>()
 
   get pages(): number[] {
@@ -38,4 +37,3 @@ export class PaginationComponent {
     }
   }
 }
-

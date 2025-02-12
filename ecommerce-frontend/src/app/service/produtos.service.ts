@@ -9,7 +9,7 @@ export class ProdutoService {
   private apiUrl = 'http://localhost:8080/products'; // URL do backend
 
   constructor(private http: HttpClient) {}
-
+ 
   getProdutos(): Observable<any> {
     return this.http.get(this.apiUrl); 
   }
@@ -19,6 +19,6 @@ export class ProdutoService {
   }
 
   getProdutoByName(name: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/search`, { params: { name } });
+    return this.http.get(`${this.apiUrl}/search?name=${name}`);
   }
 }

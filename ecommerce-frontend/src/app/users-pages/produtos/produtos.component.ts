@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ProdutoService } from '../../service/produtos.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { ProdutoService } from '../../service/produtos.service';
 
 @Component({
   selector: 'app-produtos',
@@ -21,16 +22,15 @@ export class ProdutosComponent implements OnInit {
   )  {}
 
   ngOnInit(): void {
+    this.getproduct();
+  }
+ 
+  getproduct(): void {
     this.route.paramMap.subscribe((params) => {
-      const id = Number(params.get("id"));
-      this.produtoService.getProdutoById(id).subscribe({
-        next: (produto) => {
-          this.produto = produto; // Atribui o produto recebido à variável
-        },
-        error: (err) => {
-          console.error("Erro ao buscar produto:", err);
-          this.produto = null; // Define produto como null em caso de erro
-        },
+      const id = Number(params.get("id")); // Obtém o id do produto da URL
+      this.produtoService.getProdutoById(id).subscribe({ // Busca o produto pelo id
+        next: (produto) => { this.produto = produto; }, // Atribui o produto recebido à variável 
+        error: (err) => { this.produto = null; }, // Define produto como null em caso de erro
       });
     });
   }

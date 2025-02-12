@@ -16,7 +16,7 @@ export class CategoriasService {
   getCategorias(): Observable<{ id: number; nome: string; desc: string; }[]> {
     return of(this.categorias);
   }
-
+ 
   // Retorna uma categoria específica por ID como um Observable
   getCategoriaById(id: number): Observable<{ id: number; nome: string; desc: string; } | undefined> {
     const categoria = this.categorias.find((cat) => cat.id === id);
