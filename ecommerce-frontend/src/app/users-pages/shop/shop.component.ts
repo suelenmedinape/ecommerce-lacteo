@@ -7,11 +7,12 @@ import { map, Observable } from 'rxjs';
 import { PaginationComponent } from '../../_component/pagination/pagination.component';
 import { CategoriasService } from '../../service/categoria.service';
 import { ProdutoService } from '../../service/produtos.service';
+import { CardProductsComponent } from '../../_component/card-products/card-products.component';
 
 @Component({
   selector: 'app-shop',
   standalone: true,
-  imports: [PaginationComponent, CurrencyPipe, RouterLink, RouterLinkActive],
+  imports: [PaginationComponent, CurrencyPipe, RouterLink, RouterLinkActive, CardProductsComponent],
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.css'],
 })

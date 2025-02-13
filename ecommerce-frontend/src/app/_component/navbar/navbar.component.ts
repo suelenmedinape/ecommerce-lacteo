@@ -12,10 +12,11 @@ import { ProdutoService } from '../../service/produtos.service';
 import { UserType } from '../../Models/user-types.enum';
 import { AlertComponent } from '../alert/alert.component';
 import { AuthService } from '../../service/auth.service';
+import { CardProductsComponent } from '../card-products/card-products.component';
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive, RouterModule, AlertComponent],
+  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive, RouterModule, AlertComponent, CardProductsComponent],
   standalone: true,
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css' 
