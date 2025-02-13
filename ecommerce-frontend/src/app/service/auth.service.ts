@@ -1,17 +1,44 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable, inject } from "@angular/core"
+import { HttpClient } from "@angular/common/http" // Remove 'type' from this import
+import { type Observable, BehaviorSubject } from "rxjs"
+import { tap } from "rxjs/operators"
+import { CookieService } from "ngx-cookie-service"
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AuthService {
-  private apiUrl = '/auth'; // Agora o proxy redireciona para o backend
-  constructor(private http: HttpClient) { }
- 
+  private apiUrl = "/auth"
+  private userRoleSubject = new BehaviorSubject<string | null>(null)
+  userRole$ = this.userRoleSubject.asObservable()
+
+  private http = inject(HttpClient)
+  private cookieService = inject(CookieService)
+
   login(email: string, password: string): Observable<any> {
-    const body = { email, password };
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<any>(`${this.apiUrl}/login`, body, { headers, withCredentials: true });
+    return this.http.post<any>(`${this.apiUrl}/login`, { email, password }, { withCredentials: true }).pipe(
+      tap((response) => {
+        this.setToken(response.token)
+        this.setUserRole(response.role)
+      }),
+    )
+  }
+
+  logout() {
+    this.cookieService.delete("auth_token")
+    this.userRoleSubject.next(null)
+  }
+
+  getToken(): string | null {
+    return this.cookieService.get("auth_token") || null
+  }
+
+  private setToken(token: string) {
+    this.cookieService.set("auth_token", token, 7, "/", undefined, true, "Strict")
+  }
+
+  private setUserRole(role: string) {
+    this.userRoleSubject.next(role)
   }
 }
+

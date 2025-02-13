@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 
-import { take } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 
 import { DarkModeService } from '../../service/dark-mode.service';
 import { CategoriasService } from '../../service/categoria.service';
@@ -11,6 +11,7 @@ import { ProdutoService } from '../../service/produtos.service';
 
 import { UserType } from '../../Models/user-types.enum';
 import { AlertComponent } from '../alert/alert.component';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -23,8 +24,6 @@ import { AlertComponent } from '../alert/alert.component';
 export class NavbarComponent implements OnInit {
   @ViewChild('cartButton') cartButton!: ElementRef; // Referência ao botão de carrinho
   @ViewChild('categButton') categButton!: ElementRef; // Referência ao botão de categorias
-  
-  @Input() userType: UserType = UserType.CLIENTE; // Tipo de usuário
 
   categoriasLimitadas: { id: number; nome: string; desc: string }[] = []; //dropdown de categorias
 
@@ -33,6 +32,8 @@ export class NavbarComponent implements OnInit {
   isSearching: boolean = false; // Indica se está buscando produtos
   showAlert: boolean = false; // Variável para controlar a exibição do alerta
   UserType = UserType // Enum de tipos de usuário
+  userRole: string | null = null
+  private subscription: Subscription | null = null
 
   isMenuOpen = false // Indica se o menu está aberto
 
@@ -40,10 +41,24 @@ export class NavbarComponent implements OnInit {
     public darkModeService: DarkModeService, 
     private categoriasService: CategoriasService, 
     private produtoService: ProdutoService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.getCategMenu();
+    this.subscription = this.authService.userRole$.subscribe((role: string | null) => {
+      this.userRole = role
+    })
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe()
+    }
+  }
+
+  logout() {
+    this.authService.logout()
   }
 
   toggleMenu() {

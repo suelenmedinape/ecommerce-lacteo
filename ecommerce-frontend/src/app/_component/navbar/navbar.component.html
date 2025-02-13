@@ -176,15 +176,21 @@
             </div>
           </div>
         </li>
-        @switch (userType) { @case (UserType.PRODUTOR) {
-        <a routerLink="/manage-products"
-          class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Gerenciar Produtos</a>
-        } @case (UserType.VISITANTE) {
-        <a routerLink="/login"
-          class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Login</a>
-        <a routerLink="/register"
-          class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Registre-se</a>
-        } }
+        <ng-container [ngSwitch]="userRole">
+          <ng-container *ngSwitchCase="'ROLE_ADMIN'">
+            <a routerLink="/manage-products">Gerenciar Produtos</a>
+            <a routerLink="/dashboard">Dashboard</a>
+          </ng-container>
+          <ng-container *ngSwitchCase="'ROLE_CLIENT'">
+            <a routerLink="/products">Produtos</a>
+            <a routerLink="/orders">Meus Pedidos</a>
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            <a routerLink="/login">Login</a>
+            <a routerLink="/register">Registre-se</a>
+          </ng-container>
+        </ng-container>
+        <a *ngIf="userRole" (click)="logout()">Logout</a>
         <li class="shrink-0">
           <button (click)="toggleDarkMode()" class="px-4 py-2 text-white rounded">
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
