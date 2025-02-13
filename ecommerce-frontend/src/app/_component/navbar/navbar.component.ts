@@ -23,6 +23,7 @@ import { AlertComponent } from '../alert/alert.component';
 export class NavbarComponent implements OnInit {
   @ViewChild('cartButton') cartButton!: ElementRef; // Referência ao botão de carrinho
   @ViewChild('categButton') categButton!: ElementRef; // Referência ao botão de categorias
+  
   @Input() userType: UserType = UserType.CLIENTE; // Tipo de usuário
 
   categoriasLimitadas: { id: number; nome: string; desc: string }[] = []; //dropdown de categorias
