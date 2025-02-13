@@ -120,7 +120,7 @@
           </ul>
 
           <div class="p-2 text-sm font-medium text-gray-900 dark:text-white">
-            <a href="#" title=""
+            <a *ngIf="userRole" (click)="logout()"
               class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
               Sign Out
             </a>
@@ -178,19 +178,13 @@
         </li>
         <ng-container [ngSwitch]="userRole">
           <ng-container *ngSwitchCase="'ROLE_ADMIN'">
-            <a routerLink="/manage-products">Gerenciar Produtos</a>
-            <a routerLink="/dashboard">Dashboard</a>
-          </ng-container>
-          <ng-container *ngSwitchCase="'ROLE_CLIENT'">
-            <a routerLink="/products">Produtos</a>
-            <a routerLink="/orders">Meus Pedidos</a>
+            <a routerLink="/manage-products" class="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">Gerenciar Produtos</a>
           </ng-container>
           <ng-container *ngSwitchDefault>
-            <a routerLink="/login">Login</a>
-            <a routerLink="/register">Registre-se</a>
+            <a routerLink="/login" class="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">Login</a>
+            <a routerLink="/register" class="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">Registre-se</a>
           </ng-container>
         </ng-container>
-        <a *ngIf="userRole" (click)="logout()">Logout</a>
         <li class="shrink-0">
           <button (click)="toggleDarkMode()" class="px-4 py-2 text-white rounded">
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"

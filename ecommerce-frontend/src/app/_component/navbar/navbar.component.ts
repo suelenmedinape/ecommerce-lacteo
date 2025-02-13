@@ -47,8 +47,9 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.getCategMenu();
     this.subscription = this.authService.userRole$.subscribe((role: string | null) => {
-      this.userRole = role
-    })
+      console.log('User role updated in NavbarComponent:', role); 
+      this.userRole = role;
+    });
   }
 
   ngOnDestroy() {

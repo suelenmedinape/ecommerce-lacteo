@@ -25,11 +25,10 @@ public class TokenService {
 			String token = JWT.create()
 					.withIssuer("auth-api")
 					.withSubject(user.getEmail())
+					.withClaim("role", user.getRole().name()) // Adicione a role como uma claim
 					.withExpiresAt(generateExpirationDate())
 					.sign(algorithm);
-			
 			return token;
-			
 		} catch (JWTCreationException e) {
 			throw new RuntimeException("Erro ao gerar token", e);
 		}

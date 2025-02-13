@@ -1,16 +1,16 @@
 import { Injectable, inject } from "@angular/core"
 import { HttpClient } from "@angular/common/http" // Remove 'type' from this import
 import { type Observable, BehaviorSubject } from "rxjs"
-import { tap } from "rxjs/operators"
+import { switchMap, tap } from "rxjs/operators"
 import { CookieService } from "ngx-cookie-service"
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AuthService {
   private apiUrl = "/auth"
-  private userRoleSubject = new BehaviorSubject<string | null>(null)
-  userRole$ = this.userRoleSubject.asObservable()
+  private userRoleSubject = new BehaviorSubject<string | null>(null);
+  userRole$ = this.userRoleSubject.asObservable();
 
   private http = inject(HttpClient)
   private cookieService = inject(CookieService)
@@ -18,10 +18,10 @@ export class AuthService {
   login(email: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, { email, password }, { withCredentials: true }).pipe(
       tap((response) => {
-        this.setToken(response.token)
-        this.setUserRole(response.role)
+        this.setToken(response.token);
+        this.setUserRole(response.role); // Use a role da resposta
       }),
-    )
+    );
   }
 
   logout() {
@@ -38,7 +38,8 @@ export class AuthService {
   }
 
   private setUserRole(role: string) {
-    this.userRoleSubject.next(role)
+    console.log('Setting user role:', role); // Log para depuração
+    this.userRoleSubject.next(role);
   }
 }
 
