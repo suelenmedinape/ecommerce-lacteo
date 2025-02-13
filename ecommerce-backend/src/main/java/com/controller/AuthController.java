@@ -48,7 +48,7 @@ public class AuthController {
 
 		clientService.register(newClient);
 
-		Map<String, String> response = Map.of("message", "Cadastro realizado com sucesso!");
+		Map<String, String> response = Map.of("message", "Cadastro realizado com sucesso! Faça login para começar.");
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 
@@ -57,7 +57,7 @@ public class AuthController {
 		var userNamePassword = new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword());
 		var auth = this.authenticationManager.authenticate(userNamePassword);
 		Person person = (Person) auth.getPrincipal();
-		var token = tokenService.generateToken(person);
+		var token = tokenService.generateToken((Person)auth.getPrincipal());
 		
 		// Adicione a role na resposta
 		return ResponseEntity.ok(new LoginResponseDTO(token, person.getRole().name())); 
