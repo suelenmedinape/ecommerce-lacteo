@@ -1,38 +1,42 @@
 import { Component } from "@angular/core"
-import { CommonModule } from "@angular/common"
+
 import { FormsModule } from "@angular/forms"
 import { Router } from "@angular/router"
 import { inject } from "@angular/core"
 import { AuthService } from "../../../service/auth.service"
+import { AlertComponent } from "../../../_component/alert/alert.component"
 
 @Component({
   selector: "app-login",
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  template: `
-    <form (ngSubmit)="onSubmit()">
-      <input type="email" [(ngModel)]="email" name="email" required>
-      <input type="password" [(ngModel)]="password" name="password" required>
-      <button type="submit">Login</button>
-    </form>
-  `,
+  imports: [FormsModule, AlertComponent],
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
 })
 export class LoginComponent {
   email = ""
   password = ""
+  showAlert: boolean = false
 
   private authService = inject(AuthService)
   private router = inject(Router)
 
   onSubmit() {
     this.authService.login(this.email, this.password).subscribe({
-      next: (response) => {
+      next: (response) => {  
         this.router.navigate(["/"])
         console.log("Login successful:")
       },
       error: (error) => {
-        console.error("Login failed:", error)
-      },
+        console.error("Login failed:", error);
+        this.showAlert = true; 
+        if (this.showAlert) {
+          setTimeout(() => {
+            this.showAlert = false;
+          }, 3000);
+          
+        }
+      },      
     })
   }
 }

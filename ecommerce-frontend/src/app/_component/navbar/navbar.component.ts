@@ -20,22 +20,21 @@ import { AuthService } from '../../service/auth.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css' 
 })
-
+ 
 export class NavbarComponent implements OnInit {
-  @ViewChild('cartButton') cartButton!: ElementRef; // Referência ao botão de carrinho
-  @ViewChild('categButton') categButton!: ElementRef; // Referência ao botão de categorias
+  @ViewChild('cartButton') cartButton!: ElementRef; 
+  @ViewChild('categButton') categButton!: ElementRef; 
 
-  categoriasLimitadas: { id: number; nome: string; desc: string }[] = []; //dropdown de categorias
+  categoriasLimitadas: { id: number; nome: string; desc: string }[] = [];
 
-  searchTerm: string = ''; // Termo de busca
-  produtos: any[] = []; // Produtos encontrados
-  isSearching: boolean = false; // Indica se está buscando produtos
-  showAlert: boolean = false; // Variável para controlar a exibição do alerta
-  UserType = UserType // Enum de tipos de usuário
+  searchTerm: string = ''; 
+  produtos: any[] = []; 
+  isSearching: boolean = false; 
+  showAlert: boolean = false;
   userRole: string | null = null
   private subscription: Subscription | null = null
 
-  isMenuOpen = false // Indica se o menu está aberto
+  isMenuOpen = false 
 
    constructor(
     public darkModeService: DarkModeService, 
@@ -87,7 +86,7 @@ export class NavbarComponent implements OnInit {
     this.getByNameProduct();
   }
   
-  getByNameProduct(): void {
+  getByNameProduct(): void { 
     this.produtoService.getProdutoByName(this.searchTerm).subscribe(
       (produtos) => {
         this.produtos = produtos;
