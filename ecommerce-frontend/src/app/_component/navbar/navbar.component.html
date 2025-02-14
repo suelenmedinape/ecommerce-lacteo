@@ -1,10 +1,11 @@
+@if (navbarService.isVisible) {
 <nav class="bg-white dark:bg-gray-800 antialiased">
   <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0 py-4">
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-8">
         <form class="max-w-md mx-auto" (ngSubmit)="buscarProdutos()">
           <label for="default-search"
-          class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+            class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
           <div class="relative">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -55,7 +56,7 @@
             <div>
               <a href="#"
                 class="truncate text-sm font-semibold leading-none text-gray-900 dark:text-white hover:underline">Apple
-              iPhone 15</a>
+                iPhone 15</a>
               <p class="mt-0.5 truncate text-sm font-normal text-gray-500 dark:text-gray-400">
                 $599
               </p>
@@ -84,11 +85,19 @@
             </div>
           </div>
 
+          @if (userRole){
           <a href="#" title=""
             class="mb-2 me-2 inline-flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             role="button">
             Proceed to Checkout
           </a>
+          } @else {
+            <a routerLink="/login" routerLinkActive="active" title=""
+            class="mb-2 me-2 inline-flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+            role="button">
+            Login
+          </a>
+          }
         </div>
 
         <!-- USUARIO -->
@@ -112,7 +121,7 @@
           class="hidden z-10 w-56 divide-y divide-gray-100 overflow-hidden overflow-y-auto rounded-lg bg-white antialiased shadow dark:divide-gray-600 dark:bg-gray-700">
           <ul class="p-2 text-start text-sm font-medium text-gray-900 dark:text-white">
             <li>
-              <a href="#" title=""
+              <a routerLink="/my-account" routerLinkActive="active" title=""
                 class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                 My Account
               </a>
@@ -121,10 +130,10 @@
 
           <div class="p-2 text-sm font-medium text-gray-900 dark:text-white">
             @if (userRole) {
-              <a (click)="logout()"
-                class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
-                Sign Out
-              </a>
+            <a (click)="logout()"
+              class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">
+              Sign Out
+            </a>
             }
           </div>
         </div>
@@ -171,23 +180,27 @@
             class="hidden z-10 mx-auto max-w-sm space-y-4 overflow-hidden rounded-lg bg-white p-4 antialiased shadow-lg dark:bg-gray-800">
             <div class="grid grid-cols-2 gap-4">
               @for (categ of categoriasLimitadas; track categ) {
-                <a routerLink="/categoria/ {{ categ.id }}" routerLinkActive="active"
-                  class="truncate text-sm font-semibold text-gray-900 dark:text-white hover:underline">{{ categ.nome
+              <a routerLink="/categoria/ {{ categ.id }}" routerLinkActive="active"
+                class="truncate text-sm font-semibold text-gray-900 dark:text-white hover:underline">{{ categ.nome
                 }}</a>
               }
             </div>
           </div>
         </li>
         @switch (userRole) {
-          @case ('ROLE_ADMIN') {
-            <a routerLink="/manage-products" class="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">Gerenciar Produtos</a>
-          }
-          @default {
-            <!-- Exibe apenas se NÃO estiver logado -->
-            <a *ngIf="!userRole" routerLink="/login" class="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">Login</a>
-            <a *ngIf="!userRole" routerLink="/register" class="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">Registre-se</a>
-          }
-        }        
+        @case ('ROLE_ADMIN') {
+        <a routerLink="/manage-products"
+          class="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">Gerenciar
+          Produtos</a>
+        }
+        @default {
+        <!-- Exibe apenas se NÃO estiver logado -->
+        <a *ngIf="!userRole" routerLink="/login"
+          class="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">Login</a>
+        <a *ngIf="!userRole" routerLink="/register"
+          class="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">Registre-se</a>
+        }
+        }
         <li class="shrink-0">
           <button (click)="toggleDarkMode()" class="px-4 py-2 text-white rounded">
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -227,13 +240,13 @@
           <div id="myCartDropdown1"
             class="hidden z-10 mx-auto max-w-sm space-y-4 overflow-hidden rounded-lg bg-white p-4 antialiased shadow-lg dark:bg-gray-800">
             @for (categ of categoriasLimitadas; track categ) {
-              <div class="grid grid-cols-2">
-                <div>
-                  <a href="#"
-                    class="truncate text-sm font-semibold leading-none text-gray-900 dark:text-white hover:underline">{{
+            <div class="grid grid-cols-2">
+              <div>
+                <a href="#"
+                  class="truncate text-sm font-semibold leading-none text-gray-900 dark:text-white hover:underline">{{
                   categ.nome }}</a>
-                </div>
               </div>
+            </div>
             }
           </div>
         </li>
@@ -251,26 +264,22 @@
     </div>
   </div>
 </nav>
+}
 
 <!-- Loading indicator -->
 @if (isSearching) {
-  <div class="mt-2 text-center">
-    <p class="text-gray-500">Buscando produtos...</p>
-  </div>
+<div class="mt-2 text-center">
+  <p class="text-gray-500">Buscando produtos...</p>
+</div>
 }
 
 <!-- Lista de produtos encontrados -->
 <div class="flex justify-center items-center mr-8 ml-8">
   @if (!isSearching && produtos.length > 0 && searchTerm.trim() !== '') {
-    <app-card-products
-      [variavel]="produtos"
-      [lista]="produtos">
-    </app-card-products>
+  <app-card-products [variavel]="produtos" [lista]="produtos">
+  </app-card-products>
   }
 </div>
 
-<app-alert [message]="'Nenhum produto encontrado para ' + searchTerm"
-  [showAlert]="showAlert"
-  [categAlert]="4"
-(close)="showAlert = false"></app-alert>
-
+<app-alert [message]="'Nenhum produto encontrado para ' + searchTerm" [showAlert]="showAlert" [categAlert]="4"
+  (close)="showAlert = false"></app-alert>

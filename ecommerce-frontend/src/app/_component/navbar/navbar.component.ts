@@ -13,6 +13,7 @@ import { UserType } from '../../Models/user-types.enum';
 import { AlertComponent } from '../alert/alert.component';
 import { AuthService } from '../../service/auth.service';
 import { CardProductsComponent } from '../card-products/card-products.component';
+import { NavbarService } from '../../service/navbar.service';
 
 @Component({
   selector: 'app-navbar',
@@ -41,7 +42,8 @@ export class NavbarComponent implements OnInit {
     public darkModeService: DarkModeService, 
     private categoriasService: CategoriasService, 
     private produtoService: ProdutoService,
-    private authService: AuthService
+    private authService: AuthService,
+    public navbarService: NavbarService
   ) {}
 
   ngOnInit(): void {
