@@ -15,8 +15,6 @@ export class RegisterComponent {
   name = "";
   email = "";
   password = "";
-  showAlert: boolean = false;
-  errorMessage: string = "";  // <- Adicionei esta variável
 
   private authService = inject(AuthService);
   private router = inject(Router);
@@ -24,19 +22,14 @@ export class RegisterComponent {
   onSubmit() {
     this.authService.register(this.name, this.email, this.password).subscribe({
       next: () => {
-        this.router.navigate(["/"]);
+        this.router.navigate(["/login"]);
         console.log("Registro bem-sucedido!");
       },
       error: (error) => {
-        console.error("Falha no registro:", error.message);
-        
-        this.errorMessage = error.message; // <- Captura a mensagem do backend
-        this.showAlert = true;
-
-        setTimeout(() => {
-          this.showAlert = false;
-        }, 3000);
-      },
+        console.error("Registration failed:", error);
+        // Display an error message to the user
+        alert("Registration failed. Please try again.");
+      }  
     });
   }
 }

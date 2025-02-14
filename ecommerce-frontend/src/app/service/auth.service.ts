@@ -27,30 +27,43 @@ export class AuthService {
         console.error('Erro ao decodificar o token:', error);
         this.logout();
       }
+    } else {
+      this.logout(); // Ensure the user is logged out if there's no token
     }
   }
 
   login(email: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, { email, password }, { withCredentials: true }).pipe(
       tap((response) => {
-        this.setToken(response.token);
-        const decodedToken: any = jwtDecode(response.token); // manter o login mesmo mudando de guia
-        this.setUserRole(decodedToken.role);
+        if (response.token) {
+          this.setToken(response.token);
+          const decodedToken: any = jwtDecode(response.token);
+          this.setUserRole(decodedToken.role);
+        } else {
+          console.error('No token received in the response');
+        }
       }),
+      catchError((error) => {
+        console.error('Login failed:', error);
+        return throwError(error);
+      })
     );
   }
-
+  
   register(name: string, email: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/register`, { name, email, password }, { withCredentials: true }).pipe(
       tap((response) => {
-        this.setToken(response.token);
-        const decodedToken: any = jwtDecode(response.token); // manter o login mesmo mudando de guia
-        this.setUserRole(decodedToken.role);
+        if (response.token) {
+          this.setToken(response.token);
+          const decodedToken: any = jwtDecode(response.token);
+          this.setUserRole(decodedToken.role);
+        } else {
+          console.error('No token received in the response');
+        }
       }),
       catchError((error) => {
-        const errorMessage = error?.error?.message || 'Erro desconhecido no registro.';
-        console.error('Erro ao registrar usuário:', errorMessage);
-        return throwError(() => new Error(errorMessage));
+        console.error('Registration failed:', error);
+        return throwError(error);
       })
     );
   }

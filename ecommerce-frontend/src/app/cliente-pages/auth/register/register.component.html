@@ -1,8 +1,4 @@
-<app-alert [message]="errorMessage"
-            [showAlert]="showAlert"
-            [categAlert]="2"
-            (close)="showAlert = false">
-    </app-alert>
+
     <form (ngSubmit)="onSubmit()">
         <input type="text" [(ngModel)]="name" name="name" required>
         <input type="email" [(ngModel)]="email" name="email" required>
