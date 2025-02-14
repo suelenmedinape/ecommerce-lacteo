@@ -30,6 +30,6 @@ export class RegisterComponent {
         // Display an error message to the user
         alert("Registration failed. Please try again.");
       }  
-    });
+    }); 
   }
 }
