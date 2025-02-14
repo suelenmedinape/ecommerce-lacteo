@@ -6,7 +6,7 @@
 
 O projeto ainda está em desenvolvimento e ainda faltam algumas paginas a serem feitas:
 
-- [ ] Login
+- [x] Login
 - [ ] Cadastro
 - [x] Home
 - [x] Loja
