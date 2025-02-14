@@ -1,7 +1,7 @@
 import { Component } from "@angular/core"
 
 import { FormsModule } from "@angular/forms"
-import { Router } from "@angular/router"
+import { Router, RouterLink, RouterLinkActive } from "@angular/router"
 import { inject } from "@angular/core"
 import { AuthService } from "../../../service/auth.service"
 import { AlertComponent } from "../../../_component/alert/alert.component"
@@ -10,7 +10,7 @@ import { NavbarService } from "../../../service/navbar.service"
 @Component({
   selector: "app-login",
   standalone: true,
-  imports: [FormsModule, AlertComponent],
+  imports: [FormsModule, AlertComponent, RouterLink, RouterLinkActive],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../service/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AlertComponent } from '../../../_component/alert/alert.component';
 import { NavbarService } from '../../../service/navbar.service';
@@ -8,7 +8,7 @@ import { NavbarService } from '../../../service/navbar.service';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, AlertComponent],
+  imports: [FormsModule, AlertComponent, RouterLink, RouterLinkActive],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
