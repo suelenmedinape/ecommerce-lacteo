@@ -5,7 +5,7 @@ import { Router } from "@angular/router"
 import { inject } from "@angular/core"
 import { AuthService } from "../../../service/auth.service"
 import { AlertComponent } from "../../../_component/alert/alert.component"
-
+ 
 @Component({
   selector: "app-login",
   standalone: true,

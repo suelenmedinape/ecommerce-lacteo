@@ -183,10 +183,11 @@
             <a routerLink="/manage-products" class="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">Gerenciar Produtos</a>
           }
           @default {
-            <a routerLink="/login" class="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">Login</a>
-            <a routerLink="/register" class="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">Registre-se</a>
+            <!-- Exibe apenas se NÃO estiver logado -->
+            <a *ngIf="!userRole" routerLink="/login" class="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">Login</a>
+            <a *ngIf="!userRole" routerLink="/register" class="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">Registre-se</a>
           }
-        }
+        }        
         <li class="shrink-0">
           <button (click)="toggleDarkMode()" class="px-4 py-2 text-white rounded">
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -222,7 +223,7 @@
             </svg>
           </button>
 
-          <!-- DROPDOWN DO CARRINHO -->
+          <!-- DROPDOWN DO CATEGORIA -->
           <div id="myCartDropdown1"
             class="hidden z-10 mx-auto max-w-sm space-y-4 overflow-hidden rounded-lg bg-white p-4 antialiased shadow-lg dark:bg-gray-800">
             @for (categ of categoriasLimitadas; track categ) {
