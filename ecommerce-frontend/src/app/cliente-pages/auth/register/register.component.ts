@@ -28,15 +28,26 @@ export class RegisterComponent {
   onSubmit() {
     this.authService.register(this.name, this.email, this.password).subscribe({
       next: () => {
-        this.router.navigate(["/login"]);
-        this.navbarService.show();
         console.log("Registro bem-sucedido!");
+  
+        // Realiza login automaticamente após o registro
+        this.authService.login(this.email, this.password).subscribe({
+          next: (response) => {
+            console.log("Login automático bem-sucedido!");
+            this.router.navigate(["/"]); // Redireciona para a página principal
+            this.navbarService.show();
+          },
+          error: (loginError) => {
+            console.error("Falha no login automático:", loginError);
+            alert("O registro foi concluído, mas houve um erro ao fazer login.");
+            this.router.navigate(["/login"]); // Caso o login falhe, redireciona para login
+          }
+        });
       },
       error: (error) => {
-        console.error("Registration failed:", error);
-        // Display an error message to the user
-        alert("Registration failed. Please try again.");
-      }  
-    }); 
-  }
+        console.error("Falha no registro:", error);
+        alert("Falha no registro. Por favor, tente novamente.");
+      }
+    });
+  }  
 }
