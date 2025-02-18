@@ -1,4 +1,4 @@
-# Ecommerce
+# Ecommerce Lacteos
 
 > O projeto é um e-commerce desenvolvido com Angular, focado em oferecer uma experiência de compra intuitiva e dinâmica. Ele permite navegação fácil, exibição de produtos, gerenciamento de carrinho.
 
