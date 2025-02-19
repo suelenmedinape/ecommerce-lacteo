@@ -16,7 +16,7 @@ public class CorsConfig {
 				registry.addMapping("/**") // Permite todos os endpoints
 						.allowedOrigins("http://localhost:4200") // Permite o domínio do frontend
 						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos permitidos
-						.allowedHeaders("*") // Permite todos os cabeçalhos
+						.allowedHeaders("*") // Permite todos os cabeçalhos de requisição
 						.allowCredentials(true); // Permite envio de cookies ou autenticação
 			}
 		};
