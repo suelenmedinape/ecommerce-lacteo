@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
@@ -42,9 +42,10 @@ export class NavbarComponent implements OnInit {
     public darkModeService: DarkModeService, 
     private categoriasService: CategoriasService, 
     private produtoService: ProdutoService,
-    private authService: AuthService,
     public navbarService: NavbarService
   ) {}
+
+  authService = inject(AuthService) 
 
   ngOnInit(): void {
     this.getCategMenu();
