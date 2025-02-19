@@ -8,7 +8,7 @@ import { NavbarService } from '../../../service/navbar.service';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, AlertComponent, RouterLink, RouterLinkActive],
+  imports: [FormsModule, RouterLink, RouterLinkActive],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -29,6 +29,7 @@ export class RegisterComponent {
     this.authService.register(this.name, this.email, this.password).subscribe({
       next: () => {
         console.log("Registro bem-sucedido!");
+        alert("Registro concluído com sucesso! Fazendo login automaticamente...");
   
         // Realiza login automaticamente após o registro
         this.authService.login(this.email, this.password).subscribe({
@@ -39,8 +40,8 @@ export class RegisterComponent {
           },
           error: (loginError) => {
             console.error("Falha no login automático:", loginError);
-            alert("O registro foi concluído, mas houve um erro ao fazer login.");
-            this.router.navigate(["/login"]); // Caso o login falhe, redireciona para login
+            alert("O registro foi concluído, mas houve um erro ao fazer login. Por favor, faça login manualmente.");
+            this.router.navigate(["/login"]); // Redireciona para a página de login
           }
         });
       },
@@ -49,5 +50,5 @@ export class RegisterComponent {
         alert("Falha no registro. Por favor, tente novamente.");
       }
     });
-  }  
+  } 
 }
