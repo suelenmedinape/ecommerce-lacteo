@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from "@angular/core";
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { AccountService } from "../../service/account.service";
 import { Observable, Subject, catchError, of } from "rxjs";
 import { AccountDetails } from "../../Models/models/account-details";
@@ -7,7 +7,7 @@ import { AccountDetails } from "../../Models/models/account-details";
 
 @Component({
   selector: "app-account",
-  template: `
+  template: ` 
     @if (clientDetails$ | async; as clientDetails) {
       <h2>Client Details</h2>
       <p>Name: {{ clientDetails.name }}</p>

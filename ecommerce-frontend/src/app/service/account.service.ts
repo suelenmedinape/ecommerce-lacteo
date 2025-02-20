@@ -6,7 +6,7 @@ import { AccountDetails } from '../Models/models/account-details';
 
 @Injectable({
   providedIn: 'root'
-})
+}) 
 export class AccountService {
   private apiUrl = "/profile";
 
@@ -18,6 +18,7 @@ export class AccountService {
   getAccountDetails(params?: { [key: string]: string }): Observable<AccountDetails> {
     const token = this.cookieService.get("auth_token");
     const headers = new HttpHeaders().set("Authorization", `Bearer ${token}`);
+    console.log('Token no getAccountDetails:', token); 
     let httpParams = new HttpParams();
     if (params) {
       Object.keys(params).forEach(key => {

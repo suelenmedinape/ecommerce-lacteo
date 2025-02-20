@@ -1,37 +1,62 @@
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { ProdutoService } from '../../service/produtos.service';
+import { Component, type OnInit } from "@angular/core"
+import { CurrencyPipe } from "@angular/common"
+import { ActivatedRoute } from "@angular/router"
+import { ProdutoService } from "../../service/produtos.service"
+import { CartService } from "../../service/cart.service"
 
 @Component({
-  selector: 'app-produtos',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  templateUrl: './produtos.component.html',
-  styleUrl: './produtos.component.css',
-  providers: [ProdutoService],
+  selector: "app-produtos",
+  templateUrl: "./produtos.component.html",
+  styleUrls: ["./produtos.component.css"],
+  imports: [CurrencyPipe]
 })
 export class ProdutosComponent implements OnInit {
-  produtos: { id: number; productName: string; price: number }[] = [];
-  produto: any;
+  produto: any
+  errorMessage = ""
 
   constructor(
     private route: ActivatedRoute,
-    private produtoService: ProdutoService
-  )  {}
+    private produtoService: ProdutoService,
+    private cartService: CartService,
+  ) {}
 
   ngOnInit(): void {
-    this.getproduct();
+    this.getproduct()
   }
- 
+
   getproduct(): void {
     this.route.paramMap.subscribe((params) => {
-      const id = Number(params.get("id")); // Obtém o id do produto da URL
-      this.produtoService.getProdutoById(id).subscribe({ // Busca o produto pelo id
-        next: (produto) => { this.produto = produto; }, // Atribui o produto recebido à variável 
-        error: (err) => { this.produto = null; }, // Define produto como null em caso de erro
-      });
-    });
+      const id = Number(params.get("id"))
+      this.produtoService.getProdutoById(id).subscribe({
+        next: (produto) => {
+          this.produto = produto
+        },
+        error: (err) => {
+          this.produto = null
+          this.errorMessage = "Erro ao carregar o produto."
+        },
+      })
+    })
   }
+
+  addToCart(productId: number, quantity: number): void {
+    if (quantity <= 0) {
+        this.errorMessage = "Quantidade inválida.";
+        return;
+    }
+    
+    this.cartService.addToCart(productId, quantity).subscribe({
+        next: () => {
+            alert('Produto adicionado ao carrinho!');
+        },
+        error: (error) => {
+            if (error.status === 401) {
+                this.errorMessage = "Faça login para adicionar itens ao carrinho.";
+            } else {
+                this.errorMessage = "Erro ao adicionar produto.";
+            }
+        }
+    });
 }
+}
+

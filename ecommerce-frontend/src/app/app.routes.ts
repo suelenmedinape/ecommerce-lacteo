@@ -5,12 +5,14 @@ import { ProdutosComponent } from './users-pages/produtos/produtos.component';
 import { LoginComponent } from './users-pages/auth/login/login.component';
 import { RegisterComponent } from './cliente-pages/auth/register/register.component';
 import { AccountComponent } from './cliente-pages/account/account.component';
+import { CartComponent } from './cliente-pages/cart/cart.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'shop', component: ShopComponent},
     {path: 'produto/:id', component: ProdutosComponent},
-    {path: "login", component: LoginComponent },
-    {path: "register", component: RegisterComponent },
+    {path: 'login', component: LoginComponent },
+    {path: 'register', component: RegisterComponent },
     {path: 'account', component: AccountComponent},
+    {path: 'cart', component: CartComponent}
 ];

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 
@@ -17,7 +17,7 @@ import { NavbarService } from '../../service/navbar.service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive, RouterModule, AlertComponent, CardProductsComponent],
+  imports: [FormsModule, RouterLink, RouterLinkActive, RouterModule, AlertComponent, CardProductsComponent],
   standalone: true,
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css' 
