@@ -21,14 +21,18 @@ O projeto ainda está em desenvolvimento e ainda faltam algumas paginas a serem 
 
 ## 💻 Pré-requisitos
 
-Antes de começar, verifique se você atendeu aos seguintes requisitos:
+Antes de começar, faça os seguintes passos:
 
-- Você instalou a versão mais recente do Angular `npm install -g @angular/cli`
-- Você instalou a versão mais recente do Tailwind CSS `npm install -D tailwindcss`
-- Iniciar o Tailwind dentro do projeto Angular `npx tailwindcss init`
-- E por fim adicionar o `ng generate @angular/core:control-flow`
-- Você tem uma máquina `<Windows / Linux / Mac>`.
-- É preciso tambem ter o Node em sua maquina `winget install Schniz.fnm -> fnm install 22`.
+### Instalação do Node
+- Instale o node em sua maquina [Node](https://nodejs.org/en/download)
+- node -v para verificar a versão
+- Vefique se o comando npm -v está mostrando a versão do node, caso de erro acesse esse link [Solução](https://chatgpt.com/share/67b743c1-a9e0-800b-80a0-0f745c921efc)
+
+### Instalação do Angular (Terminal)
+- Instalar a versão mais recente do Angular `npm install -g @angular/cli` (VS Code ou PowerShell)
+- Você instalou a versão mais recente do Tailwind CSS `npm install -D tailwindcss` (Terminal do Projeto)
+- Iniciar o Tailwind dentro do projeto Angular `npx tailwindcss init` (Terminal do Projeto)
+- E por fim adicionar o `ng generate @angular/core:control-flow` (Terminal do Projeto)
 
 ## ☕ Executando o projeto
 - Para executar o projeto `ng serve`.
