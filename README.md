@@ -35,11 +35,7 @@ Antes de começar, faça os seguintes passos:
 - E por fim adicionar o `ng generate @angular/core:control-flow` (Terminal do Projeto)
 
 ## ☕ Executando o projeto
-- Para executar o projeto `ng serve`.
-- Para executar o projeto em um navegador especifico `$env:BROWSER="chrome"; ng serve --open`.
-
-> [!WARNING]  
-> No lugar do chrome você escolhe o navegador que desejar, caso ele nao seja seu navegador principal.
+- Para executar o projeto `ng serve` no terminal.
 
 ## 📝 Licença
 
