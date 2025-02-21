@@ -7,17 +7,17 @@
 O projeto ainda está em desenvolvimento e ainda faltam algumas paginas a serem feitas:
 
 - [x] Login
-- [ ] Cadastro
+- [x] Cadastro Uusuário
 - [x] Home
 - [x] Loja
-- [ ] Carrinho
+- [x] Carrinho
 - [x] Produto Individual
 - [ ] Cadastro de produtos
 - [ ] Relatorios
 - [ ] Pedidos
 - [ ] Estoque
-- [ ] Tela de Erro (Para produtos não encontrados ou outra coisa)
-- [ ] Tela com as informações do usuario (cliente e produtor)
+- [x] Alert de Erro (Para produtos não encontrados ou outra coisa)
+- [x] Tela com as informações do usuario (cliente)
 
 ## 💻 Pré-requisitos
 
