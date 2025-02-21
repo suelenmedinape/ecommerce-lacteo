@@ -6,7 +6,7 @@ import { inject } from "@angular/core"
 import { AuthService } from "../../../service/auth.service"
 import { AlertComponent } from "../../../_component/alert/alert.component"
 import { NavbarService } from "../../../service/navbar.service"
- 
+  
 @Component({
   selector: "app-login",
   standalone: true,
@@ -36,13 +36,7 @@ export class LoginComponent {
       },
       error: (error) => {
         console.error("Login failed:", error);
-        this.showAlert = true; 
-        if (this.showAlert) {
-          setTimeout(() => {
-            this.showAlert = false;
-          }, 3000);
-          
-        }
+        this.showAlert = true;
       },      
     })
   }

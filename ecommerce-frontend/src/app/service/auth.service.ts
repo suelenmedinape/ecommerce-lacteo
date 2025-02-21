@@ -76,7 +76,7 @@ export class AuthService {
   }
 
   private setToken(token: string) {
-    this.cookieService.set('auth_token', token, 7, '/', undefined, true, 'Strict');
+    this.cookieService.set('auth_token', token, 1, '/', undefined, true, 'Strict');
   } // duara 7 dias o token
 
   private setUserRole(role: string | null) {

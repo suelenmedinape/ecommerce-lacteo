@@ -1,5 +1,4 @@
-
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-alert',
@@ -7,13 +6,23 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrl: './alert.component.css',
   imports: []
 })
-export class AlertComponent {
+export class AlertComponent implements OnChanges {
   @Input() message: string = 'Ocorreu um erro!';
   @Input() showAlert: boolean = false;
   @Input() categAlert: number = 0;
   @Output() close = new EventEmitter<void>();
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['showAlert'] && this.showAlert) {
+      setTimeout(() => {
+        this.showAlert = false;
+        this.close.emit(); // Emite um evento para o componente pai
+      }, 3000);
+    }
+  }
+
   closeAlert() {
+    this.showAlert = false;
     this.close.emit();
   }
 }

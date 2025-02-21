@@ -7,7 +7,9 @@ import { AccountDetails } from "../../Models/models/account-details";
 
 @Component({
   selector: "app-account",
-  template: ` 
+  templateUrl: './account.component.html',
+  styleUrl: './account.component.css',
+  /*template: ` 
     @if (clientDetails$ | async; as clientDetails) {
       <h2>Client Details</h2>
       <p>Name: {{ clientDetails.name }}</p>
@@ -20,7 +22,7 @@ import { AccountDetails } from "../../Models/models/account-details";
     } @else {
       <p>Loading client details...</p>
     }
-  `,
+  `,*/
   standalone: true,
   imports: [AsyncPipe],
   providers: [AccountService],
