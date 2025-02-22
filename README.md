@@ -33,6 +33,8 @@ Antes de começar, faça os seguintes passos:
 - Você instalou a versão mais recente do Tailwind CSS `npm install -D tailwindcss` (Terminal do Projeto)
 - Iniciar o Tailwind dentro do projeto Angular `npx tailwindcss init` (Terminal do Projeto)
 - E por fim adicionar o `ng generate @angular/core:control-flow` (Terminal do Projeto)
+- `npm install ngx-cookie-service --save`
+- `npm install jwt-decode`
 
 ## ☕ Executando o projeto
 - Para executar o projeto `ng serve` no terminal.
