@@ -7,17 +7,17 @@
 O projeto ainda está em desenvolvimento e ainda faltam algumas paginas a serem feitas:
 
 - [x] Login
-- [ ] Cadastro
+- [x] Cadastro Uusuário
 - [x] Home
 - [x] Loja
-- [ ] Carrinho
+- [x] Carrinho
 - [x] Produto Individual
 - [ ] Cadastro de produtos
 - [ ] Relatorios
 - [ ] Pedidos
 - [ ] Estoque
-- [ ] Tela de Erro (Para produtos não encontrados ou outra coisa)
-- [ ] Tela com as informações do usuario (cliente e produtor)
+- [x] Alert de Erro (Para produtos não encontrados ou outra coisa)
+- [x] Tela com as informações do usuario (cliente)
 
 ## 💻 Pré-requisitos
 
@@ -33,13 +33,11 @@ Antes de começar, faça os seguintes passos:
 - Você instalou a versão mais recente do Tailwind CSS `npm install -D tailwindcss` (Terminal do Projeto)
 - Iniciar o Tailwind dentro do projeto Angular `npx tailwindcss init` (Terminal do Projeto)
 - E por fim adicionar o `ng generate @angular/core:control-flow` (Terminal do Projeto)
+- `npm install ngx-cookie-service --save`
+- `npm install jwt-decode`
 
 ## ☕ Executando o projeto
-- Para executar o projeto `ng serve`.
-- Para executar o projeto em um navegador especifico `$env:BROWSER="chrome"; ng serve --open`.
-
-> [!WARNING]  
-> No lugar do chrome você escolhe o navegador que desejar, caso ele nao seja seu navegador principal.
+- Para executar o projeto `ng serve` no terminal.
 
 ## 📝 Licença
 
