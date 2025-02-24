@@ -25,5 +25,7 @@ export class AlertComponent implements OnChanges {
     this.showAlert = false;
     this.close.emit();
   }
+
+  /* register */
 }
 
