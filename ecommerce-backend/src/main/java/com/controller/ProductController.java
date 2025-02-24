@@ -32,6 +32,7 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	/* Só o admin */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping
 	@CrossOrigin(origins = "http://localhost:4201")
