@@ -12,7 +12,7 @@ O projeto ainda está em desenvolvimento e ainda faltam algumas paginas a serem 
 - [x] Loja
 - [x] Carrinho
 - [x] Produto Individual
-- [ ] Cadastro de produtos
+- [x] Cadastro de produtos
 - [ ] Relatorios
 - [ ] Pedidos
 - [ ] Estoque
