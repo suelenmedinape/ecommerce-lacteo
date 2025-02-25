@@ -35,7 +35,7 @@ public class CartItemController {
 	
 	@PostMapping("/add")
 	public ResponseEntity<Void> addItemToCart(@RequestBody CartItemDTO cartItemDTO){
-		String email =  SecurityContextHolder.getContext().getAuthentication().getName(); // pega o token
+		String email =  SecurityContextHolder.getContext().getAuthentication().getName();
 		Client client = clientService.findByEmail(email);
 		cartService.addItemToCart(client.getId(), cartItemDTO.getProductId(), cartItemDTO.getQuantity());		
 		

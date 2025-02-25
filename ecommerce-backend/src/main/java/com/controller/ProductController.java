@@ -57,6 +57,13 @@ public class ProductController {
 		
 		return ResponseEntity.ok(productSummaryDTO);
 	}
+
+	@GetMapping("/info-product-admin")
+	public ResponseEntity<List<Product>> listProductsAdmin(){
+		List<Product> products = productService.listProducts();
+		
+		return ResponseEntity.ok(products);
+	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Product> detailProduct(@PathVariable Long id){
