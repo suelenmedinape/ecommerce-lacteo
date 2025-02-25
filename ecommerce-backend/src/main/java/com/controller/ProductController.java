@@ -58,6 +58,7 @@ public class ProductController {
 		return ResponseEntity.ok(productSummaryDTO);
 	}
 
+	@CrossOrigin(origins = "http://localhost:4201")
 	@GetMapping("/info-product-admin")
 	public ResponseEntity<List<Product>> listProductsAdmin(){
 		List<Product> products = productService.listProducts();
@@ -80,6 +81,7 @@ public class ProductController {
 		return ResponseEntity.ok(dtos);
 	}
 	
+	@CrossOrigin(origins = "http://localhost:4201")
 	@PutMapping("/{productId}")
 	public ResponseEntity<Void> updateProduct(@PathVariable Long productId, @RequestBody ProductDTO dto){
 		productService.updateProduct(productId, dto);
@@ -87,6 +89,7 @@ public class ProductController {
 		return ResponseEntity.ok().build();
 	}
 	
+	@CrossOrigin(origins = "http://localhost:4201")
 	@DeleteMapping("/{productId}")
 	public ResponseEntity<Void> deleteProduct(@PathVariable Long productId){
 		productService.removeProduct(productId);
