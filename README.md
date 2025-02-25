@@ -30,9 +30,10 @@ Antes de começar, faça os seguintes passos:
 
 ### Instalação do Angular (Terminal)
 - Instalar a versão mais recente do Angular `npm install -g @angular/cli` (VS Code ou PowerShell)
-- Você instalou a versão mais recente do Tailwind CSS `npm install -D tailwindcss` (Terminal do Projeto)
-- Iniciar o Tailwind dentro do projeto Angular `npx tailwindcss init` (Terminal do Projeto)
+- Você instalou a versão mais recente do Tailwind CSS `npm install tailwindcss @tailwindcss/postcss postcss --force` (Terminal do Projeto)
+- Iniciar o Flowbite dentro do projeto Angular `npm install flowbite` (Terminal do Projeto)
 - E por fim adicionar o `ng generate @angular/core:control-flow` (Terminal do Projeto)
+- Apenas no Cliente-app `npm install flowbite-angular`
 - `npm install ngx-cookie-service --save`
 - `npm install jwt-decode`
 
