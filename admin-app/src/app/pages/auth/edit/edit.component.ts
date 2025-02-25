@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AlertComponent } from '../../../shared/models/alert/alert.component';
 import { ProdutoService } from '../../../autentication/service/produto/produto.service';
@@ -6,12 +6,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit',
+  standalone: true,
   imports: [FormsModule, AlertComponent],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.css'
 })
 
-export class EditComponent {
+export class EditComponent implements OnInit{
   productName: string = "";
   price: number = 0;
   quantity: number = 0;
@@ -58,10 +59,6 @@ export class EditComponent {
         this.showAlert = true;
         this.message = "Edição concluída com sucesso!";
         this.categAlert = 3;
-  
-        setTimeout(() => {
-          this.router.navigate(['/home']); // Redireciona para a Home após edição bem-sucedida
-        }, 2000);
       },
       error: (error) => {
         console.error('Error:', error);

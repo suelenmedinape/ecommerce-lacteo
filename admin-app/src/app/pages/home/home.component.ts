@@ -132,7 +132,4 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  editProduct(id: number): void {
-    this.router.navigate(['/edit', id]);
-  }
 }
