@@ -177,4 +177,9 @@ public class CartService {
 
 		cartItemRepository.deleteAllByCartId(cart.getId());
 	}
+
+    public void updateItemQuantity(Long id, Long productId, int quantity) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateItemQuantity'");
+    }
 }

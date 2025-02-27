@@ -29,55 +29,56 @@ public class CartItemController {
 
 	@Autowired
 	private CartService cartService;
-	
+
 	@Autowired
 	private ClientService clientService;
-	
-	@PostMapping("/add")
-	public ResponseEntity<Void> addItemToCart(@RequestBody CartItemDTO cartItemDTO){
-		String email =  SecurityContextHolder.getContext().getAuthentication().getName();
-		Client client = clientService.findByEmail(email);
-		cartService.addItemToCart(client.getId(), cartItemDTO.getProductId(), cartItemDTO.getQuantity());		
-		
-		return ResponseEntity.ok().build();
-	}
-	
-	@GetMapping
-	public ResponseEntity<List<CartItem>> listCartItems(){
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-		Client client = clientService.findByEmail(email);
-		
-		Cart cart = cartService.findByClientId(client.getCart().getId());
-		
-		return ResponseEntity.ok(cart.getCartItems());
-	}
-	
-	@DeleteMapping("/{productId}")
-	public ResponseEntity<Void> removeItemFromCart( @PathVariable Long productId){
+
+	@PostMapping("/add") // ok
+	public ResponseEntity<Void> addItemToCart(@RequestBody CartItemDTO cartItemDTO) {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		Client client = clientService.findByEmail(email);
-		
-		cartService.removeProductByCartItems(client.getCart().getId(), productId);
-	
+		cartService.addItemToCart(client.getId(), cartItemDTO.getProductId(), cartItemDTO.getQuantity());
+
 		return ResponseEntity.ok().build();
 	}
 
-	/* ADICIONADO PARA PODER MUDAR A QUANTIDADE DE PRODUTOS NO CARRINHO NA TELA MY CART*/
-	@PutMapping("/update")
-	public ResponseEntity<Void> updateItemFromCart(@RequestBody CartItemDTO cartItemDTO){
-		String email =  SecurityContextHolder.getContext().getAuthentication().getName();
-		Client client = clientService.findByEmail(email);
-		cartService.addItemToCart(client.getId(), cartItemDTO.getProductId(), cartItemDTO.getQuantity());		
-		
-		return ResponseEntity.ok().build();
-	}
-	
-	@PostMapping("/buy")
-	 public ResponseEntity<Void> buyItemsCart() {
+	@GetMapping
+	public ResponseEntity<List<CartItem>> listCartItems() {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		Client client = clientService.findByEmail(email);
-		
+
+		Cart cart = cartService.findByClientId(client.getCart().getId());
+
+		return ResponseEntity.ok(cart.getCartItems());
+	}
+
+	@DeleteMapping("/{productId}")
+	public ResponseEntity<Void> removeItemFromCart(@PathVariable Long productId) {
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		Client client = clientService.findByEmail(email);
+
+		cartService.removeProductByCartItems(client.getCart().getId(), productId);
+
+		return ResponseEntity.ok().build();
+	}
+
+	@PutMapping("/update")
+	public ResponseEntity<Void> updateItemQuantity(@RequestBody CartItemDTO cartItemDTO) {
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		Client client = clientService.findByEmail(email);
+
+		// 🔹 Método que apenas atualiza a quantidade, sem adicionar novo item
+		cartService.updateItemQuantity(client.getId(), cartItemDTO.getProductId(), cartItemDTO.getQuantity());
+
+		return ResponseEntity.ok().build();
+	}
+
+	@PostMapping("/buy")
+	public ResponseEntity<Void> buyItemsCart() {
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		Client client = clientService.findByEmail(email);
+
 		cartService.buyItemsFromCart(client.getCart().getId());
-        return ResponseEntity.ok().build();
-    }
+		return ResponseEntity.ok().build();
+	}
 }

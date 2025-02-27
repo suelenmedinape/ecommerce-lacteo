@@ -28,7 +28,7 @@ export class CardProductComponent {
       return;
     }
 
-    this.cartService.addToCart(productId, quantity).subscribe({
+    this.cartService.addItemToCart(productId, quantity).subscribe({
       next: () => {
         this.showAlert = true;
         this.categAlert = 3;

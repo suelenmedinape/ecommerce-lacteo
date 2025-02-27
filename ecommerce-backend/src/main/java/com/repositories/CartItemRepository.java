@@ -1,5 +1,7 @@
 package com.repositories;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,4 +19,6 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long>{
 	@Transactional
 	@Query("DELETE FROM CartItem c WHERE c.cart.id = :cartId")
 	void deleteAllByCartId(@Param("cartId") Long cartId);
+
+	Optional<CartItem> findByCartClientIdAndProductId(Long clientId, Long productId);
 }

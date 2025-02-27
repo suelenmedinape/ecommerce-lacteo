@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +18,7 @@ import com.services.OrderService;
 
 @RestController
 @RequestMapping("/orders")
+@CrossOrigin(origins = "http://localhost:4201")
 public class OrderController {
 
 	@Autowired
@@ -40,7 +42,7 @@ public class OrderController {
 		return ResponseEntity.ok(orderService.findAllOrdersBystatus(status));
 	}
 	
-	@PutMapping("{orderId}")
+	@PutMapping("/{orderId}")
 	public ResponseEntity<Void> updateOrderStatus(@PathVariable Long orderId , @RequestParam String status){
 		orderService.updateOrderStatus(orderId, status);
 		
