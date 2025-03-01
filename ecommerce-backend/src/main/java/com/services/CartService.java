@@ -26,7 +26,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class CartService {
-	
+
 	@Autowired
 	private ClientRepository clientRepository;
 
@@ -45,7 +45,7 @@ public class CartService {
 	public void addItemToCart(Long clientId, Long productId, int quantity) {
 		clientRepository.findById(clientId)
 				.orElseThrow(() -> new UserUnauthorizedException("Cliente não encontrado"));
-		
+
 		Cart cart = cartRepository.findByClientId(clientId)
 				.orElseThrow(() -> new CartNotFoundException("Carrinho do cliente não encontrado"));
 
@@ -100,39 +100,57 @@ public class CartService {
 		return findByClientId(clientId);
 	}
 
-	/* ADICIONADO */	
+	/* ADICIONADO */
 	@Transactional
 	public Cart updateItemFromCart(Long clientId, Long productId, int quantity) {
-		Cart cart = cartRepository.findByClientId(clientId)
-				.orElseThrow(() -> new CartNotFoundException("Carrinho não encontrado"));
-
-		Product product = productRepository.findById(productId)
-				.orElseThrow(() -> new ProductNotFoundException("Produto não encontrado"));
-
-		CartItem cartItem = cart.getCartItems().stream()
-				.filter(item -> item.getProduct().getId().equals(productId)).findFirst()
-				.orElseThrow(() -> new ProductNotFoundException("Produto não encontrado"));
-
-		if (quantity <= product.getQuantity()) {
-			cartItem.setQuantity(quantity);
-		} else {
-			throw new InsufficientStockException("Quantidade não disponível em estoque");
+		// Validação: A quantidade precisa ser maior que zero
+		if (quantity < 1) {
+			throw new IllegalArgumentException("A quantidade deve ser pelo menos 1");
 		}
 
-		BigDecimal totalPrice = cartItem.getUnitPrice().multiply(BigDecimal.valueOf(quantity));
-		cartItem.setTotalPrice(totalPrice);
+		// Encontrar o carrinho do cliente
+		Cart cart = cartRepository.findByClientId(clientId)
+				.orElseThrow(() -> new CartNotFoundException("Carrinho não encontrado para o cliente"));
 
+		// Encontrar o item no carrinho
+		CartItem cartItem = cartItemRepository.findByCartClientIdAndProductId(clientId, productId)
+				.orElseThrow(() -> new ProductNotFoundException("Produto não encontrado no carrinho"));
+
+		// Obter informações do produto
+		Product product = cartItem.getProduct();
+
+		// Validação: Verificar se a quantidade desejada está dentro do estoque
+		// disponível
+		if (quantity > product.getQuantity()) {
+			throw new InsufficientStockException("Estoque insuficiente para o produto: " + product.getProductName());
+		}
+
+		// Atualizar a quantidade do item no carrinho
+		cartItem.setQuantity(quantity);
+
+		// Atualizar o preço total do item
+		BigDecimal itemTotalPrice = product.getPrice().multiply(BigDecimal.valueOf(quantity));
+		cartItem.setTotalPrice(itemTotalPrice);
+
+		cartItemRepository.save(cartItem);
+
+		// Atualizar o total do carrinho
+		BigDecimal totalCartPrice = cart.getCartItems().stream()
+				.map(CartItem::getTotalPrice)
+				.reduce(BigDecimal.ZERO, BigDecimal::add);
+
+		cartItem.setTotalPrice(totalCartPrice);
 		cartRepository.save(cart);
 
+		// Retornar o carrinho atualizado
 		return cart;
-
 	}
 
 	@Transactional
 	public void buyItemsFromCart(Long clientId) {
 		clientRepository.findById(clientId)
-		.orElseThrow(() -> new UserUnauthorizedException("Cliente não encontrado"));
-		
+				.orElseThrow(() -> new UserUnauthorizedException("Cliente não encontrado"));
+
 		Cart cart = cartRepository.findByClientId(clientId)
 				.orElseThrow(() -> new CartNotFoundException("Carrinho não encontrado"));
 
@@ -178,8 +196,8 @@ public class CartService {
 		cartItemRepository.deleteAllByCartId(cart.getId());
 	}
 
-    public void updateItemQuantity(Long id, Long productId, int quantity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateItemQuantity'");
-    }
+	public void updateItemQuantity(Long id, Long productId, int quantity) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'updateItemQuantity'");
+	}
 }

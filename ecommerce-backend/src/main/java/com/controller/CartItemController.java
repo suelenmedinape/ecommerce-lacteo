@@ -1,8 +1,10 @@
 package com.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,6 +21,9 @@ import com.domain.Cart;
 import com.domain.CartItem;
 import com.domain.Client;
 import com.dtos.CartItemDTO;
+import com.exceptions.CartNotFoundException;
+import com.exceptions.InsufficientStockException;
+import com.exceptions.ProductNotFoundException;
 import com.services.CartService;
 import com.services.ClientService;
 
@@ -60,17 +65,27 @@ public class CartItemController {
 		cartService.removeProductByCartItems(client.getCart().getId(), productId);
 
 		return ResponseEntity.ok().build();
-	}
+	} 
 
 	@PutMapping("/update")
-	public ResponseEntity<Void> updateItemQuantity(@RequestBody CartItemDTO cartItemDTO) {
-		String email = SecurityContextHolder.getContext().getAuthentication().getName();
-		Client client = clientService.findByEmail(email);
+	public ResponseEntity<?> updateItemQuantity(@RequestBody CartItemDTO cartItemDTO) {
+		try {
+			String email = SecurityContextHolder.getContext().getAuthentication().getName();
+			Client client = clientService.findByEmail(email);
 
-		// 🔹 Método que apenas atualiza a quantidade, sem adicionar novo item
-		cartService.updateItemQuantity(client.getId(), cartItemDTO.getProductId(), cartItemDTO.getQuantity());
+			cartService.updateItemFromCart(client.getId(), cartItemDTO.getProductId(), cartItemDTO.getQuantity());
 
-		return ResponseEntity.ok().build();
+			return ResponseEntity.ok(Collections.singletonMap("message", "Quantidade atualizada com sucesso"));
+		} catch (CartNotFoundException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Carrinho não encontrado");
+		} catch (ProductNotFoundException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado no carrinho");
+		} catch (InsufficientStockException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro interno do servidor");
+		}
 	}
 
 	@PostMapping("/buy")
