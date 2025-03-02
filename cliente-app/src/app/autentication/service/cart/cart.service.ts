@@ -32,19 +32,24 @@ export class CartService {
   }
 
   updateCartItemQuantity(productId: number, quantity: number): Observable<any> {
-    const url = `${this.apiUrl}/update`;
-    const body = { productId, quantity };
-    const headers = this.headersService.getAuthHeaders();
+    const url = `${this.apiUrl}/update`
+    const body = { productId, quantity }
+    const headers = this.headersService.getAuthHeaders()
 
     return this.http.put(url, body, { headers }).pipe(
-      map(response => {
-        console.log('Response from server:', response);
-        return response;
+      tap((response) => {
+        console.log("Response from server:", response)
       }),
-      catchError(error => {
-        console.error('Error in updateCartItemQuantity:', error);
-        throw error;
-      })
-    );
+      catchError((error: HttpErrorResponse) => {
+        console.error("Error in updateCartItemQuantity:", error)
+
+        // If the error is related to insufficient stock, handle it specifically
+        if (error.status === 400 && error.error?.message?.includes("Quantidade não disponível")) {
+          return throwError(() => new Error("Quantidade Indisponível"))
+        }
+
+        return throwError(() => error)
+      }),
+    )
   }
 }

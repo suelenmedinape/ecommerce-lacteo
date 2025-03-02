@@ -79,18 +79,6 @@ export class CartComponent implements OnInit {
     this.message = message
   }
 
-  increaseQuantity(item: any) {
-    const newQuantity = item.quantity + 1;
-    this.updateQuantity(item.product.id, newQuantity);
-  }
-
-  decreaseQuantity(item: any) {
-    if (item.quantity > 1) {
-      const newQuantity = item.quantity - 1;
-      this.updateQuantity(item.product.id, newQuantity);
-    }
-  }
-
   updateQuantity(productId: number, newQuantity: number) {
     newQuantity = Math.max(1, Math.floor(Number(newQuantity)));
 
@@ -107,16 +95,10 @@ export class CartComponent implements OnInit {
         }
       },
       error: (error) => {
-        this.showAlert = true
-        this.categAlert = 2
-        this.message = "Quantidade Indisponível"
+        this.showError("Erro ao atualizar quantidade do item no carrinho");
         this.listCart();
       }
     });
-  }
-
-  calculateTotalPrice(): number {
-      return this.cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
   }
 
 }
