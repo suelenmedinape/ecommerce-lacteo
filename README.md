@@ -10,7 +10,7 @@ O projeto ainda está em desenvolvimento e ainda faltam algumas paginas a serem 
 - [x] Cadastro Usuário
 - [x] Home
 - [x] Loja
-- [x] Carrinho (Falta algumas coisas)
+- [ ] Carrinho (Falta algumas coisas)
 - [x] Produto Individual
 - [x] Cadastro de produtos
 - [ ] Relatorios
