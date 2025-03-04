@@ -1,21 +1,55 @@
-@if (cart.length > 0) {
-    @for (item of cart; track item.id) {
-    <p> {{ item.quantity }}</p>
-    <p> {{ item.unitPrice }}</p>
-    <p> {{ item.totalPrice }}</p>
-    <input type="number" id="counter-input" data-input-counter
-        min="1" [(ngModel)]="item.quantity" (ngModelChange)="updateQuantity(item.product.id, $event)" required />
-    <p> {{ item.product.productName }}</p>
-    <p> {{ item.product.description }}</p>
-    <p> {{ item.product.price }}</p>
-    <p> {{ item.product.quantity }}</p>
-    }
-    <button (click)="buyItems()"> Comprar </button>
-    } @else {
-    <p>Seu carrinho está vazio</p>
-    }
-    <p class="text-red-700"> 
-        O que resta? <br>
-         - Mostrar o valor total do carrinho, arrumar o remover item
-    </p>
+<div class="cart-container">
+    <h2>Seu Carrinho</h2>
     
+    @if (cartItems.length === 0) {
+      <div class="empty-cart">
+        <p>Seu carrinho está vazio</p>
+        <button class="continue-shopping">Continuar Comprando</button>
+      </div>
+    } @else {
+      <div class="cart-items">
+        @for (item of cartItems; track item.id) {
+          <div class="cart-item">
+            <div class="item-details">
+              <h3>{{ item.product.productName }}</h3>
+              <p class="item-description">{{ item.product.description }}</p>
+              <p class="item-availability">Disponível: {{ item.product.quantity }} unidades</p>
+            </div>
+            
+            <div class="item-quantity">
+                <button (click)="decreaseQuantity(item.id)" [disabled]="item.quantity <= 1">-</button>
+                <input 
+                  type="number" 
+                  min="1" 
+                  [max]="item.product.quantity" 
+                  [(ngModel)]="item.quantity" 
+                  (change)="updateItemQuantity(item.id, item.quantity)">
+                <button (click)="increaseQuantity(item.id)" [disabled]="item.quantity >= item.product.quantity">+</button>
+              </div>
+            
+            <div class="item-price">
+              <p class="unit-price">R$ {{ item.unitPrice.toFixed(2) }}</p>
+              <p class="total-price">R$ {{ item.totalPrice.toFixed(2) }}</p>
+            </div>
+            
+            <button class="remove-btn" (click)="removeItem(item.id)">
+              Remover
+            </button>
+          </div>
+        }
+        
+        <div class="cart-summary">
+          <div class="cart-total">
+            <span>Total:</span>
+            <span class="total-amount">R$ {{ cartTotal.toFixed(2) }}</span>
+          </div>
+          <div class="cart-actions">
+            <button class="continue-shopping">Continuar Comprando</button>
+            <button class="checkout" (click)="buyItems()">Finalizar Compra</button>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+  
+  

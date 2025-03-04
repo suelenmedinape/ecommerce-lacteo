@@ -103,10 +103,6 @@ public class CartService {
 	/* ADICIONADO */
 	@Transactional
 	public Cart updateItemFromCart(Long clientId, Long productId, int quantity) {
-		// Validação: A quantidade precisa ser maior que zero
-		if (quantity < 1) {
-			throw new IllegalArgumentException("A quantidade deve ser pelo menos 1");
-		}
 
 		// Encontrar o carrinho do cliente
 		Cart cart = cartRepository.findByClientId(clientId)
@@ -134,12 +130,6 @@ public class CartService {
 
 		cartItemRepository.save(cartItem);
 
-		// Atualizar o total do carrinho
-		BigDecimal totalCartPrice = cart.getCartItems().stream()
-				.map(CartItem::getTotalPrice)
-				.reduce(BigDecimal.ZERO, BigDecimal::add);
-
-		cartItem.setTotalPrice(totalCartPrice);
 		cartRepository.save(cart);
 
 		// Retornar o carrinho atualizado

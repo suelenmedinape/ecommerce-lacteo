@@ -35,7 +35,6 @@ public class ClientController {
 	public ResponseEntity<Void> updateDetailsClient(@RequestBody ClientUpdateDTO clientUpdateDTO) {		
 	    String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		Client client = clientService.findByEmail(email);
-
 		
 		clientService.updateClient(client.getId(), clientUpdateDTO);	
 	    return ResponseEntity.ok().build();
