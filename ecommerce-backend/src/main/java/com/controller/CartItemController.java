@@ -64,10 +64,10 @@ public class CartItemController {
 	}
 
 	@PutMapping("/update")
-	public ResponseEntity<?> updateItemQuantity(@RequestBody CartItemDTO cartItemDTO) {
+	public ResponseEntity<Void> updateItemQuantity(@RequestBody CartItemDTO cartItemDTO) {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		Client client = clientService.findByEmail(email);
-		cartService.updateItemFromCart(client.getId(), cartItemDTO.getProductId(), cartItemDTO.getQuantity());
+		cartService.addItemToCart(client.getId(), cartItemDTO.getProductId(), cartItemDTO.getQuantity());
 
 		return ResponseEntity.ok(Collections.singletonMap("message", "Quantidade atualizada com sucesso"));
 	}
