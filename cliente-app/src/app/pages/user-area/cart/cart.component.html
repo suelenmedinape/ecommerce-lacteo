@@ -1,55 +1,121 @@
-<div class="cart-container">
-    <h2>Seu Carrinho</h2>
-    
-    @if (cartItems.length === 0) {
-      <div class="empty-cart">
-        <p>Seu carrinho está vazio</p>
-        <button class="continue-shopping">Continuar Comprando</button>
-      </div>
-    } @else {
-      <div class="cart-items">
-        @for (item of cartItems; track item.id) {
-          <div class="cart-item">
-            <div class="item-details">
-              <h3>{{ item.product.productName }}</h3>
-              <p class="item-description">{{ item.product.description }}</p>
-              <p class="item-availability">Disponível: {{ item.product.quantity }} unidades</p>
-            </div>
-            
+<app-alert [message]="message"
+[showAlert]="showAlert"
+[categAlert]="categAlert"
+(close)="showAlert = false">
+</app-alert>
+<div class="cart-container dark:bg-gray-800 dark:text-white">
+  <h2>Seu Carrinho</h2>
+  
+  @if (cartItems.length === 0) {
+    <div class="empty-cart dark:bg-gray-700 dark:text-white">
+      <p>Seu carrinho está vazio</p>
+      <button class="continue-shopping dark:bg-gray-600 dark:text-white">Continuar Comprando</button>
+    </div>
+  } @else {
+    <div class="cart-items">
+      @for (item of cartItems; track item.id) {
+        <div class="cart-item dark:bg-gray-700 dark:text-white">
+          <div class="item-details">
+            <h3>{{ item.product.productName }}</h3>
+            <p class="item-description">{{ item.product.description }}</p>
+            <p class="item-availability">Disponível: {{ item.product.quantity }} unidades</p>
+          </div>
+          
+          <div class="item-quantity">
             <div class="item-quantity">
-                <button (click)="decreaseQuantity(item.id)" [disabled]="item.quantity <= 1">-</button>
-                <input 
-                  type="number" 
-                  min="1" 
-                  [max]="item.product.quantity" 
-                  [(ngModel)]="item.quantity" 
-                  (change)="updateItemQuantity(item.id, item.quantity)">
-                <button (click)="increaseQuantity(item.id)" [disabled]="item.quantity >= item.product.quantity">+</button>
-              </div>
-            
-            <div class="item-price">
-              <p class="unit-price">R$ {{ item.unitPrice.toFixed(2) }}</p>
-              <p class="total-price">R$ {{ item.totalPrice.toFixed(2) }}</p>
+              <button (click)="decreaseQuantity(item.product.id)" [disabled]="item.quantity <= 1">-</button>
+              <input 
+                type="number" 
+                min="1" 
+                [max]="item.product.quantity" 
+                [(ngModel)]="item.quantity" 
+                (change)="updateItemQuantity(item.product.id, item.quantity)">
+              <button (click)="increaseQuantity(item.product.id)" [disabled]="item.quantity >= item.product.quantity">+</button>
             </div>
-            
-            <button class="remove-btn" (click)="removeItem(item.id)">
-              Remover
-            </button>
+            </div>
+          
+          <div class="item-price">
+            <p class="unit-price">R$ {{ item.unitPrice.toFixed(2) }}</p>
+            <p class="total-price">R$ {{ item.totalPrice.toFixed(2) }}</p>
           </div>
-        }
-        
-        <div class="cart-summary">
-          <div class="cart-total">
-            <span>Total:</span>
-            <span class="total-amount">R$ {{ cartTotal.toFixed(2) }}</span>
-          </div>
-          <div class="cart-actions">
-            <button class="continue-shopping">Continuar Comprando</button>
-            <button class="checkout" (click)="buyItems()">Finalizar Compra</button>
-          </div>
+          
+          <button class="remove-btn dark:bg-red-600 dark:text-white" (click)="removeItem(item.id)">
+            Remover
+          </button>
+        </div>
+      }
+      
+      <div class="cart-summary dark:bg-gray-700 dark:text-white">
+        <div class="cart-total">
+          <span>Total:</span>
+          <span class="total-amount">R$ {{ cartTotal.toFixed(2) }}</span>
+        </div>
+        <div class="cart-actions">
+          <button class="continue-shopping dark:bg-gray-600 dark:text-white">Continuar Comprando</button>
+          <button class="checkout dark:bg-blue-600 dark:text-white" (click)="buyItems()">Finalizar Compra</button>
         </div>
       </div>
-    }
+    </div>
+  }
+</div>
+
+  
+  <!--
+  <div class="w-[250px] max-w-sm relative mt-4">
+  <div class="relative">
+    <button
+      id="decreaseButton"
+      class="absolute right-9 top-1 rounded bg-slate-800 p-1.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+      type="button"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+        class="w-4 h-4"
+      >
+        <path d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Z" />
+      </svg>
+    </button>
+    <input
+      id="amountInput"
+      type="number"
+      value="0"
+      class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md pl-3 pr-20 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+    />
+    <button
+      id="increaseButton"
+      class="absolute right-1 top-1 rounded bg-slate-800 p-1.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+      type="button"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+        class="w-4 h-4"
+      >
+        <path
+          d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z"
+        />
+      </svg>
+    </button>
   </div>
-  
-  
+</div>
+ 
+<script>
+  // Select the elements
+  const amountInput = document.getElementById('amountInput');
+  const increaseButton = document.getElementById('increaseButton');
+  const decreaseButton = document.getElementById('decreaseButton');
+ 
+  // Increase the value
+  increaseButton.addEventListener('click', () => {
+    amountInput.value = parseInt(amountInput.value) + 1;
+  });
+ 
+  // Decrease the value and prevent going below 0
+  decreaseButton.addEventListener('click', () => {
+    amountInput.value = Math.max(0, parseInt(amountInput.value) - 1);
+  });
+</script>
+  -->

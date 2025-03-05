@@ -32,6 +32,8 @@ export class CardProductComponent {
       next: () => {
         this.showAlert = true;
         this.categAlert = 3;
+        this.message = "Produto adicionado ao carrinho!";this.showAlert = true;
+        this.categAlert = 3;
         this.message = "Produto adicionado ao carrinho!";
       },
       error: (error) => {

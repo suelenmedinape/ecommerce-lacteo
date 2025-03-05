@@ -19,7 +19,9 @@ export class CartService {
 
   listItemsInCart(): Observable<any> {
     const headers = this.headersService.getAuthHeaders();
-    return this.http.get(`${this.apiUrl}`, { headers });
+    console.log("Carrinho recebido do backend:", )
+    return this.http.get(`${this.apiUrl}`, { headers }).pipe(
+  );
   }
 
   removeItemFromCart(productId: number): Observable<any> {
