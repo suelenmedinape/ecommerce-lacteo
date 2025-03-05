@@ -86,7 +86,7 @@ public class CartService {
 		}
 
 		cartRepository.save(cart);
-	}
+	}	
 
 	public Cart findByClientId(Long clientId) {
 		Cart cart = cartRepository.findByClientId(clientId)
@@ -98,42 +98,6 @@ public class CartService {
 	public Cart removeProductByCartItems(Long clientId, Long productId) {
 		cartItemRepository.deleteByProductId(productId);
 		return findByClientId(clientId);
-	}
-
-	/* ADICIONADO */
-	@Transactional
-	public Cart updateItemFromCart(Long clientId, Long productId, int quantity) {
-
-		// Encontrar o carrinho do cliente
-		Cart cart = cartRepository.findByClientId(clientId)
-				.orElseThrow(() -> new CartNotFoundException("Carrinho não encontrado para o cliente"));
-
-		// Encontrar o item no carrinho
-		CartItem cartItem = cartItemRepository.findByCartClientIdAndProductId(clientId, productId)
-				.orElseThrow(() -> new ProductNotFoundException("Produto não encontrado no carrinho"));
-
-		// Obter informações do produto
-		Product product = cartItem.getProduct();
-
-		// Validação: Verificar se a quantidade desejada está dentro do estoque
-		// disponível
-		if (quantity > product.getQuantity()) {
-			throw new InsufficientStockException("Estoque insuficiente para o produto: " + product.getProductName());
-		}
-
-		// Atualizar a quantidade do item no carrinho
-		cartItem.setQuantity(quantity);
-
-		// Atualizar o preço total do item
-		BigDecimal itemTotalPrice = product.getPrice().multiply(BigDecimal.valueOf(quantity));
-		cartItem.setTotalPrice(itemTotalPrice);
-
-		cartItemRepository.save(cartItem);
-
-		cartRepository.save(cart);
-
-		// Retornar o carrinho atualizado
-		return cart;
 	}
 
 	@Transactional
@@ -184,10 +148,5 @@ public class CartService {
 		}
 
 		cartItemRepository.deleteAllByCartId(cart.getId());
-	}
-
-	public void updateItemQuantity(Long id, Long productId, int quantity) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'updateItemQuantity'");
 	}
 }
