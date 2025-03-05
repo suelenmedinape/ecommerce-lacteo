@@ -13,7 +13,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
-@Entity 
+@Entity
 @Table(name = "tb_cart")
 public class Cart {
 

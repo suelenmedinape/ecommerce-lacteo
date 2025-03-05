@@ -26,7 +26,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class CartService {
-
+	
 	@Autowired
 	private ClientRepository clientRepository;
 
@@ -45,7 +45,7 @@ public class CartService {
 	public void addItemToCart(Long clientId, Long productId, int quantity) {
 		clientRepository.findById(clientId)
 				.orElseThrow(() -> new UserUnauthorizedException("Cliente não encontrado"));
-
+		
 		Cart cart = cartRepository.findByClientId(clientId)
 				.orElseThrow(() -> new CartNotFoundException("Carrinho do cliente não encontrado"));
 
@@ -86,7 +86,7 @@ public class CartService {
 		}
 
 		cartRepository.save(cart);
-	}	
+	}
 
 	public Cart findByClientId(Long clientId) {
 		Cart cart = cartRepository.findByClientId(clientId)
@@ -103,8 +103,8 @@ public class CartService {
 	@Transactional
 	public void buyItemsFromCart(Long clientId) {
 		clientRepository.findById(clientId)
-				.orElseThrow(() -> new UserUnauthorizedException("Cliente não encontrado"));
-
+		.orElseThrow(() -> new UserUnauthorizedException("Cliente não encontrado"));
+		
 		Cart cart = cartRepository.findByClientId(clientId)
 				.orElseThrow(() -> new CartNotFoundException("Carrinho não encontrado"));
 
