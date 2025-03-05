@@ -3,10 +3,11 @@ import { CartService } from '../../../autentication/service/cart/cart.service';
 import { AlertComponent } from '../../../shared/models/alert/alert.component';
 import { FormsModule } from '@angular/forms';
 import { Cart } from '../../../autentication/interface/cart/cart';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
-  imports: [FormsModule, AlertComponent],
+  imports: [FormsModule, AlertComponent, RouterLink],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
@@ -49,17 +50,20 @@ export class CartComponent implements OnInit {
   }
 
   increaseQuantity(itemId: number): void {
-    const item = this.cartItems.find((i) => i.id === itemId)
+    console.log("Tentando aumentar a quantidade do item:", itemId);
+    const item = this.cartItems.find((i) => i.id === itemId);
+    console.log("Item encontrado:", item);
     if (item) {
-      // Check if we're already at max quantity
-      if (item.quantity < item.product.quantity) {
-        this.updateItemQuantity(itemId, item.quantity + 1)
-      } else {
-        this.errorMessage = "Maximum available quantity reached"
-        setTimeout(() => (this.errorMessage = null), 3000)
-      }
+        if (item.quantity < item.product.quantity) {
+            console.log(`Quantidade atual: ${item.quantity}, incrementando...`);
+            this.updateItemQuantity(itemId, item.quantity + 1);
+        } else {
+            console.log("Quantidade máxima atingida");
+            this.errorMessage = "Maximum available quantity reached";
+            setTimeout(() => (this.errorMessage = null), 3000);
+        }
     }
-  }
+}
 
   decreaseQuantity(itemId: number): void {
     const item = this.cartItems.find((i) => i.id === itemId)
