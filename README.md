@@ -10,14 +10,14 @@ O projeto ainda está em desenvolvimento e ainda faltam algumas paginas a serem 
 - [x] Cadastro Usuário
 - [x] Home
 - [x] Loja
-- [ ] Carrinho (Falta algumas coisas)
+- [x] Carrinho (Falta algumas coisas)
 - [x] Produto Individual
 - [x] Cadastro de produtos
 - [ ] Relatorios
 - [ ] Pedidos
 - [ ] Estoque
 - [x] Alert de Erro (Para produtos não encontrados ou outra coisa)
-- [ ] Tela com as informações do usuario (cliente)
+- [x] Tela com as informações do usuario (cliente)
 
 ## 💻 Pré-requisitos
 
