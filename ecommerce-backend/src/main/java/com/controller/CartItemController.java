@@ -67,11 +67,6 @@ public class CartItemController {
 	public ResponseEntity<Void> updateItemQuantity(@RequestBody CartItemDTO cartItemDTO) {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		Client client = clientService.findByEmail(email);
-<<<<<<< HEAD
-		System.out.println("Id received: " + cartItemDTO.getProductId());
-		System.out.println("Quantity received: " + cartItemDTO.getQuantity());
-=======
->>>>>>> 8a8acab77d6b2595327d75545d44427363598cab
 		cartService.addItemToCart(client.getId(), cartItemDTO.getProductId(), cartItemDTO.getQuantity());
 
 		return ResponseEntity.ok().build();
