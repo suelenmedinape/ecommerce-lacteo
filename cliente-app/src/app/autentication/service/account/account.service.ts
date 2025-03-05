@@ -2,22 +2,36 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HeadersService } from '../token/headers.service';
 import { Observable } from 'rxjs';
+import { Client } from '../../interface/account/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService { 
-  private url = '/profile'
+  private url = "/my"
 
-  constructor(private http: HttpClient, private headersService: HeadersService) { }
+  constructor(
+    private http: HttpClient,
+    private headersService: HeadersService,
+  ) {}
 
-  getClientDetails(): Observable<any> {
-    const headers = this.headersService.getAuthHeaders();
-    return this.http.get(this.url, { headers });
+  clientDetails(): Observable<Client> {
+    const headers = this.headersService.getAuthHeaders()
+    return this.http.get<Client>(`${this.url}/profile`, { headers })
   }
 
-  updateClientDetails(clientUpdateDTO: any): Observable<any> {
-    const headers = this.headersService.getAuthHeaders();
-    return this.http.put(this.url, clientUpdateDTO, { headers });
+  updateDetails(client: Client): Observable<Client> {
+    const headers = this.headersService.getAuthHeaders()
+    return this.http.put<Client>(`${this.url}/details`, client, { headers })
+  }
+
+  cancelOrder(id: number): Observable<any> {
+    const headers = this.headersService.getAuthHeaders()
+    return this.http.put<any>(`${this.url}/orders/remove/${id}`, {}, { headers })
+  }
+
+  listAllOrders(): Observable<any[]> {
+    const headers = this.headersService.getAuthHeaders()
+    return this.http.get<any[]>(`${this.url}/orders`, { headers })
   }
 }

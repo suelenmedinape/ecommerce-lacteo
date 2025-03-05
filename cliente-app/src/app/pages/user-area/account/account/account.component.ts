@@ -3,117 +3,136 @@ import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } 
 import { Client } from '../../../../autentication/interface/account/user';
 import { AccountService } from '../../../../autentication/service/account/account.service';
 import { NgClass, NgIf } from '@angular/common';
+import { Orders } from '../../../../autentication/interface/account/orders';
+import { OrdersComponent } from '../../../../shared/models/orders/orders.component';
 
 @Component({
   selector: 'app-account',
   standalone: true,
-  imports: [NgClass, FormsModule, ReactiveFormsModule, NgIf],
+  imports: [FormsModule, ReactiveFormsModule, OrdersComponent],
   templateUrl: './account.component.html',
   styleUrl: './account.component.css'
 })
 export class AccountComponent implements OnInit {
-  profileForm!: FormGroup
-  client: Client | null = null
-  isLoading = true
+  cliente: Client | null = null
+  orders: Orders[] = []
+  clientForm: FormGroup
   isEditing = false
-  submitSuccess = false
-  errorMessage = ""
 
   constructor(
     private accountService: AccountService,
     private fb: FormBuilder,
-  ) {}
-
-  ngOnInit(): void {
-    this.loadClientDetails()
-    this.initForm()
-  }
-
-  loadClientDetails(): void {
-    this.isLoading = true
-    this.accountService.getClientDetails().subscribe({
-      next: (data) => {
-        this.client = data
-        this.updateForm(data)
-        this.isLoading = false
-      },
-      error: (error) => {
-        console.error("Erro ao carregar dados do perfil", error)
-        this.errorMessage = "Não foi possível carregar seus dados. Tente novamente mais tarde."
-        this.isLoading = false
-      },
-    })
-  }
-
-  initForm(): void {
-    this.profileForm = this.fb.group({
-      name: [{ value: "", disabled: true }],
-      email: [{ value: "", disabled: true }],
-      phone: ["", [Validators.pattern(/^\d{10,11}$/)]],
-      cpf: ["", [Validators.pattern(/^\d{11}$/)]],
+  ) {
+    this.clientForm = this.fb.group({
+      name: ["", Validators.required],
+      email: ["", [Validators.required, Validators.email]],
+      phone: [""],
+      cpf: [""],
       address: this.fb.group({
-        street: ["", Validators.required],
-        number: ["", Validators.required],
-        neighborhood: ["", Validators.required],
-        state: ["", Validators.required],
+        street: [""],
+        number: [""],
+        neighborhood: [""],
+        state: [""],
       }),
     })
   }
 
-  updateForm(client: Client): void {
-    this.profileForm.patchValue({
-      name: client.name,
-      email: client.email,
-      phone: client.phone || "",
-      cpf: client.cpf || "",
-      address: client.address || {
-        street: "",
-        number: "",
-        neighborhood: "",
-        state: "",
+  ngOnInit(): void {
+    this.clientDetails()
+    this.listAllOrders()
+  }
+
+  clientDetails(): void {
+    this.accountService.clientDetails().subscribe({
+      next: (client) => {
+        this.cliente = client
+        this.resetForm()
+      },
+      error: (err) => {
+        console.error("Erro ao carregar detalhes do cliente:", err)
       },
     })
+  }
+
+  resetForm(): void {
+    if (this.cliente) {
+      this.clientForm.patchValue({
+        name: this.cliente.name,
+        email: this.cliente.email,
+        phone: this.cliente.phone || "",
+        cpf: this.cliente.cpf || "",
+        address: this.cliente.address || {
+          street: "",
+          number: "",
+          neighborhood: "",
+          state: "",
+        },
+      })
+    }
   }
 
   toggleEdit(): void {
     this.isEditing = !this.isEditing
-    this.submitSuccess = false
-
     if (!this.isEditing) {
-      // Reset form to original values if canceling edit
-      if (this.client) {
-        this.updateForm(this.client)
-      }
+      this.resetForm()
     }
   }
 
-  onSubmit(): void {
-    if (this.profileForm.invalid) {
-      return
-    }
+  updateDetails(): void {
+    if (this.clientForm.valid) {
+      const updatedClient = this.clientForm.value
 
-    const updatedClient: Client = {
-      ...this.client!,
-      phone: this.profileForm.get("phone")?.value || null,
-      cpf: this.profileForm.get("cpf")?.value || null,
-      address: this.profileForm.get("address")?.value || null,
+      this.accountService.updateDetails(updatedClient).subscribe({
+        next: (response) => {
+          this.cliente = response
+          this.isEditing = false
+          this.clientDetails();
+          console.log("Cliente atualizado com sucesso!")
+        },
+        error: (err) => {
+          console.error("Erro ao atualizar cliente:", err)
+        },
+      })
+    } else {
+      Object.keys(this.clientForm.controls).forEach((key) => {
+        const control = this.clientForm.get(key)
+        control?.markAsTouched()
+      })
     }
-
-    this.accountService.updateClientDetails(updatedClient).subscribe({
-      next: (response) => {
-        this.client = response
-        this.submitSuccess = true
-        this.isEditing = false
-        this.errorMessage = ""
-      },
-      error: (error) => {
-        console.error("Erro ao atualizar perfil", error)
-        this.errorMessage = "Não foi possível atualizar seu perfil. Tente novamente mais tarde."
-      },
-    })
   }
 
   get addressForm() {
-    return this.profileForm.get("address") as FormGroup
+    return this.clientForm.get("address") as FormGroup
+  }
+
+  listAllOrders(): void {
+    this.accountService.listAllOrders().subscribe(
+      (data: any[]) => { 
+          this.orders = data.map(order => {
+              const date = new Date(order.date);
+              return {
+                  ...order,
+                  date: isNaN(date.getTime()) ? "Data Inválida" : date.toISOString().split('T')[0]
+              };
+          });
+      },
+      (error: any) => {
+          console.error("Erro ao listar pedidos:", error);
+          this.orders = []; 
+      }
+  );
+  }
+
+  cancelOrder(id: number): void {
+    this.accountService.cancelOrder(id).subscribe({
+      next: (response) => {
+        this.listAllOrders()
+        console.log("Pedido cancelado com sucesso!")
+      },
+      error: (err) => {
+        console.log(id)
+        console.error("Erro ao cancelar pedido:", err)
+      },
+    })
   }
 }

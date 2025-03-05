@@ -1,9 +1,9 @@
 export interface Address {
     id?: number;
-    street: string;
-    number: string;
-    neighborhood: string;
-    state: string;
+    street: string | null;
+    number: string | null;
+    neighborhood: string | null;
+    state: string | null;
   }
   
   export interface Client {
