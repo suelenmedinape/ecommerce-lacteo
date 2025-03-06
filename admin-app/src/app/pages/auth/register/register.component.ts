@@ -22,7 +22,7 @@ export class RegisterComponent {
 
   private produtoService = inject(ProdutoService);
 
-  onSubmit() {
+  /*onSubmit() {
     const product = {
       productName: this.productName,
       price: this.price,
@@ -43,5 +43,5 @@ export class RegisterComponent {
         this.categAlert = 2;
       }
     });
-  }
+  }*/
 } 

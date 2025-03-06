@@ -1,161 +1,152 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { ProdutoService } from '../../autentication/service/produto/produto.service';
-import { PaginationComponent } from "../../shared/_component/pagination/pagination.component";
-import { CurrencyPipe } from '@angular/common';
-import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
-import { AlertComponent } from '../../shared/models/alert/alert.component';
+import {  NgClass } from '@angular/common';
+import { ProdutoService } from '../../autentication/service/produto/produto.service';
+import { Product } from '../../autentication/interface/product';
+import { RouterLink } from '@angular/router';
+import { AlertComponent } from "../../shared/models/alert/alert.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [PaginationComponent, AlertComponent, CurrencyPipe, RouterLink, FormsModule],
+  imports: [FormsModule, RouterLink, NgClass, AlertComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
-  produtos: { id: number; productName: string; price: number; quantity: number; description: string }[] = [];
-
-  itemsPerPage = 20;
-  currentPage = 1; 
-  isMenuOpen = false;
+export class HomeComponent {
+  produto: Product[] = [];
+  idProduct: number = 0;
+  selectedProductId: number | null = null;
+  selectedProducts: number[] = [];
+  allSelected: boolean = false;
+  isDeleteModalOpen: boolean = false;
+  isInfoModalOpen: boolean = false;
 
   showAlert: boolean = false;
   message: string = "";
   categAlert: number = 0;
 
-  searchTerm: string = '';
-  isSearching: boolean = false;
-  private searchSubject = new Subject<string>();
+  constructor(private produtoService: ProdutoService) {}
 
-
-  isDeleteModalOpen: boolean = false;
-  isInfoModalOpen: boolean = false;
-  selectedProductId: number | null = null;
-  selectedProductsIds: number[] = [];
-
-  constructor(
-    private produtosService: ProdutoService,
-    private router: Router
-  ) { }
-
-  ngOnInit(): void {
+  ngOnInit() {
     this.listProducts();
+  }
 
-    this.searchSubject.pipe(
-      debounceTime(300), 
-      distinctUntilChanged() 
-    ).subscribe(term => {
-      if (term.trim() === '') {
-        this.listProducts(); 
-      } else {
-        this.getByNameProduct(term);
-      }
+  listProducts() {
+    this.produtoService.getProdutos().subscribe((data: any) => {
+      this.produto = data;
+      this.selectedProducts = [];
+      this.allSelected = false;
     });
   }
 
-  get totalPages() {
-    return Math.ceil(this.produtos.length / this.itemsPerPage);
+  toggleSelectAll() {
+    this.allSelected = !this.allSelected;
+    this.selectedProducts = this.allSelected
+      ? this.produto.map(p => p.id || 0).filter(id => id !== 0)
+      : [];
+    this.idProduct = this.selectedProducts.length > 0 ? this.selectedProducts[0] : 0;
+    console.log('Produtos selecionados:', this.selectedProducts);
   }
 
-  get paginatedProdutos() {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    return this.produtos.slice(startIndex, startIndex + this.itemsPerPage);
+  isProductSelected(productId: number): boolean {
+    return this.selectedProducts.includes(productId);
   }
 
-  onPageChange(page: number): void {
-    this.currentPage = page; 
-  }
-
-  listProducts(): void {
-    this.produtosService.getProdutos().subscribe({
-      next: (dados) => {
-        this.produtos = dados;
-      },
-      error: (err) => {
-        console.error('Erro ao buscar produtos:', err);
-      },
-    });
-  }
-
-  buscarProdutos(): void {
-    this.searchSubject.next(this.searchTerm); 
-  }
-
-  getByNameProduct(nome: string): void {
-    this.isSearching = true;
-    this.produtosService.getProdutoByName(nome).subscribe(
-      produtos => {
-        this.produtos = produtos;
-        this.showAlert = produtos.length === 0;
-        this.isSearching = false;
-
-        if (this.showAlert) {
-          setTimeout(() => this.showAlert = false, 3000);
-        }
-      },
-      error => {
-        this.showAlert = true;
-        this.message = "Erro ao buscar produtos.";
-        this.categAlert = 2;
-        this.isSearching = false;
-      }
-    );
-  }
-
-  selectProducts(id: number): void {
-    this.selectedProductId = id;
-    setTimeout(() => {
-      this.selectedProductId = null;
-    }, 5000);
-    const index = this.selectedProductsIds.indexOf(id);
+  selectProduct(productId: number) {
+    const index = this.selectedProducts.indexOf(productId);
     if (index === -1) {
-      this.selectedProductsIds.push(id); 
+      this.selectedProducts.push(productId);
+      this.idProduct = productId;
     } else {
-      this.selectedProductsIds.splice(index, 1); 
+      this.selectedProducts.splice(index, 1);
+      this.idProduct = this.selectedProducts.length > 0 ? this.selectedProducts[this.selectedProducts.length - 1] : 0;
     }
+    this.allSelected = this.produto.length > 0 && this.selectedProducts.length === this.produto.length;
+    console.log('Produtos selecionados:', this.selectedProducts);
   }
 
-  deleteProduct(): void {
-    if (this.selectedProductsIds.length > 0) {
-      this.selectedProductsIds.forEach(id => {
-        this.produtosService.deleteProduct(id).subscribe(
-          () => {
-            this.listProducts(); 
-            this.showAlert = true;
-            this.message = `Produto com ID ${id} deletado com sucesso.`;
-            this.categAlert = 3;
-            console.log('Deletando o produto com id:', id);
-          },
-          error => {
-            this.showAlert = true;
-            this.message = "Erro ao deletar produto.";
-            this.categAlert = 2;
-          }
-        );
+  deleteProduct() {
+    if (this.selectedProducts.length === 0) {
+      this.closeModal();
+      return;
+    }
+    if (this.selectedProducts.length === 1) {
+      this.produtoService.deleteProduct(this.selectedProducts[0]).subscribe({
+        next: () => {
+          this.listProducts(); 
+          this.closeModal();
+          this.alertSuccess('Produto excluído com sucesso!');
+        },
+        error: (error) => this.handleDeleteError(error)
       });
-      this.selectedProductsIds = []; // Limpa a seleção após a exclusão
     } else {
-      this.showAlert = true;
-      this.message = "Nenhum produto selecionado.";
-      this.categAlert = 2;
+      this.deleteMultipleProducts();
     }
   }
 
-  showDeleteModal() {
-    this.isDeleteModalOpen = true;
-    this.isInfoModalOpen = false; 
+  private deleteMultipleProducts() {
+    let successCount = 0, errorCount = 0;
+    const productsToDelete = [...this.selectedProducts];
+    
+    const deleteNext = (index: number) => {
+      if (index >= productsToDelete.length) {
+        this.listProducts();
+        this.closeModal();
+        this.showDeletionResult(successCount, errorCount);
+        return;
+      }
+      this.produtoService.deleteProduct(productsToDelete[index]).subscribe({
+        next: () => { successCount++; deleteNext(index + 1); },
+        error: () => { errorCount++; deleteNext(index + 1); }
+      });
+    };
+    deleteNext(0);
   }
 
-  showInfoModal() {
-    this.isInfoModalOpen = true;
-    this.isDeleteModalOpen = false; 
+  private showDeletionResult(successCount: number, errorCount: number) {
+    if (successCount > 0 && errorCount === 0) {
+      this.alertSuccess(`${successCount} produtos excluídos com sucesso!`);
+    } else if (successCount > 0 && errorCount > 0) {
+      this.alertWarning(`${successCount} produtos excluídos com sucesso, mas ${errorCount} produtos não puderam ser excluídos.`);
+    } else {
+      this.alertError(`Nenhum produto pôde ser excluído. Por favor, tente novamente.`);
+    }
   }
 
-  closeModal() {
-    this.isDeleteModalOpen = false;
-    this.isInfoModalOpen = false;
+  private handleDeleteError(error: any) {
+    if (error.status === 500 && error.error && JSON.stringify(error.error).includes('constraint')) {
+      this.alertError('Este produto não pode ser excluído pois está associado a uma ou mais vendas.');
+    } else {
+      const messages: { [key: number]: string } = {
+        500: 'Erro interno do servidor. Por favor, tente novamente mais tarde.',
+        404: 'Produto não encontrado. Ele pode já ter sido excluído.',
+        403: 'Você não tem permissão para excluir este produto.'
+      };
+      this.alertError(messages[error.status] || 'Erro desconhecido. Por favor, tente novamente.');
+    }
   }
 
+  showDeleteModal() { this.isDeleteModalOpen = true; this.isInfoModalOpen = false; }
+  showInfoModal() { this.isInfoModalOpen = true; this.isDeleteModalOpen = false; }
+  closeModal() { this.isDeleteModalOpen = false; this.isInfoModalOpen = false; }
+
+  alertError(message: string) {
+    this.showAlert = true;
+    this.message = message;
+    this.categAlert = 2;
+    this.closeModal();
+  }
+
+  alertSuccess(message: string) {
+    this.showAlert = true;
+    this.message = message;
+    this.categAlert = 3;
+  }
+
+  alertWarning(message: string) {
+    this.showAlert = true;
+    this.message = message;
+    this.categAlert = 4;
+  }
 }

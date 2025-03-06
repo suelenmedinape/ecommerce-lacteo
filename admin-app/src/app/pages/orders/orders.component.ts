@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 export interface Order {
   id: number;
-  date: string; // Apenas a data no formato YYYY-MM-DD
+  date: string; 
   totalValue: number;
   orderStatus: string;
 }
@@ -16,60 +16,8 @@ export interface Order {
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css'],
-  imports: [CurrencyPipe, OrderStatusComponent, PaginationComponent, FormsModule]
+  imports: []
 })
-export class OrdersComponent implements OnInit {
-  orders: Order[] = [];
-  selectedStatus: string = 'SOLICITADO';
-
-  isDeleteModalOpen: boolean = false;
-  isInfoModalOpen: boolean = false;
-
-  constructor(private orderService: OrdersService) { }
-
-  ngOnInit() {
-    this.listOrders();
-  }
-
-  /* ARRUMAR A DATA */
-  listOrders() {
-    this.orderService.listOrders().subscribe(
-        (data: any[]) => { 
-            this.orders = data.map(order => {
-                const date = new Date(order.date);
-                return {
-                    ...order,
-                    date: isNaN(date.getTime()) ? "Data Inválida" : date.toISOString().split('T')[0]
-                };
-            });
-        },
-        (error: any) => {
-            console.error("Erro ao listar pedidos:", error);
-            this.orders = []; 
-        }
-    );
-}
-
-
-
-  updateStatus(id: number, status: string) {
-    this.orderService.updateStatus(id, this.selectedStatus).subscribe(() => {
-      this.listOrders();
-    });
-  }
-
-  showDeleteModal() {
-    this.isDeleteModalOpen = true;
-    this.isInfoModalOpen = false;
-  }
-
-  showInfoModal() {
-    this.isInfoModalOpen = true;
-    this.isDeleteModalOpen = false;
-  }
-
-  closeModal() {
-    this.isDeleteModalOpen = false;
-    this.isInfoModalOpen = false;
-  }
+export class OrdersComponent {
+  
 }

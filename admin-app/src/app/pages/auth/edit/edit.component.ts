@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './edit.component.css'
 })
 
-export class EditComponent implements OnInit{
+export class EditComponent /*implements OnInit*/{
   productName: string = "";
   price: number = 0;
   quantity: number = 0;
@@ -27,23 +27,23 @@ export class EditComponent implements OnInit{
   private router =  inject(Router);
   productId!: number;
 
-  ngOnInit() {
+  /*ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.productId = Number(params.get('id'));
       this.loadProduct();
     });
-  }
+  }*/
 
-  loadProduct() {
+  /*loadProduct() {
     this.produtoService.getProductById(this.productId).subscribe(product => {
       this.productName = product.productName;
       this.price = product.price;
       this.quantity = product.quantity;
       this.description = product.description;
     });
-  }
+  }*/
 
-  onSubmit(event: Event) {
+  /*onSubmit(event: Event) {
     event.preventDefault();
   
     const product = {
@@ -67,5 +67,5 @@ export class EditComponent implements OnInit{
         this.categAlert = 2;
       }
     });
-  }
+  }*/
 }
