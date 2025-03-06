@@ -156,7 +156,7 @@ export class AccountComponent implements OnInit {
       },
       error: (err) => {
         console.error("Erro ao carregar detalhes do pedido:", err)
-      },
+      }, 
     })
   }
 
