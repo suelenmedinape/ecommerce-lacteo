@@ -24,7 +24,7 @@ export class ProdutoService {
     return this.http.delete(`${this.apiUrl}/${id}`, {headers});
   }
 
-  /*addProduct(product: any): Observable<any> {
+  addProduct(product: any): Observable<any> {
     const headers = this.headerService.getAuthHeaders();
     return this.http.post(this.apiUrl, product, {headers});
   }
@@ -32,8 +32,6 @@ export class ProdutoService {
   getProdutoByName(name: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/search?name=${name}`);
   }
-
-  
 
   editProduct(product: any): Observable<any> {
     const headers = this.headerService.getAuthHeaders();
@@ -43,5 +41,5 @@ export class ProdutoService {
   getProductById(id: number): Observable<any> {
     const headers = this.headerService.getAuthHeaders();
     return this.http.get(`${this.apiUrl}/${id}`, {headers});
-  }*/
+  }
 }
