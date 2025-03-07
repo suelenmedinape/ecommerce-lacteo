@@ -1,33 +1,32 @@
 <nav class="bg-white dark:bg-gray-800 antialiased">
     <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0 py-4">
         <div class="flex items-center justify-between">
-
+ 
             <!-- INPUT SEARCH -->
             <div class="flex items-center space-x-8">
                 <form class="max-w-md mx-auto" (ngSubmit)="buscarProdutos()">
                     <label for="default-search"
-                        class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                      class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                            </svg>
-                        </div>
-                        <input type="search" id="default-search"
-                            class="block w-full mr-14 p-2 ps-10 text-sm text-gray-900 border border-transparent rounded-lg bg-transparent focus:ring-blue-500 focus:border-blue-500 dark:bg-transparent dark:border-transparent dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            name="search" [(ngModel)]="searchTerm" (input)="buscarProdutos()"
-                            placeholder="Procure por produtos" required />
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                        </svg>
+                      </div>
+                      <input type="search" id="default-search"
+                        class="block w-full mr-14 p-2 ps-10 text-sm text-gray-900 border border-transparent rounded-lg bg-transparent focus:ring-blue-500 focus:border-blue-500 dark:bg-transparent dark:border-transparent dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        name="search" [(ngModel)]="searchTerm" (input)="buscarProdutos()" placeholder="Procure por produtos"
+                        required />
                     </div>
-                </form>
+                  </form>
             </div>
 
             <!-- LOGO -->
             <div class="mx-auto max-w-screen-xl text-center">
                 <div class="shrink-0">
-                    <a href="#" title=""
-                        class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
+                    <a href="#" title="" class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
                         <img class="w-10 h-10 dark:hidden" src="/cow.svg" alt="" />
                         <img class="w-10 h-10 hidden dark:block" src="/cow-dark.svg" alt="" />
                     </a>
@@ -113,22 +112,6 @@
                     Loja
                 </a>
             </li>
-            <li class="shrink-0">
-                <div class="dropdown">
-                    <a routerLink="/shop" routerLinkActive="active"
-                        class="flex items-center gap-1 text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">
-                        Categoria
-                        <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m19 9-7 7-7-7" />
-                        </svg>
-                    </a>
-                    <div class="dropdown-content">
-                        <a href="#">Link 1</a>
-                    </div>
-                </div>
-            </li>
             @switch (userRole) {
             @case ('ROLE_ADMIN'){
             <a href="http://localhost:4201"
@@ -149,19 +132,19 @@
             <li class="shrink-0">
                 <button (click)="toggleDarkMode()" class="px-4 py-2 text-white rounded">
                     <div class="hidden dark:block">
-                        <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 5V3m0 18v-2M7.05 7.05 5.636 5.636m12.728 12.728L16.95 16.95M5 12H3m18 0h-2M7.05 16.95l-1.414 1.414M18.364 5.636 16.95 7.05M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />
+                        <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                          width="24" height="24" fill="none" viewBox="0 0 24 24">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 5V3m0 18v-2M7.05 7.05 5.636 5.636m12.728 12.728L16.95 16.95M5 12H3m18 0h-2M7.05 16.95l-1.414 1.414M18.364 5.636 16.95 7.05M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />
                         </svg>
-                    </div>
-                    <div class="dark:hidden">
-                        <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 21a9 9 0 0 1-.5-17.986V3c-.354.966-.5 1.911-.5 3a9 9 0 0 0 9 9c.239 0 .254.018.488 0A9.004 9.004 0 0 1 12 21Z" />
+                      </div>
+                      <div class="dark:hidden"> 
+                        <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                          width="24" height="24" fill="none" viewBox="0 0 24 24">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 21a9 9 0 0 1-.5-17.986V3c-.354.966-.5 1.911-.5 3a9 9 0 0 0 9 9c.239 0 .254.018.488 0A9.004 9.004 0 0 1 12 21Z" />
                         </svg>
-                    </div>
+                      </div>
                 </button>
             </li>
         </ul>
@@ -201,8 +184,8 @@
 <!-- Lista de produtos encontrados -->
 <div class="flex justify-center items-center mr-8 ml-8">
     @if (!isSearching && produtos.length > 0 && searchTerm.trim() !== '') {
-    <app-card-product [variavel]="produtos" [lista]="produtos">
-    </app-card-product>
+        <app-card-product [variavel]="produtos" [lista]="produtos">
+        </app-card-product>
     }
 </div>
 
