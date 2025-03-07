@@ -41,7 +41,7 @@ public class ClientController {
 		return ResponseEntity.ok(dto);
 	}
 	
-	@PutMapping("/details")
+	@PutMapping("/details") 
 	public ResponseEntity<Void> updateDetailsClient(@RequestBody ClientUpdateDTO clientUpdateDTO) {		
 	    String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		Client client = clientService.findByEmail(email);
@@ -64,7 +64,7 @@ public class ClientController {
 		return ResponseEntity.ok(clientService.listOrderDetailsByClient(orderId));
 	}
 	
-	@PutMapping("/orders/remove/{orderId}") 
+	@PutMapping("/orders/remove/{orderId}")
 	public ResponseEntity<Void> cancelOrder(@PathVariable Long orderId){
 		orderService.updateOrderStatus(orderId, OrderStatus.CANCELADO.name());
 		
