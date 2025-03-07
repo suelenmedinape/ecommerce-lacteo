@@ -46,6 +46,7 @@ export class NavbarComponent implements OnInit {
 
   toggleDropdown() {
     this.isOpen = !this.isOpen;
+
   }
 
   private typeNavbarWithBaseInRole(): void {
@@ -66,7 +67,7 @@ export class NavbarComponent implements OnInit {
   }
 
   buscarProdutos(): void {
-    if (this.searchTerm.trim() === '') { // Verifica se o termo de busca está vazio
+    if (this.searchTerm.trim() === '') { 
       return;
     }
   
@@ -77,14 +78,13 @@ export class NavbarComponent implements OnInit {
     this.produtoService.getProdutoByName(this.searchTerm).subscribe(
       (produtos) => {
         this.produtos = produtos;
-        this.showAlert = produtos.length === 0; // Exibe alerta se nenhum produto for encontrado
+        this.showAlert = produtos.length === 0;
         if (this.showAlert) {
           setTimeout(() => {
             this.showAlert = false;
           }, 3000);
         }
       },
-      // Exibe erro no console
       (error) => {
         console.error('Erro ao buscar produtos:', error);
       }
