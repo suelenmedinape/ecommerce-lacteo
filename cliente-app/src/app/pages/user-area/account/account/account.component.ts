@@ -40,6 +40,7 @@ export class AccountComponent implements OnInit {
         number: [""],
         neighborhood: [""],
         state: [""],
+        city: [""],
       }),
     })
   }
@@ -73,6 +74,7 @@ export class AccountComponent implements OnInit {
           number: "",
           neighborhood: "",
           state: "",
+          city: "",
         },
       })
     }
