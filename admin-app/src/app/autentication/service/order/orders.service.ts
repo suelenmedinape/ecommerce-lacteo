@@ -19,8 +19,10 @@ export class OrdersService {
   updateStatus(id: number, status: string): any {
     const token = this.cookieService.get('auth_token');
     const headers = new HttpHeaders().set("Authorization", `Bearer ${token}`);
-    status = status.toLowerCase()
+    
+    status = status.toLowerCase();
 
-    return this.http.put(`${this.apiUrl}/${id}?status=${status}`, {}, { headers });
-  }
+    return this.http.put(`${this.apiUrl}/${id}?status=${encodeURIComponent(status)}`, {}, { headers });
+}
+
 }

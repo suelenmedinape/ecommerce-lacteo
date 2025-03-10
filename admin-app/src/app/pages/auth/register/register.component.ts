@@ -77,7 +77,7 @@ export class RegisterComponent implements OnInit {
         this.message = "Falha no registro."
         this.categAlert = 2
       },
-    })
+    }) 
   }
 
   toggleDropdown(event: Event) {
