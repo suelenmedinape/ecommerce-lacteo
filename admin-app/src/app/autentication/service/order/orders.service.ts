@@ -31,4 +31,8 @@ export class OrdersService {
     return this.http.get<any[]>(`${this.apiUrl}/status?status=${encodeURIComponent(status)}`, { headers });
   }
 
+  findOrderById(id: number): any {
+    const headers = this.headerService.getAuthHeaders();
+    return this.http.get(`${this.apiUrl}/${id}`, { headers });
+  }
 }
