@@ -9,7 +9,7 @@ import { PaginationComponent } from '../../shared/_component/pagination/paginati
 
 @Component({
   selector: 'app-shop-by-category',
-  imports: [NgIf, AlertComponent, NgFor, PaginationComponent, RouterLink],
+  imports: [NgIf, AlertComponent, PaginationComponent, RouterLink],
   templateUrl: './shop-by-category.component.html',
   styleUrl: './shop-by-category.component.css'
 })
