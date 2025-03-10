@@ -12,17 +12,24 @@ import { Order } from '../../autentication/interface/order';
   styleUrls: ['./orders.component.css'],
   imports: [OrderStatusComponent, PaginationComponent]
 })
-export class OrdersComponent implements OnInit{ 
+export class OrdersComponent implements OnInit {
 
   orders: Order[] = [];
 
   itemsPerPage = 10; // Quantos produtos por página
   currentPage = 1; // Página inicial
-  
+
+  showOrderDetails = false
+  selectedOrderId: number | null = null
+  orderStatusSelected: string | null = null
+  selectedStatus = 'TODOS'
+
+  isOpen = false
+
   constructor(private ordersService: OrdersService) { }
 
   ngOnInit(): void {
-      this.listOrders();
+    this.listOrders();
   }
 
   listOrders() {
@@ -44,6 +51,8 @@ export class OrdersComponent implements OnInit{
   finalizarOrder(id: number) {
     this.ordersService.updateStatus(id, 'finalizado').subscribe(() => {
       this.listOrders();
+      this.showOrderDetails = false
+      this.selectedOrderId = null
     });
   }
 
@@ -52,6 +61,35 @@ export class OrdersComponent implements OnInit{
   }
 
   onPageChange(page: number): void {
-    this.currentPage = page; // Atualiza a página atual
+    this.currentPage = page; 
+  }
+
+  viewOrderDetails(orderId: number, orderStatus: string): void {
+    this.selectedOrderId = orderId
+    this.orderStatusSelected = orderStatus
+    console.log(this.selectedOrderId)
+    this.showOrderDetails = true
+  }
+
+  closeOrderDetails(): void {
+    this.showOrderDetails = false
+    this.selectedOrderId = null
+  }
+
+  toggleDropdown() {
+    this.isOpen = !this.isOpen
+  }
+
+  applyFilter(status: string): void {
+    this.selectedStatus = status;
+    this.isOpen = false;
+  
+    if (status === 'TODOS') {
+      this.listOrders();
+    } else {
+      this.ordersService.filterByStatus(status).subscribe((response: any) => {
+        this.orders = response;
+      });
+    }
   }
 }
