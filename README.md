@@ -33,7 +33,6 @@ Antes de começar, faça os seguintes passos:
 - Você instalou a versão mais recente do Tailwind CSS `npm install tailwindcss @tailwindcss/postcss postcss --force` (Terminal do Projeto)
 - Iniciar o Flowbite dentro do projeto Angular `npm install flowbite` (Terminal do Projeto)
 - E por fim adicionar o `ng generate @angular/core:control-flow` (Terminal do Projeto)
-- Apenas no Cliente-app `npm install flowbite-angular`
 - `npm install ngx-cookie-service --save`
 - `npm install jwt-decode`
 
