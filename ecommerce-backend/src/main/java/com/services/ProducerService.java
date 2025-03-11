@@ -8,7 +8,7 @@ import com.repositories.ProducerRepository;
 
 @Service
 public class ProducerService {
- 
+
 	@Autowired
 	private ProducerRepository producerRepository;
 	
