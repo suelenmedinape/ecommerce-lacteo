@@ -13,25 +13,26 @@ import { CategoryService } from '../../../autentication/service/categ/category.s
   styleUrl: './edit.component.css'
 })
 
-export class EditComponent implements OnInit{
+export class EditComponent implements OnInit {
   productName: string = "";
   price: number = 0;
   quantity: number = 0;
   description: string = "";
+  categories: string = ""; // Add this property to match your Product interface
 
   showAlert: boolean = false;
   message: string = "";
   categAlert: number = 0;
 
-  isOpen = false
+  isOpen = false;
 
-  categories: string[] = []
-  selectedCategory = "Categories"
-  defaultCategoryText = "Categories"
+  category: string[] = []; 
+  selectedCategory = "Categories";
+  defaultCategoryText = "Categories";
 
   private produtoService = inject(ProdutoService);
   private route = inject(ActivatedRoute);
-  private router =  inject(Router);
+  private router = inject(Router);
   productId!: number;
   private categoryService = inject(CategoryService);
 
@@ -49,6 +50,12 @@ export class EditComponent implements OnInit{
       this.price = product.price;
       this.quantity = product.quantity;
       this.description = product.description;
+      this.categories = product.categories;
+      
+      // Update the selectedCategory if a category is already set
+      if (product.categories && product.categories !== "") {
+        this.selectedCategory = product.categories;
+      }
     });
   }
 
@@ -60,7 +67,8 @@ export class EditComponent implements OnInit{
       productName: this.productName,
       price: this.price,
       quantity: this.quantity,
-      description: this.description
+      description: this.description,
+      categories: this.categories // Make sure to include the comma here
     };
   
     this.produtoService.editProduct(product).subscribe({
@@ -79,58 +87,60 @@ export class EditComponent implements OnInit{
   }
 
   toggleDropdown(event: Event) {
-    event.stopPropagation()
-    this.isOpen = !this.isOpen
-    console.log("Dropdown toggled ", this.isOpen)
+    event.stopPropagation();
+    this.isOpen = !this.isOpen;
+    console.log("Dropdown toggled ", this.isOpen);
   }
 
   selectCategory(category: string | null) {
     if (category === null) {
-      this.selectedCategory = this.defaultCategoryText
-      console.log("No category selected")
+      this.selectedCategory = this.defaultCategoryText;
+      this.categories = ""; // Clear the categories property
+      console.log("No category selected");
     } else {
-      this.selectedCategory = category
-      console.log("Selected category:", category)
+      this.selectedCategory = category;
+      this.categories = category; // Update the categories property
+      console.log("Selected category:", category);
     }
-    this.isOpen = false
+    this.isOpen = false;
   }
 
   loadCategories() {
     this.categoryService.getCategories().subscribe({
       next: (data: string[]) => {
-        this.categories = data
-        console.log("Categories loaded:", this.categories)
+        this.category = data;
+        console.log("Categories loaded:", this.category);
       },
       error: (error) => {
-        console.error("Error loading categories:", error)
-        this.alertError("Erro ao carregar categorias. Por favor, tente novamente.")
+        console.error("Error loading categories:", error);
+        this.alertError("Erro ao carregar categorias. Por favor, tente novamente.");
       },
-    })
+    });
   }
 
   isCategorySelected(): boolean {
-    return this.selectedCategory !== this.defaultCategoryText
+    return this.selectedCategory !== this.defaultCategoryText;
   }
 
   clearCategorySelection() {
-    this.selectCategory(null)
+    this.selectCategory(null);
   }
 
   alertError(message: string) {
-    this.showAlert = true
-    this.message = message
-    this.categAlert = 2
+    this.showAlert = true;
+    this.message = message;
+    this.categAlert = 2;
   }
 
   alertSuccess(message: string) {
-    this.showAlert = true
-    this.message = message
-    this.categAlert = 3
+    this.showAlert = true;
+    this.message = message;
+    this.categAlert = 3;
   }
 
   alertWarning(message: string) {
-    this.showAlert = true
-    this.message = message
-    this.categAlert = 4
+    this.showAlert = true;
+    this.message = message;
+    this.categAlert = 4;
   }
 }

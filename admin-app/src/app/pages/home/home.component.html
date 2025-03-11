@@ -38,7 +38,7 @@
                                                     d="M6 18L18 6M6 6l12 12" />
                                             </svg>
                                             Limpar seleção
-                                        </span>
+                                        </span> 
                                     </li>
                                     }
                                     <!-- Categories list -->
@@ -180,7 +180,7 @@
                             </td>
                             <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 <div class="flex items-center">
-                                    <div class="inline-block w-4 h-4 mr-2 bg-red-700 rounded-full"></div>
+                                    <app-quantity-status [quantity]="product.quantity"></app-quantity-status>
                                     {{ product.quantity }}
                                 </div>
                             </td>

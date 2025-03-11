@@ -6,11 +6,12 @@ import { Product } from '../../autentication/interface/product';
 import { RouterLink } from '@angular/router';
 import { AlertComponent } from "../../shared/models/alert/alert.component";
 import { CategoryService } from '../../autentication/service/categ/category.service';
+import { QuantityStatusComponent } from "../../shared/models/quantity-status/quantity-status.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, RouterLink, NgClass, AlertComponent],
+  imports: [FormsModule, RouterLink, NgClass, AlertComponent, QuantityStatusComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -107,8 +108,6 @@ export class HomeComponent implements OnInit {
     }
     this.isOpen = false
   }
-
-  // Resto do código permanece igual...
 
   toggleSelectAll() {
     this.allSelected = !this.allSelected
@@ -212,7 +211,7 @@ export class HomeComponent implements OnInit {
     this.isInfoModalOpen = true
     this.isDeleteModalOpen = false
   }
-  closeModal() {
+  closeModal() { 
     this.isDeleteModalOpen = false
     this.isInfoModalOpen = false
   }
