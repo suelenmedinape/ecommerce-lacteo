@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Client } from '../../../../autentication/interface/account/user';
-import { AccountService } from '../../../../autentication/service/account/account.service';
+import { Client } from '../../../autentication/interface/account/user';
+import { AccountService } from '../../../autentication/service/account/account.service';
 import { NgClass, NgIf } from '@angular/common';
-import { Orders } from '../../../../autentication/interface/account/orders';
-import { OrdersComponent } from '../../../../shared/models/orders/orders.component';
-import { Cart } from '../../../../autentication/interface/cart/cart';
+import { Orders } from '../../../autentication/interface/account/orders';
+import { OrdersComponent } from '../../../shared/models/orders/orders.component';
+import { Cart } from '../../../autentication/interface/cart/cart';
 
 @Component({
   selector: 'app-account',
