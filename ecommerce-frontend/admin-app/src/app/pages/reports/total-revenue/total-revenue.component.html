@@ -1,0 +1,62 @@
+<div class="revenue-dashboard">
+    <h2>Revenue Dashboard</h2>
+    
+    <div class="date-filters">
+      <div class="form-group">
+        <label for="startDate">Start Date</label>
+        <input 
+          type="date" 
+          id="startDate" 
+          [(ngModel)]="startDate" 
+          name="startDate"
+          [max]="endDate"
+        >
+      </div>
+      
+      <div class="form-group">
+        <label for="endDate">End Date</label>
+        <input 
+          type="date" 
+          id="endDate" 
+          [(ngModel)]="endDate" 
+          name="endDate"
+          [min]="startDate"
+        >
+      </div>
+      
+      <button 
+        (click)="fetchTotalRevenue()" 
+        [disabled]="loading || !startDate || !endDate"
+        class="apply-btn"
+      >
+        {{ loading ? 'Loading...' : 'Apply' }}
+      </button>
+    </div>
+    
+    @if (error) {
+    <div class="error-message">
+      {{ error }}
+    </div>
+    }
+    
+    @if (dashboard && !loading) {
+    <div class="dashboard-stats">
+      <div class="stat-card">
+        <div class="stat-title">Total Orders</div>
+        <div class="stat-value">{{ dashboard.totalOrders }}</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-title">Total Sales</div>
+        <div class="stat-value">{{ dashboard.totalSales | currency }}</div>
+      </div>
+    </div>
+}
+    @if (loading) {
+    <div class="loading-indicator">
+      Loading data...
+    </div>
+}
+  </div>
+  
+  

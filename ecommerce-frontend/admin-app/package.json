@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^19.1.0",
     "@angular/router": "^19.1.0",
     "@tailwindcss/postcss": "^4.0.8",
+    "apexcharts": "^4.5.0",
     "flowbite": "^3.1.2",
     "jwt-decode": "^4.0.0",
     "ngx-cookie-service": "^19.1.2",
