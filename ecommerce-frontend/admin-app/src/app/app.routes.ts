@@ -6,13 +6,19 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { StockComponent } from './pages/stock/stock.component';
 import { TotalRevenueComponent } from './pages/reports/total-revenue/total-revenue.component';
+import { ComparisonMonthComponent } from './pages/reports/comparison-month/comparison-month.component';
+import { BestSellersComponent } from './pages/reports/best-sellers/best-sellers.component';
+import { WorstSellersComponent } from './pages/reports/worst-sellers/worst-sellers.component';
 
 export const routes: Routes = [
-    {path: '', component: HomeComponent},
+    {path: 'products', component: HomeComponent},
     {path: 'insert', component: RegisterComponent},
     {path: 'edit/:id', component: EditComponent},
     {path: 'orders', component: OrdersComponent},
-    {path: 'data', component: DashboardComponent},
+    {path: '', component: DashboardComponent},
     {path: 'stock', component: StockComponent},
     {path: 'total-revenue', component: TotalRevenueComponent},
+    {path: 'comparison-month', component: ComparisonMonthComponent},
+    {path: 'best-sellers', component: BestSellersComponent},
+    {path: 'worst-sellers', component: WorstSellersComponent}
 ];
