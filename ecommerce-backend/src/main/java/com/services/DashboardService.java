@@ -16,10 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.domain.Product;
+import com.dtos.OrderComparisonDTO;
 import com.dtos.OrderStatusSummaryDTO;
 import com.dtos.OrderStatusSummaryProjectionDTO;
 import com.dtos.OrderSummaryDTO;
-import com.repositories.OrderItemRepository;
+import com.dtos.ProductRankingDTO;
 import com.repositories.OrderRepository;
 import com.repositories.ProductRepository;
 
@@ -31,9 +32,6 @@ public class DashboardService {
 
 	@Autowired
 	private OrderRepository orderRepository;
-
-	@Autowired
-	private OrderItemRepository itemRepository;
 
 	public OrderSummaryDTO getTotalRevenueByPeriod(LocalDate start, LocalDate end) {
 		Date startDate = convertToDate(start);
@@ -65,28 +63,24 @@ public class DashboardService {
 	    OrderStatusSummaryDTO summaryDTO = new OrderStatusSummaryDTO();
 	    Map<Integer, String> monthMap = getMonthMap();
 
-	    Map<String, List<Integer>> statusMap = new HashMap<>();
-	    statusMap.put("FINALIZADO", new ArrayList<>());
-	    statusMap.put("CANCELADO", new ArrayList<>());
-
 	    Set<String> orderedMonths = results.stream()
 	        .map(dto -> monthMap.get(dto.getMonth()))
 	        .distinct()
 	        .collect(Collectors.toCollection(LinkedHashSet::new));
-	    
+
 	    summaryDTO.getMonths().addAll(orderedMonths);
 
-	    statusMap.forEach((status, list) -> {
-	        list.addAll(Collections.nCopies(orderedMonths.size(), 0));
-	    });
+	    Map<String, List<Integer>> statusMap = Map.of(
+	        "FINALIZADO", new ArrayList<>(Collections.nCopies(orderedMonths.size(), 0)),
+	        "CANCELADO", new ArrayList<>(Collections.nCopies(orderedMonths.size(), 0))
+	    );
 
 	    for (OrderStatusSummaryProjectionDTO dto : results) {
 	        String monthLabel = monthMap.get(dto.getMonth());
 	        int monthIndex = new ArrayList<>(orderedMonths).indexOf(monthLabel);
-	        
+
 	        if (monthIndex != -1) {
-	            String status = dto.getStatus();
-	            statusMap.get(status).set(monthIndex, dto.getTotal().intValue());
+	            statusMap.get(dto.getStatus()).set(monthIndex, dto.getTotal().intValue());
 	        }
 	    }
 
@@ -96,6 +90,7 @@ public class DashboardService {
 
 	    return summaryDTO;
 	}
+
 	
 	private Date convertToDate(LocalDate localDate) {
 		return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -116,5 +111,25 @@ public class DashboardService {
 		monthMap.put(11, "Nov");
 		monthMap.put(12, "Dec");
 		return monthMap;
+	}
+
+	public List<OrderComparisonDTO> compareOrderByMonth(LocalDate one, LocalDate two) {
+		Date monthOne = convertToDate(one);
+		Date monthTwo = convertToDate(two);
+		
+		
+		List<OrderComparisonDTO> list = orderRepository.compareOrderCompletion(monthOne, monthTwo);
+		
+		return list;
+	}
+	
+	public List<ProductRankingDTO> findTop5BestSellingProducts(){
+		
+		return orderRepository.findTop5BestSellingProducts();
+	}
+	
+public List<ProductRankingDTO> findBottom5LeastSellingProducts(){
+		
+		return orderRepository.findBottom5LeastSellingProducts();
 	}
 }
