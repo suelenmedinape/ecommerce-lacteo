@@ -2,7 +2,7 @@
 </app-alert>
 <section class="bg-white dark:bg-gray-900">
     <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-        <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Add a new product</h2>
+        <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Edit product</h2>
         <form action="#" (ngSubmit)="onSubmit($event)">
             <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                 <div class="sm:col-span-2">
@@ -58,13 +58,13 @@
                             </li>
                             }
                             <!-- Categories list -->
-                            @for (category of category; track category) {
-                            <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer" (click)="selectCategory(category)">
-                                {{ category }}
+                            @for (cat of categoryList; track cat) {
+                            <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer" (click)="selectCategory(cat)">
+                                {{ cat }}
                             </li>
                             }
                             <!-- Show message if no categories are available -->
-                            @if (category.length === 0) {
+                            @if (categoryList.length === 0) {
                             <li class="px-4 py-2 text-gray-500 italic">
                                 Carregando categorias...
                             </li>
@@ -88,3 +88,4 @@
         </form>
     </div>
 </section>
+

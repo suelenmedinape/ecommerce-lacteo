@@ -22,7 +22,7 @@ export class ProdutoService {
     const headers = this.headerService.getAuthHeaders();
     console.log('id', id);
     return this.http.delete(`${this.apiUrl}/${id}`, {headers});
-  }
+  } 
 
   addProduct(product: any): Observable<any> {
     const headers = this.headerService.getAuthHeaders();
@@ -42,4 +42,5 @@ export class ProdutoService {
     const headers = this.headerService.getAuthHeaders();
     return this.http.get(`${this.apiUrl}/${id}`, {headers});
   }
+
 }
