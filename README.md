@@ -13,9 +13,9 @@ O projeto ainda está em desenvolvimento e ainda faltam algumas paginas a serem 
 - [x] Carrinho (Falta algumas coisas)
 - [x] Produto Individual
 - [x] Cadastro de produtos
-- [ ] Relatorios
+- [x] Relatorios
 - [x] Pedidos
-- [ ] Estoque
+- [x] Estoque
 - [x] Alert de Erro (Para produtos não encontrados ou outra coisa)
 - [x] Tela com as informações do usuario (cliente)
 
