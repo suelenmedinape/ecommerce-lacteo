@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HeadersService } from '../token/headers.service';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { catchError, map, Observable, tap, throwError } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class CartService {
   private apiUrl = "/cart";
 
-  constructor(private http: HttpClient, private headersService: HeadersService) {}
+  constructor(private http: HttpClient, private headersService: HeadersService) { }
 
   addItemToCart(productId: number, quantity: number): Observable<any> {
     const headers = this.headersService.getAuthHeaders();
@@ -19,9 +18,7 @@ export class CartService {
 
   listItemsInCart(): Observable<any> {
     const headers = this.headersService.getAuthHeaders();
-    console.log("Carrinho recebido do backend:", )
-    return this.http.get(`${this.apiUrl}`, { headers }).pipe(
-  );
+    return this.http.get(`${this.apiUrl}`, { headers });
   }
 
   removeItemFromCart(productId: number): Observable<any> {

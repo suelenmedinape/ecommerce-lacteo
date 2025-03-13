@@ -9,8 +9,7 @@ import { ProdutoService } from '../../autentication/service/products/produto.ser
   selector: 'app-shop',
   standalone: true,
   imports: [PaginationComponent, CardProductComponent],
-  templateUrl: './shop.component.html',
-  styleUrl: './shop.component.css'
+  templateUrl: './shop.component.html'
 })
 export class ShopComponent implements OnInit {
   produtos: { id: number; productName: string; price: number }[] = [];
@@ -41,12 +40,6 @@ export class ShopComponent implements OnInit {
   // Atualiza a página atual (chamado pelo componente de paginação)
   onPageChange(page: number): void {
     this.currentPage = page; // Atualiza a página atual
-  }
-
-  getStars(rating: number): number[] {
-    return Array(5)
-      .fill(0)
-      .map((_, i) => rating - i);
   }
 
   getProduto(): void {

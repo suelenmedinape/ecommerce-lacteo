@@ -8,8 +8,7 @@ import { AlertComponent } from '../../../shared/models/alert/alert.component';
   selector: 'app-register',
   standalone: true,
   imports: [FormsModule, RouterLink, RouterLinkActive, AlertComponent],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  templateUrl: './register.component.html'
 })
 export class RegisterComponent {
   name = "";

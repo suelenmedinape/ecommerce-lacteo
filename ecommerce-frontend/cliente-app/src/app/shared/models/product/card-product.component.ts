@@ -8,8 +8,7 @@ import { CartService } from '../../../autentication/service/cart/cart.service';
   selector: 'app-card-product',
   standalone: true,
   imports: [CurrencyPipe, RouterLink, RouterLinkActive, AlertComponent],
-  templateUrl: './card-product.component.html',
-  styleUrl: './card-product.component.css'
+  templateUrl: './card-product.component.html'
 })
 export class CardProductComponent {
   @Input() lista: any[] = []

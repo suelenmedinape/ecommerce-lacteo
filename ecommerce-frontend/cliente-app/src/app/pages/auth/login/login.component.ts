@@ -9,8 +9,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-login',
   standalone: true,
   imports: [FormsModule, RouterLink, RouterLinkActive, AlertComponent],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit, OnDestroy {
   email = ""
@@ -38,7 +37,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     console.log("Tentando login com:", this.email, this.password)
     this.userService.login(this.email, this.password).subscribe({
       next: () => {
-        // The userRole will be updated via the subscription to userRole$
         console.log("Login bem-sucedido!")
         this.showAlert = true
         this.message = "Login bem-sucedido!"

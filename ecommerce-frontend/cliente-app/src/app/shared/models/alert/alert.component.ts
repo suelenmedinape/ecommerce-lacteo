@@ -4,7 +4,6 @@ import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from
   selector: 'app-alert',
   standalone: true,
   templateUrl: './alert.component.html',
-  styleUrl: './alert.component.css',
   imports: []
 })
 export class AlertComponent implements OnChanges {

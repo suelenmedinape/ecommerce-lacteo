@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { HeadersService } from '../token/headers.service';
 import { Observable } from 'rxjs';
 import { Client } from '../../interface/account/user';
-import { Orders } from '../../interface/account/orders';
-import { Cart } from '../../interface/cart/cart';
+import { Cart } from '../../interface/cart/cart-product';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +15,7 @@ export class AccountService {
     private http: HttpClient,
     private headersService: HeadersService,
   ) {}
-
+ 
   clientDetails(): Observable<Client> {
     const headers = this.headersService.getAuthHeaders()
     return this.http.get<Client>(`${this.url}/profile`, { headers })

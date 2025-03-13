@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -7,9 +6,6 @@ import { Subscription } from 'rxjs';
 import { AlertComponent } from '../../models/alert/alert.component';
 import { CardProductComponent } from '../../models/product/card-product.component';
 import { ProdutoService } from '../../../autentication/service/products/produto.service';
-import { CategoryService } from '../../../autentication/service/categ/category.service';
-import { ShopByCategoryComponent } from '../../../pages/byCategory/shop-by-category.component';
-
 
 @Component({
   selector: 'app-navbar',
@@ -31,7 +27,6 @@ export class NavbarComponent implements OnInit {
 
   private userService = inject(UserService)
   private produtoService = inject(ProdutoService)
-  private categoryService = inject(CategoryService)
   private router = inject(Router)
 
   ngOnInit(): void {
@@ -40,7 +35,7 @@ export class NavbarComponent implements OnInit {
   }
 
   listCategories(): void {
-    this.categoryService.listCategories().subscribe(
+    this.produtoService.listCategories().subscribe(
       (data) => {
         console.log("Categorias carregadas:", data)
         this.category = data

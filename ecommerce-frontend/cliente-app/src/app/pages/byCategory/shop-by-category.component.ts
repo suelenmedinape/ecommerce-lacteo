@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../../autentication/service/categ/category.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { CardProductComponent } from "../../shared/models/product/card-product.component";
-import { NgFor, NgIf } from '@angular/common';
 import { ProdutoService } from '../../autentication/service/products/produto.service';
 import { AlertComponent } from '../../shared/models/alert/alert.component';
 import { PaginationComponent } from '../../shared/_component/pagination/pagination.component';
+import { CardProductComponent } from "../../shared/models/product/card-product.component";
 
 @Component({
   selector: 'app-shop-by-category',
-  imports: [NgIf, AlertComponent, PaginationComponent, RouterLink],
-  templateUrl: './shop-by-category.component.html',
-  styleUrl: './shop-by-category.component.css'
+  imports: [AlertComponent, PaginationComponent, RouterLink, CardProductComponent],
+  templateUrl: './shop-by-category.component.html'
 })
 export class ShopByCategoryComponent implements OnInit {
   products: any[] = []
@@ -20,16 +17,16 @@ export class ShopByCategoryComponent implements OnInit {
   showAlert = false
   categAlert = 0
   message = ""
-  itemsPerPage = 16; // Quantos produtos por página
-  currentPage = 1; // Página inicial
+
+  itemsPerPage = 16;
+  currentPage = 1;
 
   constructor(
-    private categoryService: CategoryService,
+    private categoryService: ProdutoService,
     private route: ActivatedRoute,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    // You can optionally check for category parameter in the route here
     this.route.params.subscribe((params) => {
       if (params["category"]) {
         this.getCategory(params["category"])
@@ -37,12 +34,17 @@ export class ShopByCategoryComponent implements OnInit {
     })
   }
 
-  onPageChange(page: number): void {
-    this.currentPage = page; // Atualiza a página atual
-  }
-
   get totalPages() {
     return Math.ceil(this.products.length / this.itemsPerPage);
+  }
+
+  get paginatedProdutos() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.products.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
   }
 
   getCategory(category: string): void {
@@ -64,7 +66,7 @@ export class ShopByCategoryComponent implements OnInit {
   }
 
   trackByProductId(index: number, product: any): number {
-    return product.id || index 
+    return product.id || index
   }
 }
 

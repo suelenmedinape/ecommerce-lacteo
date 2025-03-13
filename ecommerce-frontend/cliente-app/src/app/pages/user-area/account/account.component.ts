@@ -5,14 +5,13 @@ import { AccountService } from '../../../autentication/service/account/account.s
 import { NgClass, NgIf } from '@angular/common';
 import { Orders } from '../../../autentication/interface/account/orders';
 import { OrdersComponent } from '../../../shared/models/orders/orders.component';
-import { Cart } from '../../../autentication/interface/cart/cart';
+import { Cart } from '../../../autentication/interface/cart/cart-product';
 
 @Component({
   selector: 'app-account',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, OrdersComponent],
-  templateUrl: './account.component.html',
-  styleUrl: './account.component.css'
+  templateUrl: './account.component.html'
 })
 export class AccountComponent implements OnInit {
   cliente: Client | null = null

@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertComponent } from '../../../shared/models/alert/alert.component';
+import { AlertComponent } from '../../shared/models/alert/alert.component';
 import { CurrencyPipe } from '@angular/common';
-import { CartService } from '../../../autentication/service/cart/cart.service';
-import { ProdutoService } from '../../../autentication/service/products/produto.service';
+import { CartService } from '../../autentication/service/cart/cart.service';
+import { ProdutoService } from '../../autentication/service/products/produto.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product',
   standalone: true,
   imports: [CurrencyPipe, AlertComponent],
-  templateUrl: './product.component.html',
-  styleUrl: './product.component.css'
+  templateUrl: './product.component.html'
 })
 export class ProductComponent implements OnInit {
   produto: any
