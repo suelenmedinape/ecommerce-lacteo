@@ -144,11 +144,17 @@ export class CartComponent implements OnInit {
         console.log("Purchase successful:", response)
         this.loadCartItems()
         this.errorMessage = "Purchase successful!"
+        this.showAlert = true;
+        this.categAlert = 3;
+        this.message = "Compra realizada com sucesso";
       },
       error: (err) => {
         console.error("Error purchasing items:", err)
         this.errorMessage = "Failed to complete purchase. Please try again."
         this.isLoading = false
+        this.showAlert = true;
+        this.categAlert = 2;
+        this.message = "Ocorreu um erro ao realizar a compra";
       },
     })
   }

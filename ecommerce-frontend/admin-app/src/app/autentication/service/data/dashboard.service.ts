@@ -59,6 +59,11 @@ export class DashboardService {
     return this.http.get<Stock[]>(`${this.apiUrl}/products/low-stock`, { headers }); 
   }
 
+  /*getLowStockProducts(): Observable<Stock[]> {
+    const headers = this.headerService.getAuthHeaders();
+    return this.http.get<Stock[]>(`${this.apiUrl}/products/low-stock?quantity=5`, { headers }); 
+  }*/
+
   getTotalRevenue(startDate: Date, endDate: Date): Observable<Dashboard> {
     const headers = this.headerService.getAuthHeaders()
 

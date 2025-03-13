@@ -84,7 +84,7 @@ export class GraphicBarComponent implements AfterViewInit {
       legend: {
         position: 'top'
       },
-      colors: ['#F05252', '#0E9F6E'] // Blue for finalizado, Green for solicitado, Orange for cancelado
+      colors: ['#0E9F6E', '#F05252'] // Blue for finalizado, Green for solicitado, Orange for cancelado
     };
   
     const chart = new ApexCharts(this.chartElement.nativeElement, options);
