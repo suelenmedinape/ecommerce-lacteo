@@ -43,4 +43,13 @@ export class ProdutoService {
     return this.http.get(`${this.apiUrl}/${id}`, {headers});
   }
 
+  getCategories(): Observable<any> {
+    const headers = this.headerService.getAuthHeaders();
+    return this.http.get(`${this.apiUrl}/list-categories`, {headers}); 
+  }
+
+  listByCategory(category: string): Observable<any> {
+    const headers = this.headerService.getAuthHeaders();
+    return this.http.get(`${this.apiUrl}/list?category=${encodeURIComponent(category)}`, { headers })
+  }
 }

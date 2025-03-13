@@ -6,8 +6,7 @@ import { GraphicBarComponent } from "../../shared/models/graphic-bar/graphic-bar
   selector: 'app-dashboard',
   standalone: true,
   imports: [DashboardCardComponent, GraphicBarComponent],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent {
   cardConfigs = {
@@ -20,6 +19,11 @@ export class DashboardComponent {
       title: "Vendas Totais",
       endpoint: "totalSales" as const,
       icon: "sales",
+    },
+    day: {
+      title: "Pedidos Feitos Hoje",
+      endpoint: "solicitedToday" as const,
+      icon: "day",
     },
   }
 }

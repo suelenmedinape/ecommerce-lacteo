@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { HeadersService } from '../token/headers.service';
 import { delay, map, Observable, of } from 'rxjs';
 import { Dashboard } from '../../interface/dashboard';
-import { Stock } from '../../interface/stock';
 import { MonthComparisonResponse } from '../../interface/month-data';
 import { BestWorts } from '../../interface/best-worts';
+import { Product } from '../../interface/product';
 
 interface StatusDataResponse {
   months: string[];
@@ -15,7 +15,6 @@ interface StatusDataResponse {
   }>;
 }
 
-// Interface existente (ajustada para o novo formato)
 interface StatusData {
   status: Array<{
     name: string;
@@ -54,17 +53,30 @@ export class DashboardService {
     );
   }
 
-  getLowStockProducts(): Observable<Stock[]> {
+  getLowStockProducts(): Observable<Product[]> {
     const headers = this.headerService.getAuthHeaders();
-    return this.http.get<Stock[]>(`${this.apiUrl}/products/low-stock`, { headers }); 
+    return this.http.get<Product[]>(`${this.apiUrl}/products/low-stock`, { headers }); 
   }
 
-  /*getLowStockProducts(): Observable<Stock[]> {
+  getValueLowStockProducts(value: number): Observable<Product[]> {
     const headers = this.headerService.getAuthHeaders();
-    return this.http.get<Stock[]>(`${this.apiUrl}/products/low-stock?quantity=5`, { headers }); 
-  }*/
+    return this.http.get<Product[]>(`${this.apiUrl}/products/low-stock?quantity=${value}`, { headers }); 
+  }
 
   getTotalRevenue(startDate: Date, endDate: Date): Observable<Dashboard> {
+    const headers = this.headerService.getAuthHeaders()
+
+    // Format dates to YYYY-MM-DD
+    const formattedStartDate = startDate.toISOString().split("T")[0]
+    const formattedEndDate = endDate.toISOString().split("T")[0]
+
+    return this.http.get<Dashboard>(
+      `${this.apiUrl}/orders/total-revenue/count?startDate=${formattedStartDate}&endDate=${formattedEndDate}`,
+      { headers },
+    )
+  }
+
+  getTotalRevenueToday(startDate: Date, endDate: Date): Observable<Dashboard> {
     const headers = this.headerService.getAuthHeaders()
 
     // Format dates to YYYY-MM-DD

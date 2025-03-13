@@ -2,138 +2,89 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProdutoService } from '../../../autentication/service/produto/produto.service';
 import { AlertComponent } from '../../../shared/models/alert/alert.component';
-import { CategoryService } from '../../../autentication/service/categ/category.service';
+import { EditRegisterComponent } from "../../../shared/models/edit-register/edit-register.component";
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, AlertComponent],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  imports: [FormsModule, AlertComponent, EditRegisterComponent],
+  templateUrl: './register.component.html'
 })
 export class RegisterComponent implements OnInit {
-  productName = ""
-  price = 0
-  quantity = 0
-  description = ""
+  // Dados do formulário
+  productName = '';
+  price = 0;
+  quantity = 0;
+  description = '';
+  category = ''; // Agora usamos apenas 'category' para armazenar a categoria selecionada
 
-  showAlert = false
-  message = ""
-  categAlert = 0
+  // Alertas
+  showAlert = false;
+  message = '';
+  categAlert = 0;
 
-  isOpen = false
+  // Lista de categorias
+  categories: string[] = [];
 
-  categories: string[] = []
-  selectedCategory = "Categories"
-  defaultCategoryText = "Categories"
-
-  private produtoService = inject(ProdutoService)
-  private categoryService = inject(CategoryService)
+  // Serviço
+  private produtoService = inject(ProdutoService);
 
   ngOnInit() {
-    this.loadCategories()
-    this.selectedCategory = this.defaultCategoryText
-    document.addEventListener("click", this.closeDropdownOnClickOutside.bind(this))
+    this.loadCategories();
+    this.category = 'Categoria'; // Define o valor inicial como 'Categoria'
   }
 
-  ngOnDestroy() {
-    // Remover o listener quando o componente for destruído
-    document.removeEventListener("click", this.closeDropdownOnClickOutside.bind(this))
+  // Carrega as categorias do serviço
+  loadCategories() {
+    this.produtoService.getCategories().subscribe({
+      next: (data: string[]) => {
+        this.categories = data;
+        console.log('Categories loaded:', this.categories);
+      },
+      error: (error) => {
+        console.error('Error loading categories:', error);
+        this.alertError('Erro ao carregar categorias. Por favor, tente novamente.');
+      },
+    });
   }
 
-  closeDropdownOnClickOutside(event: MouseEvent) {
-    const dropdownElement = document.getElementById("categoryDropdown")
-    const buttonElement = document.getElementById("dropdownDefaultButton")
-
-    if (
-      this.isOpen &&
-      dropdownElement &&
-      buttonElement &&
-      !dropdownElement.contains(event.target as Node) &&
-      !buttonElement.contains(event.target as Node)
-    ) {
-      this.isOpen = false
-    }
-  }
-
+  // Envia o formulário
   onSubmit() {
     const product = {
       productName: this.productName,
       price: this.price,
       quantity: this.quantity,
       description: this.description,
-      category: this.isCategorySelected() ? this.selectedCategory : null,
-    }
+      category: this.category, // Usamos a categoria selecionada
+    };
 
     this.produtoService.addProduct(product).subscribe({
       next: () => {
-        this.showAlert = true
-        this.message = "Registro concluído com sucesso!"
-        this.categAlert = 3
+        this.alertSuccess('Registro concluído com sucesso!');
       },
       error: (error) => {
-        console.error("Error:", error)
-        this.showAlert = true
-        this.message = "Falha no registro."
-        this.categAlert = 2
+        console.error('Error:', error);
+        this.alertError('Falha no registro.');
       },
-    }) 
+    });
   }
 
-  toggleDropdown(event: Event) {
-    // Impedir que o evento de clique se propague para o document
-    event.stopPropagation()
-    this.isOpen = !this.isOpen
-    console.log("Dropdown toggled ", this.isOpen)
-  }
-
-  selectCategory(category: string | null) {
-    if (category === null) {
-      this.selectedCategory = this.defaultCategoryText
-      console.log("No category selected")
-    } else {
-      this.selectedCategory = category
-      console.log("Selected category:", category)
-    }
-    this.isOpen = false
-  }
-
-  loadCategories() {
-    this.categoryService.getCategories().subscribe({
-      next: (data: string[]) => {
-        this.categories = data
-        console.log("Categories loaded:", this.categories)
-      },
-      error: (error) => {
-        console.error("Error loading categories:", error)
-        this.alertError("Erro ao carregar categorias. Por favor, tente novamente.")
-      },
-    })
-  }
-
-  isCategorySelected(): boolean {
-    return this.selectedCategory !== this.defaultCategoryText
-  }
-
-  clearCategorySelection() {
-    this.selectCategory(null)
-  }
-
+  // Métodos de alerta
   alertError(message: string) {
-    this.showAlert = true
-    this.message = message
-    this.categAlert = 2
+    this.showAlert = true;
+    this.message = message;
+    this.categAlert = 2;
   }
 
   alertSuccess(message: string) {
-    this.showAlert = true
-    this.message = message
-    this.categAlert = 3
+    this.showAlert = true;
+    this.message = message;
+    this.categAlert = 3;
   }
 
   alertWarning(message: string) {
-    this.showAlert = true
-    this.message = message
-    this.categAlert = 4
+    this.showAlert = true;
+    this.message = message;
+    this.categAlert = 4;
   }
 }

@@ -15,16 +15,22 @@ import { CardConfig } from '../../../autentication/interface/card-config';
 export class DashboardCardComponent implements OnInit {
   @Input() config!: CardConfig
 
+  startDate: Date;
+  endDate: Date;
+
   dashboard?: Dashboard
   loading = true
   error = false
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(private dashboardService: DashboardService) {
+    this.startDate = new Date();
+    this.endDate = new Date();
+  }
 
   ngOnInit() {
     this.fetchData()
   }
-
+ 
   fetchData() {
     this.loading = true
 
@@ -32,9 +38,11 @@ export class DashboardCardComponent implements OnInit {
 
     if (this.config.endpoint === "completedMonthly") {
       request$ = this.dashboardService.getCompletedOrdersInTheMonth()
-    } else {
+    } else if (this.config.endpoint === "totalSales") {
       request$ = this.dashboardService.getTotalSales()
-    }
+    } else {
+      request$ = this.dashboardService.getTotalRevenueToday(this.startDate, this.endDate)
+    }  
 
     request$.subscribe({
       next: (data: Dashboard) => {

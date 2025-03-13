@@ -5,7 +5,6 @@ import { ProdutoService } from '../../autentication/service/produto/produto.serv
 import { Product } from '../../autentication/interface/product';
 import { RouterLink } from '@angular/router';
 import { AlertComponent } from "../../shared/models/alert/alert.component";
-import { CategoryService } from '../../autentication/service/categ/category.service';
 import { QuantityStatusComponent } from "../../shared/models/quantity-status/quantity-status.component";
 
 @Component({
@@ -35,7 +34,6 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private produtoService: ProdutoService,
-    private categoryService: CategoryService,
   ) {}
 
   ngOnInit() {
@@ -50,7 +48,7 @@ export class HomeComponent implements OnInit {
       return
     }
 
-    this.categoryService.listByCategory(this.selectedCategory).subscribe({
+    this.produtoService.listByCategory(this.selectedCategory).subscribe({
       next: (data: any) => {
         this.produto = data
         this.selectedProducts = []
@@ -84,7 +82,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadCategories() {
-    this.categoryService.getCategories().subscribe({
+    this.produtoService.getCategories().subscribe({
       next: (data: string[]) => {
         this.categories = data
         console.log("Categories loaded:", this.categories)

@@ -5,8 +5,7 @@ import { BestWorts } from '../../../autentication/interface/best-worts';
 @Component({
   selector: 'app-worts-sellers',
   imports: [],
-  templateUrl: './worst-sellers.component.html',
-  styleUrl: './worst-sellers.component.css'
+  templateUrl: './worst-sellers.component.html'
 })
 export class WorstSellersComponent implements OnInit {
   worstSeller: BestWorts[] = []

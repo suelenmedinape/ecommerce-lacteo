@@ -1,5 +1,5 @@
 export interface CardConfig {
   title: string
-  endpoint: "completedMonthly" | "totalSales"
+  endpoint: "completedMonthly" | "totalSales" | "solicitedToday"
   icon: string
 }

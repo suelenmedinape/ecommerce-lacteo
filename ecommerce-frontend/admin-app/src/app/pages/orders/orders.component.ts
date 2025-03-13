@@ -9,7 +9,6 @@ import { Order } from '../../autentication/interface/order';
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css'],
   imports: [OrderStatusComponent, PaginationComponent]
 })
 export class OrdersComponent implements OnInit {

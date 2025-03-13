@@ -6,8 +6,7 @@ import { CurrencyPipe } from '@angular/common';
 @Component({
   selector: 'app-best-sellers',
   imports: [],
-  templateUrl: './best-sellers.component.html',
-  styleUrl: './best-sellers.component.css'
+  templateUrl: './best-sellers.component.html'
 })
 export class BestSellersComponent implements OnInit {
   bestSeller: BestWorts[] = []
@@ -22,6 +21,6 @@ export class BestSellersComponent implements OnInit {
     this.dashboardService.getBestSellerProducts().subscribe((bestSeller) => {
       this.bestSeller = bestSeller
     })
-  }
+  } 
 }
  

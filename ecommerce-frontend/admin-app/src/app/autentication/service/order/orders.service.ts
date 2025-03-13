@@ -1,6 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { HeadersService } from '../token/headers.service';
 import { Observable } from 'rxjs';
 
