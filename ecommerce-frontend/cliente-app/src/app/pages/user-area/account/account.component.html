@@ -74,7 +74,7 @@
         <dl class="w-1/2 sm:w-48">
           <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Order ID:</dt>
           <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
-            <a href="#" class="hover:underline">{{ order.id }}</a>
+            <a href="#" class="hover:underline">#{{ order.id }}</a>
           </dd>
         </dl>
 
@@ -94,6 +94,7 @@
         </dl>
 
         <div class="w-full sm:flex sm:w-32 sm:items-center sm:justify-end sm:gap-4">
+          @if (order.orderStatus === "SOLICITADO") {
           <button (click)="cancelOrder(order.id)" type="button"
             class="flex w-full items-center justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-red-200 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 md:w-auto">
             <svg class="w-4 h-4 text-gray-900 mr-1 dark:text-gray-400" aria-hidden="true"
@@ -103,6 +104,7 @@
             </svg>
             Cancelar
           </button>
+        }
           <button (click)="viewOrderDetails(order.id)" type="button"
             class="flex w-full items-center justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 md:w-auto">
             <svg class="w-4 h-4 text-gray-900 mr-1 dark:text-gray-400" aria-hidden="true"
