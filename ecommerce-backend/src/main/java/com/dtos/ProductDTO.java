@@ -9,6 +9,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class ProductDTO{
+
+	@NotBlank
+	private Long id;
 	
     @NotBlank(message = "Nome não pode estar vazio.")
 	private String productName;
@@ -32,6 +35,15 @@ public class ProductDTO{
 		this.price = product.getPrice();
 		this.quantity = product.getQuantity();
 		this.category = product.getCategories();
+		this.id = product.getId();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getProductName() {
