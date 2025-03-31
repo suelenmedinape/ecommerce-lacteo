@@ -6,11 +6,12 @@ import { NgClass, NgIf } from '@angular/common';
 import { Orders } from '../../../autentication/interface/account/orders';
 import { OrdersComponent } from '../../../shared/models/orders/orders.component';
 import { Cart } from '../../../autentication/interface/cart/cart-product';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-account',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, OrdersComponent],
+  imports: [FormsModule, ReactiveFormsModule, OrdersComponent, RouterLink],
   templateUrl: './account.component.html'
 })
 export class AccountComponent implements OnInit {
@@ -157,7 +158,7 @@ export class AccountComponent implements OnInit {
       },
       error: (err) => {
         console.error("Erro ao carregar detalhes do pedido:", err)
-      }, 
+      },
     })
   }
 
