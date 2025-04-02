@@ -6,7 +6,7 @@ import { NgClass, NgIf } from '@angular/common';
 import { Orders } from '../../../autentication/interface/account/orders';
 import { OrdersComponent } from '../../../shared/models/orders/orders.component';
 import { Cart } from '../../../autentication/interface/cart/cart-product';
-import {RouterLink} from '@angular/router';
+import { ActivatedRoute, Route, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -25,10 +25,12 @@ export class AccountComponent implements OnInit {
   selectedOrderItems: Cart[] = []
   selectedOrderId: number | null = null
   showOrderDetails = false
+  cancelOrderOption = false
 
   constructor(
     private accountService: AccountService,
     private fb: FormBuilder,
+    private route: ActivatedRoute
   ) {
     this.clientForm = this.fb.group({
       name: ["", Validators.required],
@@ -48,6 +50,12 @@ export class AccountComponent implements OnInit {
   ngOnInit(): void {
     this.clientDetails()
     this.listAllOrders()
+
+    this.route.queryParams.subscribe(params => {
+      if (params['edit'] === 'true') {
+        this.toggleEdit(); // Aciona o toggle se edit=true
+      }
+    });
   }
 
   clientDetails(): void {
@@ -136,17 +144,43 @@ export class AccountComponent implements OnInit {
     )
   }
 
+  prepareCancelOrder(orderId: number): void {
+    this.selectedOrderId = orderId;
+    this.cancelOrderOption = true;
+  }
+
+  openCancelOrder(orderId: number): void {
+    this.selectedOrderId = orderId;
+    this.cancelOrderOption = true;
+    console.log('ID armazenado:', this.selectedOrderId);
+  }
+  
+  confirmCancelOrder(): void {
+    if (this.selectedOrderId !== null) {
+      console.log('ID sendo enviado:', this.selectedOrderId);
+      this.cancelOrder(this.selectedOrderId);
+    } else {
+      console.warn('Nenhum ID selecionado para cancelamento');
+    }
+  }
+  
   cancelOrder(id: number): void {
+    console.log('Cancelando pedido ID:', id);
     this.accountService.cancelOrder(id).subscribe({
       next: (response) => {
-        this.listAllOrders()
-        console.log("Pedido cancelado com sucesso!")
+        this.listAllOrders();
+        this.closeCancelOrder();
+        console.log("Pedido cancelado com sucesso!");
       },
       error: (err) => {
-        console.log(id)
-        console.error("Erro ao cancelar pedido:", err)
+        console.error("Erro ao cancelar pedido:", err);
       },
-    })
+    });
+  }
+  
+  closeCancelOrder(): void {
+    this.cancelOrderOption = false;
+    this.selectedOrderId = null;
   }
 
   viewOrderDetails(orderId: number): void {
