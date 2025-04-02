@@ -19,10 +19,6 @@ O projeto ainda está em desenvolvimento e ainda faltam algumas paginas a serem 
 - [x] Alert de Erro (Para produtos não encontrados ou outra coisa)
 - [x] Tela com as informações do usuario (cliente)
 
-## Funcionalidades restantes
-- Não permitir a compra se o usuario não tiver endereço cadastrado
-- Apos apertar em comprar será mostrado para o cliente o comprovante da compra dele
-
 ## 💻 Pré-requisitos
 
 Antes de começar, faça os seguintes passos:
