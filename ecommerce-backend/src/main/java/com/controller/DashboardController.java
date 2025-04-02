@@ -74,7 +74,8 @@ public class DashboardController {
 	}
 
 	@GetMapping("/products/low-stock")
-	public ResponseEntity<List<Product>> getLowStockProducts(@RequestParam(required = false, defaultValue = "10") int quantity) {
+	public ResponseEntity<List<Product>> getLowStockProducts(
+			@RequestParam(required = false, defaultValue = "10") int quantity) {
 		List<Product> list = dashboardService.listProductsLowStock(quantity);
 		return ResponseEntity.ok().body(list);
 	}
