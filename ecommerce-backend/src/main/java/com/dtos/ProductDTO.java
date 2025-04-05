@@ -10,7 +10,6 @@ import jakarta.validation.constraints.NotNull;
 
 public class ProductDTO{
 	
-	@NotBlank(message = "Id não pode estar vazio.")
 	private Long id;
 	
     @NotBlank(message = "Nome não pode estar vazio.")
