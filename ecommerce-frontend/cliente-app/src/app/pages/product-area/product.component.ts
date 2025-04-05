@@ -45,31 +45,30 @@ export class ProductComponent implements OnInit {
 
   addToCart(productId: number, quantity: number): void {
     if (quantity <= 0) {
-      this.errorMessage = "Quantidade inválida.";
-      return;
+      this.errorMessage = "Quantidade inválida."
+      return
     }
 
     this.cartService.addItemToCart(productId, quantity).subscribe({
       next: () => {
-        this.showAlert = true;
-        this.categAlert = 3;
-        this.message = "Produto adicionado ao carrinho!";
+        this.showAlert = true
+        this.categAlert = 3
+        this.message = "Produto adicionado ao carrinho!"
       },
       error: (error) => {
         if (error.status === 401) {
-          this.errorMessage = "Faça login para adicionar itens ao carrinho.";
-          this.showAlert = true;
-          this.categAlert = 4;
-          this.message = "Erro ao realizar a compra!";
+          this.errorMessage = "Faça login para adicionar itens ao carrinho."
+          this.showAlert = true
+          this.categAlert = 4
+          this.message = "Erro ao realizar a compra!"
         } else {
-          this.errorMessage = "Erro ao adicionar produto.";
-          this.showAlert = true;
-          this.categAlert = 2;
-          this.message = "Erro ao adicionar produto.";
+          this.errorMessage = "Erro ao adicionar produto."
+          this.showAlert = true
+          this.categAlert = 2
+          this.message = "Erro ao adicionar produto."
         }
-      }
-    });
+      },
+    })
   }
-
 }
  
