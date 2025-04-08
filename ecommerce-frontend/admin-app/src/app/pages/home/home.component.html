@@ -38,7 +38,7 @@
                                                     d="M6 18L18 6M6 6l12 12" />
                                             </svg>
                                             Limpar seleção
-                                        </span> 
+                                        </span>
                                     </li>
                                     }
                                     <!-- Categories list -->
@@ -54,7 +54,7 @@
                                         Carregando categorias...
                                     </li>
                                     }
-                                </ul> 
+                                </ul>
                             </div>
                             }
                             <div class="relative w-full">
@@ -182,8 +182,10 @@
                             <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 <div class="flex items-center">
                                     <!-- Force the quantity to be a number -->
-                                    <app-quantity-status [quantity]="Number(product.quantity) || 0"></app-quantity-status>
-                                    {{ product.quantity !== undefined && product.quantity !== null ? product.quantity : 'N/A' }}
+                                    <app-quantity-status
+                                        [quantity]="Number(product.quantity) || 0"></app-quantity-status>
+                                    {{ product.quantity !== undefined && product.quantity !== null ? product.quantity :
+                                    'N/A' }}
                                 </div>
                             </td>
                             <td class="px-4 py-2">R$ {{ product.price }}</td>
@@ -231,14 +233,46 @@
                     </tbody>
                 </table>
                 @if (produto && produto.length > 0) {
-                    <nav class="mt-6 mb-6 flex items-center justify-center sm:mt-8" aria-label="Page navigation">
-                      <app-pagination [totalPages]="totalPages" [currentPage]="currentPage" (pageChange)="onPageChange($event)">
-                      </app-pagination>
-                    </nav>
+                <nav class="mt-6 mb-6 flex items-center justify-center sm:mt-8" aria-label="Page navigation">
+                    <app-pagination [totalPages]="totalPages" [currentPage]="currentPage"
+                        (pageChange)="onPageChange($event)">
+                    </app-pagination>
+                </nav>
                 }
+            </div>
+        </div>
+        } @else {
+        <div class="flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h3 class="mt-2 text-lg font-medium text-gray-900 dark:text-white">Nenhum produto encontrado</h3>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    Tente ajustar seus filtros ou adicionar novos produtos.
+                </p>
+                <div class="mt-6">
+                    <button type="button"
+                        class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-primary-700 hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                        <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 12h14m-7 7V5" />
+                        </svg>
+                        <a routerLink="/insert">Adicionar produto</a>
+                    </button>
+                    <button type="button" (click)="recarregar()"
+                        class="ml-2 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-primary-700 hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                        <svg class="w-4 h-4 mr-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4"/>
+                          </svg>                          
+                        Recarregar Pagina
+                    </button>
+                </div>
             </div>
         </div>
         }
     </div>
 </section>
-

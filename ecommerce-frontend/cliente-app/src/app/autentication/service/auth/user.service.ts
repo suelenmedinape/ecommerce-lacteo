@@ -49,8 +49,11 @@ export class UserService {
         }
       }),
       catchError((error) => {
-        console.error("Login failed:", error)
-        return throwError(() => error)
+        if (error.error && error.error.message) {
+          return throwError(() => new Error(error.error.message));
+        } else {
+          return throwError(() => new Error('Ocorreu um erro ao processar a compra'));
+        }
       }),
     )
   }
@@ -61,10 +64,8 @@ export class UserService {
         console.log("Registration response:", response)
       }),
       catchError((error) => {
-        console.error("Erro completo:", error)
-        console.error("Mensagem do servidor:", error.error)
-        return throwError(() => error)
-      }),
+          return throwError(() => new Error(error.error.message));
+      })
     )
   }
 
@@ -89,7 +90,7 @@ export class UserService {
       domain: "localhost",
     })
   }
-
+ 
   private setUserRole(role: string | null) {
     this.userRoleSubject.next(role)
   }

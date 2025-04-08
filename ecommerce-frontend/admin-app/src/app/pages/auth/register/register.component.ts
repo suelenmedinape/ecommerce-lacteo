@@ -61,6 +61,11 @@ export class RegisterComponent implements OnInit {
     this.produtoService.addProduct(product).subscribe({
       next: () => {
         this.alertSuccess('Registro concluído com sucesso!');
+        this.productName = '';
+        this.price = 0;
+        this.quantity = 0;
+        this.description = '';
+        this.category = '';
       },
       error: (error) => {
         console.error('Error:', error);

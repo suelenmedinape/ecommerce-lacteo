@@ -13,7 +13,7 @@ import { EditRegisterComponent } from "../../../shared/models/edit-register/edit
 })
 
 export class EditComponent implements OnInit {
-  // Dados do formulário
+  // Dados do formulário 
   productName = '';
   price = 0;
   quantity = 0;
@@ -83,12 +83,15 @@ export class EditComponent implements OnInit {
       price: this.price,
       quantity: this.quantity,
       description: this.description,
-      category: this.category, // Usamos a categoria selecionada
+      category: this.category, 
     };
 
     this.produtoService.editProduct(product).subscribe({
       next: () => {
         this.alertSuccess('Edição concluída com sucesso!');
+        setTimeout(() => {
+          this.router.navigate(['/products']);
+        }, 1000); // Redireciona após 2 segundos
       },
       error: (error) => {
         console.error('Error:', error);

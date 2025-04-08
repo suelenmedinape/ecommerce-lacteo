@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import { Component, Inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -29,5 +29,5 @@ export class NavbarComponent {
       document.documentElement.classList.add('dark'); // Adicionando a classe "dark"
       localStorage.setItem('color-theme', 'dark'); // Salvando a escolha no localStorage
     }
-  }  
+  }
 }

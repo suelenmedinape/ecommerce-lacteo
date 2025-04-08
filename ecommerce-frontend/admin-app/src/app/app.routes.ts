@@ -20,5 +20,5 @@ export const routes: Routes = [
     {path: 'total-revenue', component: TotalRevenueComponent},
     {path: 'comparison-month', component: ComparisonMonthComponent},
     {path: 'best-sellers', component: BestSellersComponent},
-    {path: 'worst-sellers', component: WorstSellersComponent}
+    {path: 'worst-sellers', component: WorstSellersComponent},
 ];

@@ -40,7 +40,8 @@ export class CartComponent implements OnInit {
       },
       error: (err) => {
         console.error("Error loading cart items:", err)
-        this.errorMessage = "Failed to load cart items. Please try again."
+        this.message = err.message;
+        this.errorMessage = this.message
         this.isLoading = false
       },
     })
@@ -93,10 +94,11 @@ export class CartComponent implements OnInit {
           this.categAlert = 4;
           this.message = "Erro ao realizar a compra!";
         } else {
-          this.errorMessage = "Erro ao adicionar produto.";
+          this.message = err.message;
+          this.errorMessage = this.message;
           this.showAlert = true;
           this.categAlert = 2;
-          this.message = "Erro ao adicionar produto.";
+          this.message = this.message;
         }
       },
     });
@@ -114,7 +116,8 @@ export class CartComponent implements OnInit {
       },
       error: (err) => {
         console.error("Error removing item from cart:", err)
-        this.errorMessage = "Failed to remove item. Please try again."
+        this.message = err.message;
+        this.errorMessage = this.message
         this.isLoading = false
       },
     })

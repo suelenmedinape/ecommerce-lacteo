@@ -45,7 +45,7 @@ export class RegisterComponent {
       },
       error: (error) => {
         this.showAlert = true;
-        this.message = "Falha no registro. Por favor, tente novamente.";
+        this.message = error.message;
         this.categAlert = 2;
       }
     });

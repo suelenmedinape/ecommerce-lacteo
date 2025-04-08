@@ -44,9 +44,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         console.error("Erro no login:", error)
+        this.message = error.message
         this.showAlert = true
-        this.message = "Falha no login. Por favor, tente novamente."
         this.categAlert = 2
+
       },
     })
   }
@@ -57,10 +58,13 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.userRole = role
 
       if (role === "ROLE_ADMIN") {
-        this.router.navigate(["/admin"])
+          this.router.navigate(["/"])
+          const baseUrl = window.location.origin 
+          const url = `${baseUrl}/admin`
+          window.open(url, "_blank")
       } else if (role) {
         this.router.navigate(["/"])
       }
-    })
+    }) 
   }
 }

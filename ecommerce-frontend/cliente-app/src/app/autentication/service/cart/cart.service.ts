@@ -13,17 +13,41 @@ export class CartService {
 
   addItemToCart(productId: number, quantity: number): Observable<any> {
     const headers = this.headersService.getAuthHeaders();
-    return this.http.post(`${this.apiUrl}/add`, { productId, quantity }, { headers });
+    return this.http.post(`${this.apiUrl}/add`, { productId, quantity }, { headers }).pipe(
+      catchError((error) => {
+        if (error.error && error.error.message) {
+          return throwError(() => new Error(error.error.message));
+        } else {
+          return throwError(() => new Error('Ocorreu um erro ao processar a compra'));
+        }
+      })
+    );
   }
 
   listItemsInCart(): Observable<any> {
     const headers = this.headersService.getAuthHeaders();
-    return this.http.get(`${this.apiUrl}`, { headers });
+    return this.http.get(`${this.apiUrl}`, { headers }).pipe(
+      catchError((error) => {
+        if (error.error && error.error.message) {
+          return throwError(() => new Error(error.error.message));
+        } else {
+          return throwError(() => new Error('Ocorreu um erro ao processar a compra'));
+        }
+      })
+    );
   }
 
   removeItemFromCart(productId: number): Observable<any> {
     const headers = this.headersService.getAuthHeaders();
-    return this.http.delete(`${this.apiUrl}/${productId}`, { headers });
+    return this.http.delete(`${this.apiUrl}/${productId}`, { headers }).pipe(
+      catchError((error) => {
+        if (error.error && error.error.message) {
+          return throwError(() => new Error(error.error.message));
+        } else {
+          return throwError(() => new Error('Ocorreu um erro ao processar a compra'));
+        }
+      })
+    );
   }
 
   buyItemsInCart(): Observable<any> {
@@ -41,6 +65,14 @@ export class CartService {
 
   updateCartItemQuantity(productId: number, quantity: number): Observable<any> {
     const headers = this.headersService.getAuthHeaders();
-    return this.http.put(`${this.apiUrl}/update`, { productId, quantity }, { headers })
+    return this.http.put(`${this.apiUrl}/update`, { productId, quantity }, { headers }).pipe(
+      catchError((error) => {
+        if (error.error && error.error.message) {
+          return throwError(() => new Error(error.error.message));
+        } else {
+          return throwError(() => new Error('Ocorreu um erro ao processar a compra'));
+        }
+      })
+    );
   }
 }

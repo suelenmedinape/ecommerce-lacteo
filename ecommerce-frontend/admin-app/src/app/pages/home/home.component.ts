@@ -72,46 +72,43 @@ export class HomeComponent implements OnInit {
 
     this.produtoService.getProdutoByName(name).subscribe({
       next: (data: any) => {
-        console.log("Raw search response:", data) // Log the raw response
+        console.log("Raw search response:", data)
 
-        // Check if data is an array
         if (Array.isArray(data)) {
           this.produto = data.map((product) => {
-            // Ensure quantity exists and is a number
             return {
               ...product,
               quantity:
                 product.quantity !== undefined && product.quantity !== null
-                  ? Number(product.quantity) // Convert to number to ensure it's numeric
+                  ? Number(product.quantity) 
                   : 0,
             }
           })
         } else if (data && typeof data === "object") {
-          // If it's a single object, convert to array with quantity check
           this.produto = [
             {
               ...data,
               quantity:
                 data.quantity !== undefined && data.quantity !== null
-                  ? Number(data.quantity) // Convert to number to ensure it's numeric
+                  ? Number(data.quantity) 
                   : 0,
             },
           ]
         } else {
-          // Empty array if no data
           this.produto = []
         }
 
         this.selectedProducts = []
         this.allSelected = false
-        this.currentPage = 1 // Reset to first page when searching
+        this.currentPage = 1 
 
         console.log("Processed search results:", this.produto)
+        if (this.produto.length === 0) {
+          this.alertError("Nenhum produto encontrado.")
+        }
       },
       error: (error) => {
         console.error("Error searching for product:", error)
-        this.alertError("Erro ao buscar produto. Por favor, tente novamente.")
-        this.produto = []
       },
     })
   }
@@ -275,6 +272,16 @@ export class HomeComponent implements OnInit {
       }
       this.alertError(messages[error.status] || "Erro desconhecido. Por favor, tente novamente.")
     }
+  }
+
+  recarregar(){
+    this.listProducts();
+    this.loadCategories();
+    this.selectedCategory = this.defaultCategoryText;
+    this.currentPage = 1;
+    this.search = "";
+    this.selectedProducts = [];
+    this.allSelected = false;
   }
 
   showDeleteModal() {
