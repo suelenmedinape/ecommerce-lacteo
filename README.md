@@ -9,10 +9,6 @@ O **ecommerce-laticionios** é uma plataforma de e-commerce projetada para facil
 
 Os clientes podem navegar pelos produtos e fazer pedidos de forma prática, enquanto o administrador tem acesso a um painel de controle completo para monitoramento e gerenciamento do negócio.
 
-## Diagrama de Classes
-
-![Diagrama de Classes](CLASSE_UML.png)
-
 # Como Navegar no Repositório
 
 O repositório está dividido em duas pastas principais, cada uma com seu próprio README detalhado. Clique nos links abaixo para saber mais sobre cada parte do projeto:
