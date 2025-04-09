@@ -1,4 +1,4 @@
-# ecommerce-laticionios
+# Ecommerce Laticionios
 Este projeto é uma plataforma de e-commerce para a venda de laticínios por encomenda, desenvolvida para um vendedor autônomo. A plataforma é composta por três partes principais:
 - Backend: A API responsável por gerenciar produtos, pedidos, autenticação e fornecer dados para os frontends.
 - Frontend do Administrador: Interface para o produtor gerenciar produtos, pedidos e visualizar relatórios de vendas.
