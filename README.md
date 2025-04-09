@@ -1,47 +1,91 @@
-# Ecommerce Lacteos 
+# ecommerce-laticionios
+Este projeto é uma plataforma de e-commerce para a venda de laticínios por encomenda, desenvolvida para um vendedor autônomo. A plataforma é composta por três partes principais:
+- Backend: A API responsável por gerenciar produtos, pedidos, autenticação e fornecer dados para os frontends.
+- Frontend do Administrador: Interface para o produtor gerenciar produtos, pedidos e visualizar relatórios de vendas.
+- Frontend do Cliente: Interface para os clientes navegarem no catálogo de produtos, fazerem pedidos e gerenciarem suas contas.
 
-> O projeto é um e-commerce desenvolvido com Angular, focado em oferecer uma experiência de compra intuitiva e dinâmica. Ele permite navegação fácil, exibição de produtos, gerenciamento de carrinho. 
+## Visão Geral do Projeto
+O **ecommerce-laticionios** é uma plataforma de e-commerce projetada para facilitar a venda de laticínios sob encomenda. Ele permite que um vendedor autônomo gerencie seu catálogo de produtos, pedidos e vendas de maneira eficiente. 
 
-### Ajustes e melhorias
+Os clientes podem navegar pelos produtos e fazer pedidos de forma prática, enquanto o administrador tem acesso a um painel de controle completo para monitoramento e gerenciamento do negócio.
 
-O projeto ainda está em desenvolvimento e ainda faltam algumas paginas a serem feitas:
+## Diagrama de Classes
 
-- [x] Login
-- [x] Cadastro Usuário
-- [x] Home
-- [x] Loja
-- [x] Carrinho (Falta algumas coisas)
-- [x] Produto Individual
-- [x] Cadastro de produtos
-- [x] Relatorios
-- [x] Pedidos
-- [x] Estoque
-- [x] Alert de Erro (Para produtos não encontrados ou outra coisa)
-- [x] Tela com as informações do usuario (cliente)
+![Diagrama de Classes](CLASSE_UML.png)
 
-## 💻 Pré-requisitos
+# Como Navegar no Repositório
+
+O repositório está dividido em duas pastas principais, cada uma com seu próprio README detalhado. Clique nos links abaixo para saber mais sobre cada parte do projeto:
+
+* [Backend](/ecommerce-backend): API desenvolvida em Java com Spring Boot, responsável pelo gerenciamento de produtos, pedidos e autenticação.
+* [Frontend do Administrador](/ecommerce-frontend/admin-app):  Interface para o vendedor gerenciar produtos, pedidos e relatórios.
+* [Frontend do Cliente](/ecommerce-frontend/cliente-app):  Interface para os clientes fazerem pedidos.
+
+## Tecnologias Utilizadas
+- **Frontend**: Angular, Tailwind CSS, Flowbite
+- **Backend**: Java, Spring Boot
+- **Banco de Dados**: H2 para testes
+- **Autenticação**: JWT
+- **Versionamento**: Git
+
+### Passos para Execução
+1. Clone o repositório:
+   ```bash
+   git clone git@github.com:suelenmedinape/ecommerce-lacteo.git
+   ```
+
+## 💻 Requisitos e Instalação
 
 Antes de começar, faça os seguintes passos:
 
-### Instalação do Node
-- Instale o node em sua maquina [Node](https://nodejs.org/en/download)
-- node -v para verificar a versão
-- Vefique se o comando npm -v está mostrando a versão do node, caso de erro acesse esse link [Solução](https://chatgpt.com/share/67b743c1-a9e0-800b-80a0-0f745c921efc)
+### 1. Instalação do Node.js e Angular
+- Instale o node em sua maquina [Download Node.js](https://nodejs.org/en/download)
 
-### Instalação do Angular (Terminal)
-- Instalar a versão mais recente do Angular `npm install -g @angular/cli` (VS Code ou PowerShell)
-- Você instalou a versão mais recente do Tailwind CSS `npm install tailwindcss @tailwindcss/postcss postcss --force` (Terminal do Projeto)
-- Iniciar o Flowbite dentro do projeto Angular `npm install flowbite` (Terminal do Projeto)
-- E por fim adicionar o `ng generate @angular/core:control-flow` (Terminal do Projeto)
-- `npm install ngx-cookie-service --save`
-- `npm install jwt-decode`
+```bash
+node -v  # Verificação da versão do Node.js
+npm -v   # Verificação da versão do npm
+```
 
-## ☕ Executando o projeto
-- Para executar o projeto `ng serve` no terminal.
+### 2. Instale o Angular CLI:
 
-## 📝 Licença
+```bash
+npm install -g @angular/cli
+```
 
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
+### 3. Instale dependências adicionais para o frontend:
+
+```bash
+ng generate @angular/core:control-flow
+npm install
+```
+
+---
+
+### Executando o Frontend
+No diretório do frontend, execute:
+
+```bash
+ng serve
+```
+
+---
+
+### 4. Executando o Backend
+Requisitos:
+* Java JDK 11 ou superior
+* Maven
+
+Acesse a pasta do backend:
+```bash
+cd ecommerce-backend
+```
+Compile e execute o projeto:
+
+```bash
+mvn spring-boot:run
+```
+
+---
 
 ## 🤝 Colaboradores
 
@@ -50,12 +94,18 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
 <table>
   <tr>
     <td align="center">
-      <a href="https://github.com/JhonnyBCastro" title="defina o título do link">
-        <img src="https://avatars.githubusercontent.com/u/166658525?v=4" width="100px;" alt="Foto do Iuri Silva no GitHub"/><br>
+      <a href="https://github.com/suelenmedinape" title="defina o título do link">
+        <img src="https://avatars.githubusercontent.com/u/164355192?v=4" width="100px;" alt="Foto de Suelen no GitHub"/><br>
         <sub>
-          <b>Jhonata Castro</b>
+          <b>Suelen Medina</b>
         </sub>
       </a>
     </td>
   </tr>
 </table>
+
+---
+
+Este documento será atualizado conforme novas funcionalidades forem implementadas.
+
+---
