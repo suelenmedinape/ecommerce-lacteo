@@ -27,4 +27,4 @@ Este é o frontend da área administrativa de um sistema de vendas, voltado para
 - WebStorm como ambiente de desenvolvimento
 
 ## 📄 Documentação
-Você pode acessar a documentação completa do projeto clicando [aqui](../Documentacao.pdf).
+Você pode acessar a documentação completa do projeto clicando [aqui](../../Documentacao.pdf).
