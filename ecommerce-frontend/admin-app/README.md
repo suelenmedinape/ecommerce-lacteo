@@ -17,7 +17,16 @@ Este é o frontend da área administrativa de um sistema de vendas, voltado para
 - 📉 Lista de produtos menos vendidos
 - 📄 Geração de relatórios detalhados
 - 📋 Visualização geral da lista de produtos
-- 🖼️ Telas Disponíveis
+
+## 🖼️ Telas Disponíveis
+- Dashboard
+- Cadastro de Produto
+- Edição de Produto
+- Produtos com Estoque Baixo
+- Produtos Mais Vendidos
+- Produtos Menos Vendidos
+- Relatório
+- Lista de Produtos
 
 ## 🛠️ Tecnologias Utilizadas
 - Angular ️como framework principal
