@@ -1,59 +1,30 @@
-# Admin App
+<p align="center">
+  <a href="https://codesandbox.io">
+    <img src="https://codesandbox.io/static/img/banner.png?v=2" height="300px">
+  </a>
+</p>
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.8.
+&nbsp;
 
-## Development server
+Este é o frontend da área administrativa de um sistema de vendas, voltado para produtores e vendedores. A interface permite visualizar dados de vendas, cadastrar e editar produtos, monitorar o estoque e obter relatórios de desempenho.
 
-To start a local development server, run
+## ✨ Funcionalidades Principais
+- 📊 Dashboard interativo com gráficos de desempenho
+- ➕ Cadastro de novos produtos
+- ✏️ Edição de produtos existentes
+- ⚠️ Visualização de produtos abaixo do estoque
+- 📈 Lista de produtos mais vendidos
+- 📉 Lista de produtos menos vendidos
+- 📄 Geração de relatórios detalhados
+- 📋 Visualização geral da lista de produtos
+- 🖼️ Telas Disponíveis
 
-```bash
-ng serve
-```
+## 🛠️ Tecnologias Utilizadas
+- Angular ️como framework principal
+- Tailwind CSS para estilização
+- TypeScript para tipagem estática
+- HTML & CSS
+- WebStorm como ambiente de desenvolvimento
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📄 Documentação
+Você pode acessar a documentação completa do projeto clicando [aqui](ecommerce-lacteo/Documentação.pdf).
