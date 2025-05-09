@@ -1,10 +1,4 @@
-<p align="center">
-  <a href="https://codesandbox.io">
-    <img src="https://codesandbox.io/static/img/banner.png?v=2" height="300px">
-  </a>
-</p>
-
-&nbsp;
+# Admin
 
 Este é o frontend da área administrativa de um sistema de vendas, voltado para produtores e vendedores. A interface permite visualizar dados de vendas, cadastrar e editar produtos, monitorar o estoque e obter relatórios de desempenho.
 
